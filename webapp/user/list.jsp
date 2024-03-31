@@ -26,7 +26,11 @@
                     </th>
                     <th class="col-md-3">${user.email}
                     </th>
-                    <th class="col-md-3"><a href="/user/updateForm?userId=${user.userId}" class="btn btn-success" role="button">수정</a></th>
+                    <c:if test="${sessionScope.user.userId eq user.userId}">
+                        <th class="col-md-3">
+                            <a href="/user/updateForm?userId=${user.userId}" class="btn btn-success" role="button">수정</a>
+                        </th>
+                    </c:if>
                 </tr>
             </c:forEach>
             </tbody>
