@@ -12,15 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/user/updateForm")
+@WebServlet("/user/update")
 public class UpdateListController extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String userId = req.getParameter("userId");
-        User user = MemoryUserRepository.getInstance().findUserById(userId);
-        req.setAttribute("users",user);
-        RequestDispatcher rd = req.getRequestDispatcher("/user/updateForm.jsp");
-        rd.forward(req, resp);
-        return;
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        User user = new User(req.getParameter("userId"),
+                req.getParameter("password"),
+                req.getParameter("name"),
+                req.getParameter("email"));
+        MemoryUserRepository.getInstance().changeUserInfo(user);
+
+        resp.sendRedirect("/user/userList");
     }
 }
