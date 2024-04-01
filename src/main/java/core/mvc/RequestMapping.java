@@ -6,10 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RequestMapper {
+public class RequestMapping {
     private Map<String , Controller> controllers = new HashMap<>();
 
-    public RequestMapper() {
+    public RequestMapping() {
         initControllers();
     }
 

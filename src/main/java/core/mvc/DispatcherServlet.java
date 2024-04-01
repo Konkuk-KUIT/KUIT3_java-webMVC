@@ -11,17 +11,17 @@ import java.io.IOException;
 @WebServlet(name = "dispatcher", urlPatterns = "/", loadOnStartup = 1)
 public class DispatcherServlet extends HttpServlet {
 
-    private RequestMapper requestMapper;
+    private RequestMapping requestMapping;
     private static final String REDIRECT_PREFIX = "redirect:";
 
     @Override
     public void init() throws ServletException {
-        this.requestMapper = new RequestMapper();
+        this.requestMapping = new RequestMapping();
     }
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Controller controller = requestMapper.getController(req);
+        Controller controller = requestMapping.getController(req);
         try {
             String viewName = controller.execute(req, resp);
             move(viewName, req, resp);
