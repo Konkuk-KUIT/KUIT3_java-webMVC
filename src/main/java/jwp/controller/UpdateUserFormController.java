@@ -25,4 +25,5 @@ public class UpdateUserFormController extends HttpServlet {
         RequestDispatcher rd = req.getRequestDispatcher("/user/updateForm.jsp");
         rd.forward(req,resp);
     }
+
 }
