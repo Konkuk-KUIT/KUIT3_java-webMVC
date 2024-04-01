@@ -21,8 +21,12 @@ public class ListUserController extends HttpServlet {
 
         if (value != null) {
             req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
+            RequestDispatcher rd = req.getRequestDispatcher("/user/list.jsp");
+            rd.forward(req,resp);
         }
-        RequestDispatcher rd = req.getRequestDispatcher("/user/list.jsp");
-        rd.forward(req,resp);
+        else{
+            resp.sendRedirect("/");
+        }
+
     }
 }

@@ -25,18 +25,19 @@ public class UpdateUserFormController extends HttpServlet {
             User sessionUser = (User) value;
             User user=MemoryUserRepository.getInstance().findUserById(id);
             if(!user.isSameUser(sessionUser)){
-                RequestDispatcher rd = req.getRequestDispatcher("/user/list.jsp");
-                rd.forward(req,resp);
+                resp.sendRedirect("/user/userList");
             }
             else{
+
                 req.setAttribute("user",user);
                 RequestDispatcher rd = req.getRequestDispatcher("/user/updateForm.jsp");
                 rd.forward(req,resp);
             }
 
         }
-        RequestDispatcher rd = req.getRequestDispatcher("/user/list.jsp");
-        rd.forward(req,resp);
+        else {
+            resp.sendRedirect("/");
+        }
 
 
 
