@@ -7,9 +7,9 @@
 <%@ include file="../include/navigation.jspf" %>
     <div class="container" id="main">
 
-        <main class="form-signin">
+        <main class="form-updateForm">
 
-          <form name="sign-up" method="post" action="/user/signup">
+          <form name="updateForm" method="post" action="/user/update">
             <div class="form-floating">
               <input type="text" class="form-control" id="userId" name="userId" placeholder="Id">
               <label for="userId">User Id</label>
