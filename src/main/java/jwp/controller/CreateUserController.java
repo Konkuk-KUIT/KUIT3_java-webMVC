@@ -12,6 +12,7 @@ import java.io.IOException;
 
 @WebServlet("/user/signup")
 public class CreateUserController extends HttpServlet {
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = new User(req.getParameter("userId"),
