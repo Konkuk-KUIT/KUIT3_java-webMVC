@@ -21,6 +21,6 @@ public class CreateUserController extends HttpServlet {
 
         MemoryUserRepository.getInstance().addUser(user);
 
-        resp.sendRedirect("/user/userList");
+        resp.sendRedirect("/");
     }
 }
