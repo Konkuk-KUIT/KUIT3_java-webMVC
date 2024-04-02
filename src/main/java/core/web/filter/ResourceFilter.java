@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+// 정적 리소스에 대한 요청을 필터링
+// 요청이 정적 리소스 라면 필터 체인을 거치지 않고 바로 처리되므로 성능상 이점
 @WebFilter("/*")
 public class ResourceFilter implements Filter {
     private static final Logger logger = Logger.getLogger(ResourceFilter.class.getName());
@@ -29,6 +31,8 @@ public class ResourceFilter implements Filter {
         this.defaultRequestDispatcher = filterConfig.getServletContext().getNamedDispatcher("default");
     }
 
+    // 요청이 정적 리소스에 대한 것인지 확인
+    // 정적 리소스 요청 => default 서블릿에 요청 전달
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {

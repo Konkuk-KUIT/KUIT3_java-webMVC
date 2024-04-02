@@ -1,33 +1,27 @@
 package jwp.controller;
 
 import core.db.MemoryUserRepository;
+import core.mvc.Controller;
 import jwp.model.User;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
-@WebServlet("/user/login")
-public class LogInController extends HttpServlet {
-
-    //세션을 포함한 로그인( 로그인 성공시에 세션에 정보 저장 => if 문 )
+public class LogInController implements Controller {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public String execute(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session = req.getSession();
         String userId = req.getParameter("userId");
         String password = req.getParameter("password");
+        //해당 아이디를 가진 사용자 검색
         User user = MemoryUserRepository.getInstance().findUserById(userId);
 
         if (user != null && user.isSameUser(userId, password)) {
+            // 유효하면 세션에 사용자 저장
             session.setAttribute("user", user);
-            resp.sendRedirect("/");
-            return;
+            return REDIRECT + "/";
         }
-        resp.sendRedirect("/user/login_failed/jsp");
-
+        return REDIRECT + "/user/loginFailed";
     }
 }
