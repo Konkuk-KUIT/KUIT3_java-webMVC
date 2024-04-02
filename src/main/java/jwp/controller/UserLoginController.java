@@ -12,19 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/user/login")
-public class UserLoginController extends HttpServlet {
+public class UserLoginController implements Controller {
+
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        User user = MemoryUserRepository.getInstance().findUserById(req.getParameter("userId"));
-        System.out.println(user.getPassword());
-        System.out.println(req.getParameter("password"));
-        if(user != null && user.getPassword().equals(req.getParameter("password"))) { //로그인 성공
-            HttpSession session = req.getSession();
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        User user = MemoryUserRepository.getInstance().findUserById(request.getParameter("userId"));
+        if(user != null && user.getPassword().equals(request.getParameter("password"))) { //로그인 성공
+            HttpSession session = request.getSession();
             session.setAttribute("user", user);
-            resp.sendRedirect("/");
+            return REDIRECT+"/";
         }
         else
-            resp.sendRedirect("/user/login_failed.jsp");
+            return REDIRECT+"/user/loginFailed";
     }
 }

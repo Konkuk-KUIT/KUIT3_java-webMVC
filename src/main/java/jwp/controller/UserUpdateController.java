@@ -11,17 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/user/update")
-public class UserUpdateController extends HttpServlet {
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = new User(req.getParameter("userId"),
-                req.getParameter("password"),
-                req.getParameter("name"),
-                req.getParameter("email"));
+public class UserUpdateController implements Controller {
 
+    @Override
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        User user = new User(request.getParameter("userId"),
+                request.getParameter("password"),
+                request.getParameter("name"),
+                request.getParameter("email"));
         MemoryUserRepository.getInstance().changeUserInfo(user);
 
-        resp.sendRedirect("/user/userList");
+        return REDIRECT+"/user/userList";
     }
 }

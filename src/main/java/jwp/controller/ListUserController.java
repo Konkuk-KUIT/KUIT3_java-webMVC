@@ -12,19 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/user/userList")
-public class ListUserController extends HttpServlet {
+public class ListUserController implements Controller {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        HttpSession session = request.getSession();
         Object value = session.getAttribute("user");
         if (value != null) {
-            User user = (User) value;
-            req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
-            RequestDispatcher rd = req.getRequestDispatcher("/user/list.jsp");
-            rd.forward(req,resp);
-            return;
+            request.setAttribute("users", MemoryUserRepository.getInstance().findAll());
+            return "redirect:/users/loginForm";
         }
-        resp.sendRedirect("/");
+        return "/user/list.jsp";
     }
 }

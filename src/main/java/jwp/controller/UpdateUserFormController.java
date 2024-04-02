@@ -12,20 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/user/updateForm")
-public class UpdateUserFormController extends HttpServlet {
+public class UpdateUserFormController implements Controller {
+
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        HttpSession session = request.getSession();
         Object value = session.getAttribute("user");
         User Loginuser = (User) value;
-        User user = MemoryUserRepository.getInstance().findUserById(req.getParameter("userId"));
+        User user = MemoryUserRepository.getInstance().findUserById(request.getParameter("userId"));
         if (user != null && user.getUserId().equals(Loginuser.getUserId())) {
-            req.setAttribute("user", user);
-            RequestDispatcher rd = req.getRequestDispatcher("/user/updateForm.jsp");
-            rd.forward(req, resp);
-            return;
+            request.setAttribute("user", user);
+            return "/user/updateForm.jsp";
         }
-        resp.sendRedirect("/");
+        return REDIRECT + "/";
     }
 }
