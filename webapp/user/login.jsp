@@ -10,7 +10,7 @@
 <div class="container">
     <main class="form-signin">
         <form name="login" method="post" action="/user/login">
-            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+            <h1 class="h3 mb-3 fw-normal">Please Log In</h1>
 
             <div class="form-floating">
                 <input type="text" class="form-control" id="loginId" name="userId" placeholder="id">
@@ -21,7 +21,7 @@
                 <label for="loginPassword">Password</label>
             </div>
 
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Log In</button>
         </form>
     </main>
 </div>

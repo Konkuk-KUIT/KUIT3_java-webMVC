@@ -18,6 +18,6 @@ public class UpdateUserController implements Controller {
 
         MemoryUserRepository.getInstance().changeUserInfo(user);
 
-        return REDIRECT + "/user/userList";
+        return REDIRECT + "/user/userlist";
     }
 }
