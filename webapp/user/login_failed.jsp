@@ -16,16 +16,13 @@
           <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
         </ul>
 
-        <div class="col-md-3 text-end">
-          <a href="/user/login.jsp" type="button" class="btn btn-outline-primary me-2">Login</a>
-          <a href="/user/form.jsp" type="button" class="btn btn-primary">Sign-up</a>
-        </div>
+        <%@ include file="../include/checkSession.jspf" %>
       </header>
     </div>
     <div class="container">
       <main class="form-signin">
         <div>
-          ID와 비밀번호가 틀렸습니다.
+          Invalid ID and password. Please try again.
         </div>
         <form name="login" method="post" action="/user/login">
           <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
