@@ -11,17 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/user/userList")
-public class ListUserController extends HttpServlet {
+public class ListUserController implements Controller {
+
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         if (UserSessionUtils.isLogined(req.getSession())) {
             req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
-            RequestDispatcher rd = req.getRequestDispatcher("/user/list.jsp");
+
+            String viewPath = "/user/list.jsp";
+            RequestDispatcher rd = req.getRequestDispatcher(viewPath);
             rd.forward(req,resp);
             return;
         }
-        resp.sendRedirect("/user/login.jsp");
-
+        String viewPath = "/user/login.jsp";
+        resp.sendRedirect(viewPath);
     }
 }

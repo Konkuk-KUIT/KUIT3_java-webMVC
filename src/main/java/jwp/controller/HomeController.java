@@ -8,14 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
-@WebServlet("/")
-public class HomeController extends HttpServlet {
+public class HomeController implements Controller {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        RequestDispatcher rd = req.getRequestDispatcher("/home.jsp");
+        String viewPath = "/home.jsp";
+        RequestDispatcher rd = req.getRequestDispatcher(viewPath);
         rd.forward(req, resp);
     }
 }
