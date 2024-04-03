@@ -26,6 +26,6 @@ public class CreateUserController extends HttpServlet {
         HttpSession session = req.getSession();
         session.setAttribute("user", user);
 
-        resp.sendRedirect("/user/userList");
+        resp.sendRedirect("/");
     }
 }
