@@ -13,12 +13,12 @@ import java.io.IOException;
 import java.util.Optional;
 
 @WebServlet("/user/logout")
-public class logoutController extends HttpServlet {
-
+public class logoutController implements Controller{
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
+    public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        HttpSession session = request.getSession();
         session.removeAttribute("user");
-        resp.sendRedirect("/");
+        return "redirect:/";
+
     }
 }

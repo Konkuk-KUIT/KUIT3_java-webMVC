@@ -11,18 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/user/signup")
-public class CreateUserController extends HttpServlet {
+
+public class CreateUserController implements Controller {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = new User(req.getParameter("userId"),
-                req.getParameter("password"),
-                req.getParameter("name"),
-                req.getParameter("email"));
+    public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        User user = new User(request.getParameter("userId"),
+                request.getParameter("password"),
+                request.getParameter("name"),
+                request.getParameter("email"));
 
         MemoryUserRepository.getInstance().addUser(user);
-        HttpSession session = req.getSession();
+        HttpSession session = request.getSession();
         session.setAttribute("user", user);
-        resp.sendRedirect("/user/userList");
+        return "redirect:/user/userList";
     }
 }

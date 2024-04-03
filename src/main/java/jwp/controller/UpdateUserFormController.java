@@ -14,33 +14,29 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/user/updateForm")
-public class UpdateUserFormController extends HttpServlet {
+public class UpdateUserFormController implements Controller {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String id=req.getParameter("userId");
-        HttpSession session = req.getSession();
+    public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String id=request.getParameter("userId");
+        HttpSession session = request.getSession();
         Object value = session.getAttribute("user");
         if (value != null) {
             User sessionUser = (User) value;
             User user=MemoryUserRepository.getInstance().findUserById(id);
             if(!user.isSameUser(sessionUser)){
-                resp.sendRedirect("/user/userList");
+                return "redirect:/user/userList";
             }
             else{
 
-                req.setAttribute("user",user);
-                RequestDispatcher rd = req.getRequestDispatcher("/user/updateForm.jsp");
-                rd.forward(req,resp);
+                request.setAttribute("user",user);
+                return "/user/updateForm.jsp";
             }
 
         }
         else {
-            resp.sendRedirect("/");
+            return "/";
         }
 
-
-
     }
-
 }

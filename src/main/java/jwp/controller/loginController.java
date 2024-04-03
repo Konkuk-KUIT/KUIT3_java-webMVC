@@ -13,21 +13,17 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebServlet("/user/login")
-public class loginController extends HttpServlet {
-
+public class loginController implements Controller{
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Optional<User> user = MemoryUserRepository.getInstance().findUserByIdAndPassword(req.getParameter("userId"), req.getParameter("password"));
+    public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        Optional<User> user = MemoryUserRepository.getInstance().findUserByIdAndPassword(request.getParameter("userId"), request.getParameter("password"));
         if(user.isPresent()){
-            HttpSession session = req.getSession();
+            HttpSession session = request.getSession();
             session.setAttribute("user", user.get());
-            resp.sendRedirect("/");
+            return "redirect:/";
         }
         else{
-            RequestDispatcher rd = req.getRequestDispatcher("/user/login_failed.jsp");
-            rd.forward(req,resp);
-
+            return "/user/login_failed.jsp";
         }
     }
 }
