@@ -9,7 +9,7 @@
 
         <main class="form-signin">
 
-            <form name="sign-up" method="post" action="/user/signup">
+            <form name="sign-up" method="post" action="/user/updateForm">
                 <div class="form-floating">
                     <input type="text" class="form-control" value="${user.userId}" id="userId" name="userId" placeholder="Id" readonly>
                     <label for="userId">User Id</label>

@@ -24,4 +24,17 @@ public class UpdateUserFormController extends HttpServlet {
         RequestDispatcher rd = req.getRequestDispatcher("/user/updateForm.jsp");
         rd.forward(req,resp);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        User updatedUser = new User(req.getParameter("userId"),
+                req.getParameter("password"),
+                req.getParameter("name"),
+                req.getParameter("email"));
+
+        MemoryUserRepository.getInstance().changeUserInfo(updatedUser);
+
+        resp.sendRedirect("/user/userList");
+
+    }
 }
