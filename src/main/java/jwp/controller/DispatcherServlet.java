@@ -14,19 +14,6 @@ import java.util.Map;
 @WebServlet(name = "dispatcher", urlPatterns = "/",loadOnStartup = 1)
 public class DispatcherServlet extends HttpServlet {
 
-    private Map<String,Controller>map=new HashMap<>();
-
-    public DispatcherServlet() {
-        map.put("/",new HomeController());
-        map.put("/user/signup",new CreateUserController());
-        map.put("/user/userList",new ListUserController());
-        map.put("/user/login",new loginController());
-        map.put("/user/logout",new logoutController());
-        map.put("/user/update",new UpdateUserController());
-        map.put("/user/updateForm",new UpdateUserFormController());
-
-    }
-
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -61,7 +48,7 @@ public class DispatcherServlet extends HttpServlet {
     }
 
     private Controller mappingController(String controllerName){
-        return map.get(controllerName);
+        return RequestMapper.getInstance().get(controllerName);
 
     }
 }
