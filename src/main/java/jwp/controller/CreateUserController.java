@@ -25,6 +25,7 @@ public class CreateUserController extends HttpServlet {
         // 로그인 성공 시 세션 정보 저장
         HttpSession session = req.getSession();
         session.setAttribute("user", user);
+//        session.setAttribute("USER_SESSION_KEY",user.getUserId());
 
         resp.sendRedirect("/");
     }
