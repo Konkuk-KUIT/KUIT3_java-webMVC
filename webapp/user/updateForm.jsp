@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="ko">
   <%@ include file="../include/header.jspf" %>
@@ -28,7 +30,7 @@
             </div>
             <div style="height:10px;">
             </div>
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">정보 수정</button>
           </form>
         </main>
     </div>
