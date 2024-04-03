@@ -17,8 +17,6 @@ public class DispatcherServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String requestURI = req.getRequestURI();
-        System.out.println("requestURI = " + requestURI);
         Controller controller=mappingController(req.getRequestURI());
         try {
             String result=controller.process(req,resp);
@@ -32,13 +30,14 @@ public class DispatcherServlet extends HttpServlet {
         if(!isRedirect(command)){
             RequestDispatcher rd = req.getRequestDispatcher(command);
             rd.forward(req, resp);
+            return;
         }
-        else{
-            String redirect = command.substring(0, 9);
-            String redirectUrl = command.substring(9);
-            String baseUrl = "http://localhost:8080";
-            resp.sendRedirect(baseUrl+redirectUrl);
-        }
+
+
+        String redirectUrl = command.substring(9);
+        String baseUrl = "http://localhost:8080";
+        resp.sendRedirect(baseUrl+redirectUrl);
+
     }
 
     private Controller mappingController(String controllerName){
@@ -46,13 +45,6 @@ public class DispatcherServlet extends HttpServlet {
     }
 
     private boolean isRedirect(String command){
-        if(command.length()<9){
-            return false;
-        }
-        String redirect = command.substring(0, 9);
-        if (redirect.equals("redirect:")) {
-            return true;
-        }
-        return false;
+        return command.startsWith("redirect:");
     }
 }
