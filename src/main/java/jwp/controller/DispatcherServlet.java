@@ -33,11 +33,8 @@ public class DispatcherServlet extends HttpServlet {
             return;
         }
 
-
         String redirectUrl = command.substring(9);
-        String baseUrl = "http://localhost:8080";
-        resp.sendRedirect(baseUrl+redirectUrl);
-
+        resp.sendRedirect(redirectUrl);
     }
 
     private Controller mappingController(String controllerName){
