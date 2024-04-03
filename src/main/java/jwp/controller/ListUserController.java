@@ -22,8 +22,8 @@ public class ListUserController implements Controller{
             request.setAttribute("users", MemoryUserRepository.getInstance().findAll());
             return "/user/list.jsp";
         }
-        else{
-            return "redirect:/";
-        }
+
+        return "redirect:/";
+
     }
 }

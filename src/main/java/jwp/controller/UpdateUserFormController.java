@@ -17,25 +17,32 @@ public class UpdateUserFormController implements Controller {
 
     @Override
     public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String id=request.getParameter("userId");
-        HttpSession session = request.getSession();
-        Object value = session.getAttribute("user");
-        if (value != null) {
-            User sessionUser = (User) value;
-            User user=MemoryUserRepository.getInstance().findUserById(id);
-            if(!user.isSameUser(sessionUser)){
-                return "redirect:/user/userList";
-            }
-            else{
-
-                request.setAttribute("user",user);
-                return "/user/updateForm.jsp";
-            }
-
-        }
-        else {
+        User user =getUserFromSession(request);
+        if (user == null) {
             return "/";
         }
+        if (sameUser(request))
+            return "/user/updateForm.jsp";
 
+        return "redirect:/user/userList";
+    }
+
+    public User getUserFromSession(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Object user = session.getAttribute("user");
+        if (user == null)
+            return null;
+
+        return (User) user;
+    }
+
+    public boolean sameUser(HttpServletRequest request) {
+
+        User sessionUser = getUserFromSession(request);
+
+        String id = request.getParameter("userId");
+        User user = MemoryUserRepository.getInstance().findUserById(id);
+
+        return user.isSameUser(sessionUser);
     }
 }
