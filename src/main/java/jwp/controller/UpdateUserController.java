@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/user/update")
+
 public class UpdateUserController implements Controller{
     @Override
     public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {

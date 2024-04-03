@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebServlet("/user/logout")
+
 public class logoutController implements Controller{
     @Override
     public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {

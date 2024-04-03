@@ -23,7 +23,7 @@ public class DispatcherServlet extends HttpServlet {
         map.put("/user/login",new loginController());
         map.put("/user/logout",new logoutController());
         map.put("/user/update",new UpdateUserController());
-        map.put("/user/updateForm",new UpdateUserController());
+        map.put("/user/updateForm",new UpdateUserFormController());
 
     }
 
@@ -48,10 +48,10 @@ public class DispatcherServlet extends HttpServlet {
         }
         else {
             String redirect = command.substring(0, 9);
-            System.out.println("redirect = " + redirect);
             if (redirect.equals("redirect:")) {
-                String redirectUrl = command.substring(10);
-                resp.sendRedirect(redirectUrl);
+                String redirectUrl = command.substring(9);
+                String baseUrl = "http://localhost:8080";
+                resp.sendRedirect(baseUrl+redirectUrl);
             } else {
                 RequestDispatcher rd = req.getRequestDispatcher(command);
                 rd.forward(req, resp);
