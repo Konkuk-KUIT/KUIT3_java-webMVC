@@ -29,26 +29,30 @@ public class DispatcherServlet extends HttpServlet {
     }
 
     private void forward(HttpServletRequest req, HttpServletResponse resp, String command) throws ServletException, IOException {
-        if(command.length()<9){
+        if(!isRedirect(command)){
             RequestDispatcher rd = req.getRequestDispatcher(command);
-            rd.forward(req,resp);
+            rd.forward(req, resp);
         }
-        else {
+        else{
             String redirect = command.substring(0, 9);
-            if (redirect.equals("redirect:")) {
-                String redirectUrl = command.substring(9);
-                String baseUrl = "http://localhost:8080";
-                resp.sendRedirect(baseUrl+redirectUrl);
-            } else {
-                RequestDispatcher rd = req.getRequestDispatcher(command);
-                rd.forward(req, resp);
-            }
+            String redirectUrl = command.substring(9);
+            String baseUrl = "http://localhost:8080";
+            resp.sendRedirect(baseUrl+redirectUrl);
         }
-
     }
 
     private Controller mappingController(String controllerName){
         return RequestMapper.getInstance().get(controllerName);
+    }
 
+    private boolean isRedirect(String command){
+        if(command.length()<9){
+            return false;
+        }
+        String redirect = command.substring(0, 9);
+        if (redirect.equals("redirect:")) {
+            return true;
+        }
+        return false;
     }
 }
