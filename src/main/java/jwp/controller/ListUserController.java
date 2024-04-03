@@ -19,10 +19,11 @@ public class ListUserController implements Controller {
         User user = (User) value;
 
         if (user!=null) {
-            return "redirect:/users/loginForm";
+            req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
+            return "/user/list.jsp";
         }
         req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
-        return "/user/list.jsp";
+        return "login.jsp";
     }
 
 //    @Override
