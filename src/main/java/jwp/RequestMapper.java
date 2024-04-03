@@ -1,8 +1,6 @@
 package jwp;
 
-import jwp.controller.Controller;
-import jwp.controller.HomeController;
-import jwp.controller.ListUserController;
+import jwp.controller.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,8 +14,13 @@ public class RequestMapper {
     public RequestMapper() {
         controllerMap = new HashMap<>();
         // 요청 경로와 컨트롤러 매핑
-        controllerMap.put("/user/userList", new ListUserController());
         controllerMap.put("/", new HomeController());
+        controllerMap.put("/user/userList", new ListUserController());
+        controllerMap.put("/user/signup", new CreateUserController());
+        controllerMap.put("/user/login", new LoginController());
+        controllerMap.put("/user/logout", new LogoutController());
+        controllerMap.put("/user/update", new UpdateUserController());
+        controllerMap.put("/user/updateForm", new UpdateUserFormController());
     }
 
     public void process(HttpServletRequest req, HttpServletResponse resp) throws IOException {
