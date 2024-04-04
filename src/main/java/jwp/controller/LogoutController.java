@@ -1,16 +1,19 @@
 package jwp.controller;
 
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-public class HomeController extends HttpController {
+public class LogoutController extends HttpController {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
-        System.out.println("HOME CONTROLLER CALLED");
-        rd.forward(req, resp);
+        HttpSession session = req.getSession();
+        session.removeAttribute("user");
+
+        resp.sendRedirect("/");
     }
 }
