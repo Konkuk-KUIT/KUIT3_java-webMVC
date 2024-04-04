@@ -8,9 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public class HomeController extends HttpController {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
+    protected String doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("HOME CONTROLLER CALLED");
-        rd.forward(req, resp);
+        return "/index.jsp";
     }
 }

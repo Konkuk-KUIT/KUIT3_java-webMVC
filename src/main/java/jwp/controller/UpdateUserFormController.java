@@ -16,25 +16,22 @@ public class UpdateUserFormController extends HttpController {
     private final Repository repository = MemoryUserRepository.getInstance();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected String doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("userId");
 
         User user = repository.findUserById(id);
         HttpSession session = req.getSession();
         Object sessionUser = session.getAttribute("user");// TODO: Session Attribute
         if(sessionUser != user) {
-            resp.sendRedirect("/user/userList");
-            return;
+            return "redirect:/user/userList";
         }
         req.setAttribute("user", user);
 
-        RequestDispatcher rd = req.getRequestDispatcher("/user/updateForm.jsp");
-
-        rd.forward(req, resp);
+        return "/user/updateForm.jsp";
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected String doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String userId = req.getParameter("userId");
         String password = req.getParameter("password");
         String name = req.getParameter("name");
@@ -44,6 +41,6 @@ public class UpdateUserFormController extends HttpController {
 
         repository.changeUserInfo(user);
 
-        resp.sendRedirect("/user/userList");
+        return "redirect:/user/userList";
     }
 }

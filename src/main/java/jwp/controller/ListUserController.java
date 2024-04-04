@@ -13,15 +13,14 @@ import javax.servlet.http.HttpSession;
 
 public class ListUserController extends HttpController {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected String doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         Object user = session.getAttribute("user");// TODO: Session Attribute
         if(user == null) {
             resp.sendRedirect("/user/login.jsp");
-            return;
+            return "redirect:/user/login.jsp";
         }
         req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
-        RequestDispatcher rd = req.getRequestDispatcher("/user/list.jsp");
-        rd.forward(req,resp);
+        return "/user/list.jsp";
     }
 }

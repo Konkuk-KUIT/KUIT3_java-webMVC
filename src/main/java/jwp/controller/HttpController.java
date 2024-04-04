@@ -9,22 +9,23 @@ import javax.servlet.http.HttpServletResponse;
 public abstract class HttpController implements Controller{
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if(Objects.equals(req.getMethod(), "GET")) {
-            doGet(req, resp);
-            return;
+            return doGet(req, resp);
         }
         if(Objects.equals(req.getMethod(), "POST")) {
-            doPost(req,resp);
-            return;
+            return doPost(req,resp);
         }
+        return "/";
     }
 
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected String doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // 옳지 않은 메서드 어쩌구 저쩌구 처리
+        return "/";
     }
 
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected String doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // 옳지 않은 메서드 어쩌구 저쩌구 처리
+        return "/";
     }
 }

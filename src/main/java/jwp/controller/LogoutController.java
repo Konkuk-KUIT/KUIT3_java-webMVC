@@ -10,10 +10,10 @@ import javax.servlet.http.HttpSession;
 
 public class LogoutController extends HttpController {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected String doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         session.removeAttribute("user");
 
-        resp.sendRedirect("/");
+        return "redirect:/";
     }
 }

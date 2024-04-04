@@ -8,9 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public class ForwardController implements Controller{
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher rd = req.getRequestDispatcher(req.getRequestURI());
+    public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("FORWARD CONTROLLER CALLED");
-        rd.forward(req, resp);
+        return req.getRequestURI();
     }
 }

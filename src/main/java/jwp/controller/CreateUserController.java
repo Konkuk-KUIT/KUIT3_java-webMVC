@@ -14,7 +14,7 @@ import java.io.IOException;
 public class CreateUserController extends HttpController {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected String doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("CALLED");
         User user = new User(req.getParameter("userId"),
                 req.getParameter("password"),
@@ -23,6 +23,6 @@ public class CreateUserController extends HttpController {
 
         MemoryUserRepository.getInstance().addUser(user);
 
-        resp.sendRedirect("/user/userList");
+        return "redirect:/user/userList";
     }
 }

@@ -12,7 +12,7 @@ import jwp.model.User;
 public class LoginController extends HttpController {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected String doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String userId = req.getParameter("userId");
         String password = req.getParameter("password");
 
@@ -20,9 +20,8 @@ public class LoginController extends HttpController {
         if(user != null && user.matchPassword(password)) {
             HttpSession session = req.getSession();
             session.setAttribute("user", user);     //TODO: Session Attribute
-            resp.sendRedirect("/");
-            return;
+            return "redirect:/";
         }
-        resp.sendRedirect("/user/login_failed.jsp");
+        return "/user/login_failed.jsp";
     }
 }
