@@ -1,5 +1,7 @@
 package jwp.controller;
 
+import core.mvc.Controller;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,13 +11,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class LogOutController implements Controller {
-
-
     @Override
-    public MyView process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public String execute(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session = req.getSession();
         session.removeAttribute("user");
-
-        return new MyView("").redirect("/");
+        return REDIRECT + "/";
     }
 }

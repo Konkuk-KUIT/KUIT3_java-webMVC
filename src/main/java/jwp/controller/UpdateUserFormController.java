@@ -1,6 +1,7 @@
 package jwp.controller;
 
 import core.db.MemoryUserRepository;
+import core.mvc.Controller;
 import jwp.model.User;
 
 import javax.servlet.RequestDispatcher;
@@ -14,17 +15,13 @@ import java.io.IOException;
 
 public class UpdateUserFormController implements Controller {
     @Override
-    public MyView process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+    public String execute(HttpServletRequest req, HttpServletResponse resp) {
         String userId = req.getParameter("userId");
         User user = MemoryUserRepository.getInstance().findUserById(userId);
-
         if (user != null) {
             req.setAttribute("user", user);
-            return new MyView("/user/updateForm.jsp");
+            return "/user/updateForm.jsp";
         }
-
-        return new MyView("/user/updateForm.jsp").redirect("/");
+        return REDIRECT + "/";
     }
 }
-

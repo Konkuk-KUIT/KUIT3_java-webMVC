@@ -1,5 +1,7 @@
 package jwp.controller;
 
+import core.mvc.Controller;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,10 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class HomeController implements Controller {
-
     @Override
-    public MyView process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        return new MyView("/home.jsp");
+    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+        return "/home.jsp";
     }
 }
