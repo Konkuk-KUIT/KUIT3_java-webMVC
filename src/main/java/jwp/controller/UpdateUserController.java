@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
+//getParameter - 클라이언트의 HTML 페이지에서 필요한 정보를 얻는 데 사용됩니다.
+//
+//getAttribute - 이전에 다른 JSP 또는 Servlet 페이지에 설정된 매개 변수를 가져 오는 데 사용됩니다.
 @WebServlet("/user/update")
 public class UpdateUserController extends HttpServlet{
     @Override
