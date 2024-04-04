@@ -31,8 +31,8 @@ public class RequestMapper {
 
     public Controller mapRequest(String path) {
         if(path.endsWith(".jsp")) {
-
+            return controllers.get("forward");
         }
-        return null;
+        return controllers.get(path);
     }
 }

@@ -17,7 +17,6 @@ public class ListUserController extends HttpController {
         HttpSession session = req.getSession();
         Object user = session.getAttribute("user");// TODO: Session Attribute
         if(user == null) {
-            resp.sendRedirect("/user/login.jsp");
             return "redirect:/user/login.jsp";
         }
         req.setAttribute("users", MemoryUserRepository.getInstance().findAll());

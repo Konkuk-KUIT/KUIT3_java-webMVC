@@ -13,18 +13,18 @@ import jwp.RequestMapper;
 
 @WebServlet(name="dispathcer", urlPatterns="/", loadOnStartup=1)
 public class DispatcherServlet extends HttpServlet {
-    Map<String, Controller> controllers = new HashMap<>();
+//    Map<String, Controller> controllers = new HashMap<>();
     RequestMapper requestMapper = new RequestMapper();
 
     @Override
     public void init() throws ServletException {
-        controllers.put("forward", new ForwardController());
-        controllers.put("/user/signup", new CreateUserController());
-        controllers.put("", new HomeController());
-        controllers.put("/user/userList", new ListUserController());
-        controllers.put("/user/login", new LoginController());
-        controllers.put("/user/logout", new LogoutController());
-        controllers.put("/user/update", new UpdateUserFormController());
+//        controllers.put("forward", new ForwardController());
+//        controllers.put("/user/signup", new CreateUserController());
+//        controllers.put("", new HomeController());
+//        controllers.put("/user/userList", new ListUserController());
+//        controllers.put("/user/login", new LoginController());
+//        controllers.put("/user/logout", new LogoutController());
+//        controllers.put("/user/update", new UpdateUserFormController());
     }
 
     @Override
@@ -33,7 +33,7 @@ public class DispatcherServlet extends HttpServlet {
         Controller controller = requestMapper.mapRequest(requestURI);
         String dd = controller.execute(req, resp);  // should return string
         if(dd.startsWith("redirect:")) {
-            resp.sendRedirect(dd.split("redirect: ")[1]);
+            resp.sendRedirect(dd.split("redirect:")[1]);
         }
         else {
             RequestDispatcher rd = req.getRequestDispatcher(dd);
