@@ -19,15 +19,20 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         HttpSession session = req.getSession();
         User user = MemoryUserRepository.getInstance().findUserById(req.getParameter("userId"));
-        if(user != null && user.matchPassword(req.getParameter("password"))){
-            session.setAttribute("user", user);
-            resp.sendRedirect("/");
+        if(user == null || !user.matchPassword(req.getParameter("password"))){
+//            session.setAttribute("user", user);
+//            resp.sendRedirect("/");
+//            return;
+            resp.sendRedirect("/user/login_failed.jsp");
             return;
         }
 //        HttpSession session = req.getSession();
 //        session.setAttribute("user", user);
 //        RequestDispatcher rd = req.getRequestDispatcher("/user/updateForm.jsp");
 //        rd.forward(req, resp);
-        resp.sendRedirect("/user/login_failed.jsp");
+        session.setAttribute("user", user);
+        resp.sendRedirect("/");
+        return;
+//        resp.sendRedirect("/user/login_failed.jsp");
     }
 }

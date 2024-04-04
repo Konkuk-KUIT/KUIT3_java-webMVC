@@ -26,7 +26,15 @@
                     </th>
                     <th class="col-md-3">${user.email}
                     </th>
-                    <th class="col-md-3"><a href="/user/updateForm?userId=${user.userId}" class="btn btn-success" role="button">수정</a></th>
+                    <c:choose>
+                        <c:when test="${not empty sessionScope.user}">
+                            <th class="col-md-3"><a href="/user/updateForm?userId=${user.userId}" class="btn btn-success" role="button">수정</a></th>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="#" class="btn" role="button" disabled>-</a>
+                        </c:otherwise>
+                    </c:choose>
+<%--                    <th class="col-md-3"><a href="/user/updateForm?userId=${user.userId}" class="btn btn-success" role="button">수정</a></th>--%>
                 </tr>
             </c:forEach>
             </tbody>
