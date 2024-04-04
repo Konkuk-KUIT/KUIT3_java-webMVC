@@ -14,7 +14,7 @@ import java.io.IOException;
 public class CreateUserController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = new User(req.getParameter("userId"),
+        User user = new User(req.getParameter("userId"),//getparameter :전달된 데이터저장
                 req.getParameter("password"),
                 req.getParameter("name"),
                 req.getParameter("email"));

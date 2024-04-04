@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+//jstl: jsp 표준 라이브러리
 <!doctype html>
 <html lang="ko">
 <head>

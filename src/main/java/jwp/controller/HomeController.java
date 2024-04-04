@@ -12,7 +12,7 @@ import java.io.IOException;
 public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher rd = req.getRequestDispatcher("/home.jsp");
-        rd.forward(req,resp);
+        RequestDispatcher rd = req.getRequestDispatcher("/home.jsp");//경로 지정
+        rd.forward(req,resp);//해당 경로 페이지로 이동
     }
 }
