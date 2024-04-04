@@ -14,19 +14,17 @@ import java.io.IOException;
 
 public class UpdateUserFormController implements Controller {
     @Override
-    public void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public MyView process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String userId = req.getParameter("userId");
         User user = MemoryUserRepository.getInstance().findUserById(userId);
 
-        String viewPath = "/user/updateForm.jsp";
         if (user != null) {
             req.setAttribute("user", user);
-            RequestDispatcher rd = req.getRequestDispatcher(viewPath);
-            rd.forward(req, resp);
-            return;
+            return new MyView("/user/updateForm.jsp");
         }
-        resp.sendRedirect("/");
+
+        return new MyView("/user/updateForm.jsp").redirect("/");
     }
 }
 

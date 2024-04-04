@@ -7,5 +7,5 @@ import java.io.IOException;
 
 public interface Controller {
 
-    void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException;
+    MyView process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException;
 }
