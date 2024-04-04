@@ -14,17 +14,13 @@ import java.io.IOException;
 public class ListUserController implements Controller {
 
     @Override
-    public void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public MyView process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         if (UserSessionUtils.isLogined(req.getSession())) {
             req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
 
-            String viewPath = "/user/list.jsp";
-            RequestDispatcher rd = req.getRequestDispatcher(viewPath);
-            rd.forward(req,resp);
-            return;
+            return new MyView("/user/list.jsp");
         }
-        String viewPath = "/user/login.jsp";
-        resp.sendRedirect(viewPath);
+        return new MyView("/user/list.jsp").redirect("/user/login.jsp");
     }
 }

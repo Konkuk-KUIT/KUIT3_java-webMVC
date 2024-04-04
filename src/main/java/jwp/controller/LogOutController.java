@@ -12,11 +12,10 @@ public class LogOutController implements Controller {
 
 
     @Override
-    public void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public MyView process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         session.removeAttribute("user");
 
-        String viewPath = "/";
-        resp.sendRedirect(viewPath);
+        return new MyView("").redirect("/");
     }
 }

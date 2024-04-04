@@ -14,7 +14,7 @@ import java.io.IOException;
 public class LogInController implements Controller {
 
     @Override
-    public void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public MyView process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         String userId = req.getParameter("userId");
         String password = req.getParameter("password");
@@ -22,12 +22,8 @@ public class LogInController implements Controller {
 
         if (user != null && user.isSameUser(userId) && user.matchPassword(password)) {
             session.setAttribute("user", user);
-            resp.sendRedirect("/");
-            return;
+            return new MyView("/user/login_failed.jsp").redirect("/");
         }
-
-        String viewPath = "/user/login_failed.jsp";
-        resp.sendRedirect(viewPath);
-
+        return new MyView("/user/login_failed.jsp");
     }
 }

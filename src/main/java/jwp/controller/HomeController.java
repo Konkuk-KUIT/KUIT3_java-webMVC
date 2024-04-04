@@ -11,10 +11,8 @@ import java.io.IOException;
 public class HomeController implements Controller {
 
     @Override
-    public void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public MyView process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String viewPath = "/home.jsp";
-        RequestDispatcher rd = req.getRequestDispatcher(viewPath);
-        rd.forward(req, resp);
+        return new MyView("/home.jsp");
     }
 }

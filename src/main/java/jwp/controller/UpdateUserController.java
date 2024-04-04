@@ -14,13 +14,13 @@ public class UpdateUserController implements Controller {
 
 
     @Override
-    public void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public MyView process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = new User(req.getParameter("userId"), req.getParameter("password"),
                 req.getParameter("name"), req.getParameter("email"));
 
         MemoryUserRepository.getInstance().changeUserInfo(user);
 
-        String viewPath = "user/userList";
-        resp.sendRedirect(viewPath);
+
+        return new MyView("user/userList");
     }
 }
