@@ -19,7 +19,7 @@ public class ListUserController extends HttpServlet {
         HttpSession session = req.getSession();
         Object user = session.getAttribute("user");
         if(user != null){
-            req.setAttribute("user", MemoryUserRepository.getInstance().findAll());
+            req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
             RequestDispatcher rd = req.getRequestDispatcher("/user/list.jsp");
             rd.forward(req,resp);
             return;
