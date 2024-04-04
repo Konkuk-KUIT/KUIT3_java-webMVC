@@ -26,7 +26,7 @@ public class RequestMapper {
         controllers.put("/user/userList", new ListUserController());
         controllers.put("/user/login", new LoginController());
         controllers.put("/user/logout", new LogoutController());
-        controllers.put("/user/update", new UpdateUserFormController());
+        controllers.put("/user/updateForm", new UpdateUserFormController());
     }
 
     public Controller mapRequest(String path) {
