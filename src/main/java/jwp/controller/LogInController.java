@@ -12,20 +12,22 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/user/login")
-public class LogInController extends HttpServlet {
+public class LogInController implements Controller {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String loginId = req.getParameter("userId");
+    public String execute(HttpServletRequest request, HttpServletResponse response0) throws Exception {
+        String loginId = request.getParameter("userId");
         User user = MemoryUserRepository.getInstance().findUserById(loginId);
 
-        if(user.getPassword().equals(req.getParameter("password"))){
-            HttpSession session = req.getSession();
+
+        if(user == null) return "/user/login_failed.jsp";
+
+
+        if(user.getPassword().equals(request.getParameter("password"))){
+            HttpSession session = request.getSession();
             session.setAttribute("user", user);
-            resp.sendRedirect("/");
-        } else {
-            RequestDispatcher rd = req.getRequestDispatcher("/user/login_failed.jsp");
-            rd.forward(req, resp);
+            return "redirect:/";
         }
+
+        return "/user/login_failed.jsp";
     }
 }

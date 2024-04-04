@@ -8,13 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/user/logout")
-public class LogOutController extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        session.removeAttribute("user");
-        resp.sendRedirect("/");
+public class LogOutController implements Controller {
 
+    @Override
+    public String execute(HttpServletRequest request, HttpServletResponse response0) throws Exception {
+        HttpSession session = request.getSession();
+        session.removeAttribute("user");
+        return "redirect:/";
     }
 }

@@ -13,33 +13,22 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/user/updateForm")
-public class UpdateUserFormController extends HttpServlet {
+import static jwp.util.UserSessionUtils.getUserFromSession;
+import static jwp.util.UserSessionUtils.isLogined;
 
+public class UpdateUserFormController implements Controller{
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String id = req.getParameter("userId");
+    public String execute(HttpServletRequest request, HttpServletResponse response0) throws Exception {
+        String id = request.getParameter("userId");
 
-        HttpSession session = req.getSession();
-        Object value = session.getAttribute("user");
-
-        if (value != null) {
-            User user = (User) value;
-
+        if (isLogined(request.getSession())) {
+            User user = getUserFromSession(request.getSession());
             if(user.getUserId().equals(id)){
-                req.setAttribute("user", user);
-                RequestDispatcher rd = req.getRequestDispatcher("/user/updateForm.jsp");
-                rd.forward(req, resp);
-            } else {
-                resp.sendRedirect("/user/userList");
+                request.setAttribute("user", user);
+                return "/user/updateForm.jsp";
             }
-
-            return;
         }
-
-        resp.sendRedirect("/");
-
-
+        return "redirect:/user/userList";
 
 
     }
