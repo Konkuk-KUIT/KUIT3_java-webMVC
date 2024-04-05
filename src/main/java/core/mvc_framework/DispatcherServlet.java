@@ -29,6 +29,7 @@ public class DispatcherServlet extends HttpServlet{
     }
 
     public void init(){
+
         this.reqMapper = new RequestMapper();
     }
     private void move(String result,HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -10,6 +10,7 @@ public class RequestMapper {
     private Map<String , Controller> controllers = new HashMap<>();
 
     public RequestMapper() {
+
         initControllers();
     }
 
@@ -22,14 +23,10 @@ public class RequestMapper {
         controllers.put("/qna/form", new ForwardController("/qna/form.jsp"));
         controllers.put("/qna/show", new ForwardController("/qna/show.jsp"));
 
-
         controllers.put("/user/userList", new ListUserController());
-
         controllers.put("/user/login", new LoginController());
         controllers.put("/user/logout", new LogoutController());
-
         controllers.put("/user/signup", new CreateUserController());
-
         controllers.put("/user/updateForm", new UpdateUserFormController());
         controllers.put("/user/update", new UpdateUserController());
     }

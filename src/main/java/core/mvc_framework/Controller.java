@@ -7,4 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public interface Controller {
     String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException;
+
+    //String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException;
+
 }
