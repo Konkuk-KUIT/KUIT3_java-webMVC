@@ -12,18 +12,33 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/user/login")
-public class LoginController extends HttpServlet {
+//@WebServlet("/user/login")
+//public class LoginController extends HttpServlet {
+//
+//    @Override
+//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+//        HttpSession session = req.getSession();
+//        User user = MemoryUserRepository.getInstance().findUserById(req.getParameter("userId"));
+//        if(user == null || !user.matchPassword(req.getParameter("password"))){
+//            resp.sendRedirect("/user/login_failed.jsp");
+//            return;
+//        }
+//        session.setAttribute("user", user);
+//        resp.sendRedirect("/");
+//    }
+//}
+
+
+public class LoginController implements Controller {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+    public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         HttpSession session = req.getSession();
         User user = MemoryUserRepository.getInstance().findUserById(req.getParameter("userId"));
         if(user == null || !user.matchPassword(req.getParameter("password"))){
-            resp.sendRedirect("/user/login_failed.jsp");
-            return;
+            return "redirect:/user/login_failed";
         }
         session.setAttribute("user", user);
-        resp.sendRedirect("/");
+        return "redirect:/";
     }
 }
