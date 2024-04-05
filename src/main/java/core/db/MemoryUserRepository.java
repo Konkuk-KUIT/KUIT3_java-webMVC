@@ -37,5 +37,6 @@ public class MemoryUserRepository {
         if (users.get(user.getUserId()) != null) {
             users.put(user.getUserId(), user);
         }
+
     }
 }

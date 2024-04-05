@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 
 @WebFilter("/*")
 public class ResourceFilter implements Filter {
+    //뷰리졸버로 쓰이는 모양이다.
     private static final Logger logger = Logger.getLogger(ResourceFilter.class.getName());
     private static final List<String> resourcePrefixs = new ArrayList<>();
     static {
@@ -24,6 +25,7 @@ public class ResourceFilter implements Filter {
 
     private RequestDispatcher defaultRequestDispatcher;
 
+    //dispatcher를 가져와서 여기서 사용할 수 있게 init()을 해줌.
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         this.defaultRequestDispatcher = filterConfig.getServletContext().getNamedDispatcher("default");
@@ -53,6 +55,7 @@ public class ResourceFilter implements Filter {
 
     @Override
     public void destroy() {
+
     }
 
 }
