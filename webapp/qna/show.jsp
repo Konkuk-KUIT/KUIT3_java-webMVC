@@ -2,9 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="ko">
-<%@ include file="../include/navigation.jspf" %>
-<body>
 <%@ include file="../include/header.jspf" %>
+<body>
+<%@ include file="../include/navigation.jspf" %>
     <div class="container" id="main">
             <header class="qna-header">
                 <h2 class="qna-title">객체지향에서 가장 중요하다고 생각하는 것이 무엇인가요?</h2>
@@ -45,7 +45,7 @@
                                 </form>
                             </li>
                             <li>
-                                <a class="link-modify-article" href="../index.jsp">목록</a>
+                                <a class="link-modify-article" href="../home.jsp">목록</a>
                             </li>
                         </ul>
                     </div>

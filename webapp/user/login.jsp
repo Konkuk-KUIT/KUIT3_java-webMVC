@@ -2,9 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="ko">
-<%@ include file="../include/navigation.jspf" %>
-<body>
 <%@ include file="../include/header.jspf" %>
+<body>
+<%@ include file="../include/navigation.jspf" %>
     <div class="container">
       <main class="form-signin">
         <form name="login" method="post" action="/user/login">
