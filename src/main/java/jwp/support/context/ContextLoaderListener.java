@@ -9,19 +9,19 @@ import java.util.logging.Logger;
 // 웹 어플리케이션이 시작되거나 종료될 때 호출할 메서드를 정의
 @WebListener
 public class ContextLoaderListener implements ServletContextListener {
-    private static final Logger logger = Logger.getLogger(ContextLoaderListener.class.getName());
+  private static final Logger logger = Logger.getLogger(ContextLoaderListener.class.getName());
 
-    @Override
-    public void contextInitialized(ServletContextEvent sce) {
+  @Override
+  public void contextInitialized(ServletContextEvent sce) {
 //        ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
 //        populator.addScript(new ClassPathResource("jwp.sql"));
 //        ConnectionManager.getDataSource();
 //        DatabasePopulatorUtils.execute(populator, ConnectionManager.getDataSource());
 
-        logger.info("Completed Load ServletContext!");
-    }
+    logger.info("Completed Load ServletContext!");
+  }
 
-    @Override
-    public void contextDestroyed(ServletContextEvent sce) {
-    }
+  @Override
+  public void contextDestroyed(ServletContextEvent sce) {
+  }
 }
