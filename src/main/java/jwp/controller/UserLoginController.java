@@ -10,34 +10,35 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-@WebServlet("/user/login")
-public class UserLoginController extends HttpServlet {
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        /*User user = new User(req.getParameter("userId"),
-                req.getParameter("password"),
-                req.getParameter("name"),
-                req.getParameter("email"));
-        System.out.println(user.toString());
-        MemoryUserRepository.getInstance().findUserById(user.getUserId()).update(user);*/
-        User user=MemoryUserRepository.getInstance().findUserById(req.getParameter("userId"));
+//@WebServlet("/user/login")
+public class UserLoginController extends HTTPController {
 
+    @Override
+    protected String doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        return "/user/login.jsp";
+    }
+    @Override
+    protected String doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        User user=MemoryUserRepository.getInstance().findUserById(req.getParameter("userId"));
         if(user==null){
-            resp.sendRedirect("/user/login_failed.jsp");
-            return;
+            //resp.sendRedirect("/user/login_failed.jsp");
+            return loginFailed();
         }
-        System.out.println(user.toString());
+        //System.out.println(user.toString());
         if(!user.matchPassword(req.getParameter("password"))){
-            resp.sendRedirect("/user/login_failed.jsp");
-            return;
+            //resp.sendRedirect("/user/login_failed");
+            return loginFailed();
         }
         // 세션 정보 저장
         HttpSession session = req.getSession();
         session.setAttribute("user", user);
-        resp.sendRedirect("/");
+        return REDIRECT +"/";
+        //resp.sendRedirect("/");
     }
 
-    private void loginFailed(HttpServletResponse resp) throws IOException{
-        resp.sendRedirect("/user/login_failed");
+    private String loginFailed() throws IOException{
+        //resp.sendRedirect("/user/login_failed");
+        return REDIRECT +"/user/login_failed";
     }
 }

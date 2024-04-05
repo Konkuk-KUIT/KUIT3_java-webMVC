@@ -10,18 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-@WebServlet("/user/logout")
-public class UserLogoutController extends HttpServlet {
+//@WebServlet("/user/logout")
+public class UserLogoutController extends HTTPController {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected String doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //세션 데이터 삭제
         HttpSession session = req.getSession(false);
         if(session==null){
-            resp.sendRedirect("/");
+            //resp.sendRedirect("/");
             System.out.println("no session request logout ");
-            return;
+            return REDIRECT +"/";
         }
         session.removeAttribute("user");
-        resp.sendRedirect("/");
+        //resp.sendRedirect("/");
+        return REDIRECT+ "/";
     }
 }
