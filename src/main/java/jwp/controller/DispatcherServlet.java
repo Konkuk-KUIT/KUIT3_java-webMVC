@@ -24,31 +24,27 @@ public class DispatcherServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // uri를 통해서 컨트롤러를 찾는다
         String requestURI = req.getRequestURI();
+        Controller controller = this.mapper.requestMapping(requestURI);
 
         log("requestURI = " + requestURI );
-
-
-
-        Controller controller = this.mapper.requestMapping(requestURI);
-        String result = "";
-
         log("controller = " + controller);
 
+        // 컨트롤러가 처리한 후에 redirect나 forward 수행한다
         try {
-            result = controller.execute(req, resp);
+            String result = controller.execute(req, resp);
+
+            log("result = " + result);
+
+            if(result.startsWith("redirect:")){
+                resp.sendRedirect(result.substring(result.indexOf(":") + 1));
+                return;
+            }
+            RequestDispatcher rd = req.getRequestDispatcher(result);
+            rd.forward(req, resp);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-        log("result = " + result);
-
-
-        if(result.startsWith("redirect:")){
-            resp.sendRedirect(result.substring(result.indexOf(":") + 1));
-            return;
-        }
-        RequestDispatcher rd = req.getRequestDispatcher(result);
-        rd.forward(req, resp);
     }
 }
