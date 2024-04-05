@@ -20,6 +20,7 @@ public class ListUserController implements Controller {
 
         if (user!=null) {
             req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
+            req.setAttribute("currentUser", user);
             return "/user/list.jsp";
         }
         req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
