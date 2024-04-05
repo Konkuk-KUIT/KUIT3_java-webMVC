@@ -16,11 +16,11 @@
                 <label for="userId">User Id</label>
             </div>
             <div class="form-floating">
-                <input type="text" class="form-control" value="${user.password}" id="password" name="password" placeholder="Password">
+                <input type="password" class="form-control" value="${user.password}" id="password" name="password" placeholder="Password">
                 <label for="password">Password</label>
             </div>
             <div class="form-floating">
-                <input type="text" class="form-control" value="${user.name}" id="name" name="name" placeholder="Name">
+                <input type="text" class="form-control" value="${user.name}" id="name" name="name" placeholder="name">
                 <label for="name">Name</label>
             </div>
             <div class="form-floating">
@@ -29,7 +29,7 @@
             </div>
             <div style="height:10px;">
             </div>
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Update</button>
         </form>
     </main>
 </div>
