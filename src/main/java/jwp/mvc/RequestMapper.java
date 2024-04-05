@@ -8,7 +8,7 @@ public class RequestMapper {
     public static Controller createController(String url){
 
         if(url.equals("/user/signup")) return new CreateUserController();
-        if(url.equals("/")) return new HomeController();
+        if(url.equals("/")) return new ForwardController("/");
         if(url.equals("/user/userList")) return new ListUserController();
         if(url.equals("/user/login")) return new LogInController();
         if(url.equals("/user/logout")) return new LogOutController();
