@@ -2,6 +2,7 @@ package jwp.controller;
 
 import core.db.MemoryUserRepository;
 import jwp.model.User;
+import jwp.util.UserSessionUtils;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,21 +18,13 @@ public class ListUserController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // 세션에 저장된 정보 가져오기
-        HttpSession session = req.getSession();
-        Object value = session.getAttribute("user");
-
         // 로그인되어있는 경우
-        if (value != null) {
-//            User user = (User) value; // Object 타입에서 User 타입으로 캐스팅
-
+        if (UserSessionUtils.isLogined(req.getSession())) {
             req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
             RequestDispatcher rd = req.getRequestDispatcher("/user/list.jsp");
             rd.forward(req, resp);
-        } else { // 로그아웃되어있는 경우
-            resp.sendRedirect("/user/login.jsp");
         }
-
+        resp.sendRedirect("/user/login.jsp");
     }
 
 }

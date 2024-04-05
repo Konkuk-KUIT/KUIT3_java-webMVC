@@ -51,6 +51,10 @@ public class User {
         return userId.equals(this.userId);
     }
 
+    public boolean isSameUser(String userId, String password) {
+        return userId.equals(this.userId) && password.equals(this.password);
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
