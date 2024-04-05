@@ -9,20 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-//@WebServlet("/user/logout")
-//public class LogoutController extends HttpServlet {
-//    @Override
-//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        HttpSession session = req.getSession();
-//        session.removeAttribute("user");
-//
-//        resp.sendRedirect("/");
-//    }
-//}
-
 public class LogoutController implements Controller{
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        // 세션을 지운다.
         HttpSession session = req.getSession();
         session.removeAttribute("user");
         return "redirect:/";

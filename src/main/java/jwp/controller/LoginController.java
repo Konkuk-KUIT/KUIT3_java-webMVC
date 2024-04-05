@@ -11,25 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-//@WebServlet("/user/login")
-//public class LoginController extends HttpServlet {
-//    @Override
-//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        User user = MemoryUserRepository.getInstance().findUserById(req.getParameter("userId"));
-//        if(user != null && user.getPassword().equals(req.getParameter("password"))){
-//            HttpSession session = req.getSession();
-//            session.setAttribute("user", user);
-//            resp.sendRedirect("/");
-//            return;
-//        }
-//        resp.sendRedirect("/user/login_failed.jsp"); // 서버에서 그냥 보내야 하면 forward해야
-//    }
-//}
-
 public class LoginController implements Controller {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         User user = MemoryUserRepository.getInstance().findUserById(req.getParameter("userId"));
+        // 유저아이디와 패스워드가 올바르면 로그인을 한다.
         if(user != null && user.getPassword().equals(req.getParameter("password"))){
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
