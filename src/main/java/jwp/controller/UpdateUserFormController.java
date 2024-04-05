@@ -1,6 +1,7 @@
 package jwp.controller;
 
 import core.db.MemoryUserRepository;
+import core.mvcFramework.Controller;
 import jwp.model.User;
 
 import javax.servlet.RequestDispatcher;
@@ -11,21 +12,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/user/updateForm")
-public class UpdateUserFormController extends HttpServlet {
+public class UpdateUserFormController implements Controller {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         String currentId = req.getParameter("userId"); // 쿼리파라미터에서 현재 수정하려는 userId를 가져옴
         User user = MemoryUserRepository.getInstance().findUserById(currentId); // currentId로 User객체를 찾아서 가져옴
-        
-        req.setAttribute("user", user);
-        RequestDispatcher rd = req.getRequestDispatcher("/user/updateForm.jsp");
-        rd.forward(req, resp);
 
-//        req.setAttribute("user", user);
-//        RequestDispatcher rd = req.getRequestDispatcher("/user/updateForm.jsp");
-//        rd.forward(req, resp);
-        resp.sendRedirect("/");
+        if(user!=null){
+            req.setAttribute("user", user);
+            return "/user/updateForm.jsp";
+        }
 
+        return REDIRCT+"/";
     }
 }
