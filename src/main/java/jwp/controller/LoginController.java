@@ -24,6 +24,6 @@ public class LoginController implements Controller {
             return "redirect:/";
         }
 
-        return "redirect:/user/login_failed.jsp";
+        return "redirect:/user/loginFailed";
     }
 }

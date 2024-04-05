@@ -26,6 +26,6 @@ public class ListUserController implements Controller {
             return "/user/list.jsp";
         }
 
-        return "redirect:/user/login.jsp";
+        return "redirect:/user/loginForm";
     }
 }
