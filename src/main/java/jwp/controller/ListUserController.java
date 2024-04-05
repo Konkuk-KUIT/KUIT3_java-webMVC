@@ -22,10 +22,7 @@ public class ListUserController extends HttpServlet implements Controller {
         if (UserSessionUtils.isLogined(request.getSession())) {
             request.setAttribute("users", MemoryUserRepository.getInstance().findAll());
             return "/user/list.jsp";
-//            RequestDispatcher rd = request.getRequestDispatcher("/user/list.jsp");
-//            rd.forward(req, resp);
         }
-//        return "/user/login.jsp";
-        return "redirect:/user/login";
+        return "redirect:/user/loginForm";
     }
 }

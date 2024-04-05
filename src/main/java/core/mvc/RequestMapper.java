@@ -15,10 +15,12 @@ public class RequestMapper {
     private void initController() {
         controllers.put("/", new HomeController());
 
+        controllers.put("/user/form", new ForwardController("/user/form.jsp"));
+        controllers.put("/user/loginForm", new ForwardController("/user/login.jsp"));
+        controllers.put("/user/loginFailed", new ForwardController("/user/loginFailed.jsp"));
+
         controllers.put("/user/login", new LoginController());
         controllers.put("/user/logout", new LogoutController());
-
-        controllers.put("/user/loginFailed", new ForwardController("/user/loginFailed.jsp"));
 
         controllers.put("/user/userList", new ListUserController());
         controllers.put("/user/signup", new CreateUserController());
