@@ -20,7 +20,7 @@ public class DispathcherServlet extends HttpServlet {
         try {
             String view = requestMapper.MappingController(req, resp);
             if(view.startsWith("redirect:")){
-                resp.sendRedirect(view.substring(view.indexOf("redirect:")+1));
+                resp.sendRedirect(view.substring("redirect:".length()));
                 return;
             }
             RequestDispatcher requestDispatcher = req.getRequestDispatcher(view);

@@ -1,13 +1,10 @@
 import jwp.controller.*;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 //Controller mapping
 public class RequestMapper {
-    //private Map<String , Controller> controllers = new HashMap<>();
     HomeController homeController;
     CreateUserController createUserController;
     ListUserController listUserController;
@@ -15,8 +12,6 @@ public class RequestMapper {
     LogoutController logoutController;
     UpdateUserFormController updateUserFormController;
     UpdateUserController updateUserController;
-
-    //FowardController fowardController;
 
     public RequestMapper() {
         homeController = new HomeController();
@@ -26,8 +21,6 @@ public class RequestMapper {
         logoutController = new LogoutController();
         updateUserController = new UpdateUserController();
         updateUserFormController = new UpdateUserFormController();
-
-        //fowardController = new FowardController();
     }
     public String MappingController(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         String uri = req.getRequestURI();
