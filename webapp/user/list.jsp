@@ -19,13 +19,6 @@
         </thead>
         <tbody>
 
-        <%-- 왜 안될까?..? HttpSession usersession = request.getSession();
-         Object sessionValue = usersession.getAttribute("user"); // 세션에서 사용자 정보 가져오기
-            Collection<User> users = (Collection<User>) request.getAttribute("users"); // request 속성에서 사용자 목록 가져오기
-            if (sessionValue != null) {
-                User sessionUser = (User) sessionValue; // 세션에서 가져온 사용자 정보
-                for (User user : users) {
-         %>--%>
 
         <c:forEach items="${users}" var="user">
             <tr>
