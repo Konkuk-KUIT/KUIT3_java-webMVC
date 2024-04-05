@@ -14,15 +14,23 @@ import java.io.IOException;
 
 @WebServlet(name = "dispatcher", urlPatterns = "/", loadOnStartup = 1)
 public class DispatcherServlet extends HttpServlet {
+
+    RequestMapper mapper;
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        this.mapper = new RequestMapper();
+    }
+
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String requestURI = req.getRequestURI();
 
         log("requestURI = " + requestURI );
 
-        RequestMapper mapper = new RequestMapper();
 
-        Controller controller = mapper.requestMapping(requestURI);
+
+        Controller controller = this.mapper.requestMapping(requestURI);
         String result = "";
 
         log("controller = " + controller);
