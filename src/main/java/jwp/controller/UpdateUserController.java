@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import core.mvc.Controller;
 
-@WebServlet("/user/update")
-public class UpdateUserController extends HttpServlet {
+public class UpdateUserController implements Controller {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public String execute(HttpServletRequest req, HttpServletResponse resp) {
         String userId = req.getParameter("userId");
         String name = req.getParameter("name");
         String password = req.getParameter("password");
@@ -21,7 +21,7 @@ public class UpdateUserController extends HttpServlet {
 
         User user = new User(userId, name,password,email);
         MemoryUserRepository.getInstance().changeUserInfo(user);
-        resp.sendRedirect("/user/userList");
+        return REDIRECT + "/user/userList";
     }
 
 }

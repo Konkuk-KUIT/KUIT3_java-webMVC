@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import core.mvc.Controller;
 
-@WebServlet("/user/login")
-public class LoginController extends HttpServlet {
+public class LoginController implements Controller{
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public String execute(HttpServletRequest req, HttpServletResponse resp) {
         //로그인이 성공되면 세션에 정보 저장
         String userId = req.getParameter("userId");
         String password = req.getParameter("password");
@@ -24,9 +24,8 @@ public class LoginController extends HttpServlet {
             HttpSession session = req.getSession();
             //세션 정보 저장
             session.setAttribute("user",user);
-            resp.sendRedirect("/");
-            return;
+            return REDIRECT + "/";
         }
-        resp.sendRedirect("/user/login_failed.jsp");
+        return REDIRECT+ "/user/login_failed.jsp";
     }
 }

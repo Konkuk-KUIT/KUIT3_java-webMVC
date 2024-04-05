@@ -10,21 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import core.mvc.Controller;
 
-@WebServlet("/user/updateForm")
-public class UpdateUserFormController extends HttpServlet {
+public class UpdateUserFormController implements Controller {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public String execute(HttpServletRequest req, HttpServletResponse resp) {
         //userId
         String userId = req.getParameter("userId");
         User user = MemoryUserRepository.getInstance().findUserById(userId);
         if(user != null){
             req.setAttribute("user",user);
-            RequestDispatcher rd = req.getRequestDispatcher("/user/updateForm.jsp");
-            rd.forward(req,resp);
-            return;
+            return "/user/updateForm.jsp";
         }
-        resp.sendRedirect("/");
+        return REDIRECT + "/";
     }
 
 }

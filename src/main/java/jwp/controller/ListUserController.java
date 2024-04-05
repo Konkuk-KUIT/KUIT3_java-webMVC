@@ -11,18 +11,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import core.mvc.Controller;
 
-@WebServlet("/user/userList")
-public class ListUserController extends HttpServlet {
+public class ListUserController implements Controller {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if(UserSessionUtils.isLogined(req.getSession())){
+    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+        if (UserSessionUtils.isLogined(req.getSession())) {
             req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
             RequestDispatcher rd = req.getRequestDispatcher("/user/list.jsp");
-            rd.forward(req,resp);
-            return;
+            return "/user/list.jsp";
         }
-        resp.sendRedirect("/user/login.jsp");
+        return REDIRECT + "/user/loginForm";
 
     }
 }
