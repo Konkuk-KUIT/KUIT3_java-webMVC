@@ -20,7 +20,7 @@ public class DispatcherServlet extends HttpServlet{
         Controller controller = reqMapper.getController(req);
         try {
             String result =controller.execute(req,resp);
-            move(result,req,resp);
+            move(result, req, resp);
         } catch (ServletException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {

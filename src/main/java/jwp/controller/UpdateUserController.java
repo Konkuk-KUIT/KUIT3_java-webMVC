@@ -24,7 +24,7 @@ public class UpdateUserController implements Controller {
                 req.getParameter("email"));
 
         MemoryUserRepository.getInstance().changeUserInfo(user);
-        return "redirect:/user/userlist";
+        return "/home.jsp";
 
 
     }
