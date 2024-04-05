@@ -40,7 +40,7 @@ public class ListUserController implements Controller {
             req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
             return "/user/list.jsp";
         }
-       return "redirect:/users/loginForm";
+       return "redirect:/user/loginForm";
     }
 }
 

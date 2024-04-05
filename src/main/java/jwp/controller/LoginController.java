@@ -36,7 +36,7 @@ public class LoginController implements Controller {
         HttpSession session = req.getSession();
         User user = MemoryUserRepository.getInstance().findUserById(req.getParameter("userId"));
         if(user == null || !user.matchPassword(req.getParameter("password"))){
-            return "redirect:/user/login_failed";
+            return "redirect:/user/loginFailed";
         }
         session.setAttribute("user", user);
         return "redirect:/";

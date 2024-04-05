@@ -13,6 +13,7 @@ import java.io.IOException;
 @WebServlet(name = "dispatcher", urlPatterns = "/", loadOnStartup = 1)      //loadOnStartup : 컨테이너 실행 시 서블릿이 로드되는 순서 지정
 public class DispatcherServlet extends HttpServlet {
     private RequestMapper requestMapper;
+    private String redirect = "redirect:";
     @Override
     public void init() throws ServletException {
         this.requestMapper = new RequestMapper();
@@ -24,7 +25,7 @@ public class DispatcherServlet extends HttpServlet {
         try {
             String view = controller.execute(req, resp);
             if(view.startsWith("redirect:")){
-                resp.sendRedirect(view);
+                resp.sendRedirect(view.substring(redirect.length()));
                 return;
             }
             RequestDispatcher rd = req.getRequestDispatcher(view);
