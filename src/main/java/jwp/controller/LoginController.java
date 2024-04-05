@@ -19,8 +19,8 @@ public class LoginController extends HttpServlet {
         String userId = req.getParameter("userId");
         String password = req.getParameter("password");
         User user = MemoryUserRepository.getInstance().findUserById(userId);
-        // id 없으면 user에 null 반환
-        if(userId != null && user.isSameUser(password,userId)){
+        // user 없으면 user에 null 반환
+        if(user != null && user.isSameUser(password,userId)){
             HttpSession session = req.getSession();
             //세션 정보 저장
             session.setAttribute("user",user);
