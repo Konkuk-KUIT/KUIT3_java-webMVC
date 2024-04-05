@@ -11,16 +11,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RequestMapper {
-    private HttpServletRequest req;
-    private HttpServletResponse resp;
     private Map<String, Controller> controllers = new HashMap<>();
-    private Controller controller;
 
-    public RequestMapper(HttpServletRequest req, HttpServletResponse resp) {
-        this.req = req;
-        this.resp = resp;
+    public RequestMapper() {
         initControllers();
-        controller = controllers.get(req.getRequestURI());
     }
 
     private void initControllers() {
@@ -39,16 +33,7 @@ public class RequestMapper {
         controllers.put("/user/logout", new LogoutController());
     }
 
-    public void proceed() throws ServletException, IOException {
-        String result = controller.execute(req, resp);
-
-        if (result.startsWith("redirect:")) {
-            int index = result.indexOf(":");
-            String url = result.substring(index + 1);
-            resp.sendRedirect(url);
-            return;
-        }
-        RequestDispatcher rd = req.getRequestDispatcher(result);
-        rd.forward(req, resp);
+    public Controller getController(HttpServletRequest req) {
+        return controllers.get(req.getRequestURI());
     }
 }
