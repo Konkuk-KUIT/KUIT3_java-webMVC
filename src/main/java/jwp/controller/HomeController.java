@@ -1,5 +1,7 @@
 package jwp.controller;
 
+import core.servlet.Controller;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,11 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/")
-public class HomeController extends HttpServlet {
+public class HomeController implements Controller {
+
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        RequestDispatcher rd = request.getRequestDispatcher("/home.jsp");
-        rd.forward(request,response);
+    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+        return "/home.jsp";
     }
 }
