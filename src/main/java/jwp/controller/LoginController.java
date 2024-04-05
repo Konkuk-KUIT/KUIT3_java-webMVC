@@ -2,6 +2,7 @@ package jwp.controller;
 
 import core.db.MemoryUserRepository;
 import jwp.model.User;
+import jwp.util.UserSessionUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +21,7 @@ public class LoginController extends HttpServlet {
         String password = req.getParameter("password");
         User user = MemoryUserRepository.getInstance().findUserById(userId);
         if (user != null && user.matchPassword(password)) {
-            session.setAttribute("user", user);
+            UserSessionUtils.login(session, user);
             resp.sendRedirect("/");
             return;
         }

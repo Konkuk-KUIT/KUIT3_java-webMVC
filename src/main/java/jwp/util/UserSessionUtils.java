@@ -15,4 +15,8 @@ public class UserSessionUtils {
     public static boolean isLogined(HttpSession session) {
         return getUserFromSession(session) != null;
     }
+
+    public static void login(HttpSession session, User user) {
+        session.setAttribute("user", user);
+    }
 }
