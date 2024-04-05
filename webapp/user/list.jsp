@@ -27,7 +27,7 @@
                     <th class="col-md-3">${user.email}
                     </th>
                     <c:choose>
-                        <c:when test="${not empty sessionScope.user}">
+                        <c:when test="${user.userId eq sessionScope.user.userId}">
                             <th class="col-md-3"><a href="/user/updateForm?userId=${user.userId}" class="btn btn-success" role="button">수정</a></th>
                         </c:when>
                         <c:otherwise>

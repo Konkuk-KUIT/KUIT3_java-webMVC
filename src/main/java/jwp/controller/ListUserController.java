@@ -17,7 +17,8 @@ public class ListUserController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        Object user = session.getAttribute("user");
+        Object value = session.getAttribute("user");
+        User user = (User) value;
         if(user != null){
             req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
             RequestDispatcher rd = req.getRequestDispatcher("/user/list.jsp");

@@ -20,19 +20,10 @@ public class LoginController extends HttpServlet {
         HttpSession session = req.getSession();
         User user = MemoryUserRepository.getInstance().findUserById(req.getParameter("userId"));
         if(user == null || !user.matchPassword(req.getParameter("password"))){
-//            session.setAttribute("user", user);
-//            resp.sendRedirect("/");
-//            return;
             resp.sendRedirect("/user/login_failed.jsp");
             return;
         }
-//        HttpSession session = req.getSession();
-//        session.setAttribute("user", user);
-//        RequestDispatcher rd = req.getRequestDispatcher("/user/updateForm.jsp");
-//        rd.forward(req, resp);
         session.setAttribute("user", user);
         resp.sendRedirect("/");
-        return;
-//        resp.sendRedirect("/user/login_failed.jsp");
     }
 }
