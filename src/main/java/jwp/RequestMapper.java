@@ -2,6 +2,7 @@ package jwp;
 
 import jwp.controller.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -28,6 +29,11 @@ public class RequestMapper {
         controllers.put("/user/update", new ForwardController("/user/updateForm.jsp"));
         controllers.put("/user/loginForm", new ForwardController("/user/login.jsp"));
 
+    }
+
+    public Controller getController(HttpServletRequest req) {
+        //getRequestURL은 http://www....으로 값을 주고, getRequestURI는 /test.jsp로 반환함.
+        return controllers.get(req.getRequestURI());
     }
     //예를 들어 action으로 /user/form을 받으면 /user/form.jsp를 넘기겠지. 그런데 /user/form.jsp의 액션은 /user/signup이란 말이지?
     //그래서 /user/signup을 받으면 CreateUserController를 실행해야 겠지.  CUC에서 할일을 다하면 /user/userList로 리다이렉트를 하는데,
