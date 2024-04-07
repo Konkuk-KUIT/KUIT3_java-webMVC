@@ -23,9 +23,8 @@ public class DispatcherServlet extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Controller controller = requestMapping.getController(req);
         try {
-            String viewName = controller.execute(req, resp);
-            if(viewName == null) return;
-            move(viewName, req, resp);
+            ModelAndView mav = controller.execute(req, resp);
+            mav.render(req,resp);
         } catch (Throwable e) {
             throw new ServletException(e.getMessage());
         }
