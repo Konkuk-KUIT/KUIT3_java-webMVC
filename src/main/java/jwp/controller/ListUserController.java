@@ -4,23 +4,16 @@ import core.db.MemoryUserRepository;
 import core.mvc.Controller;
 import jwp.util.UserSessionUtils;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
-import java.io.IOException;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class ListUserController implements Controller {
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        HttpSession session = req.getSession();
-        // 로그인되어 있다면 리스트를 보여준다.
-        if(session.getAttribute("user") != null){
+    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+        if(UserSessionUtils.isLogined(req.getSession())){
             req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
             return "/user/list.jsp";
         }
-        return "redirect:/";
+        return REDIRECT + "/user/loginForm";
     }
 }
