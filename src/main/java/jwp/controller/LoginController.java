@@ -1,26 +1,25 @@
 package jwp.controller;
 
 import core.db.MemoryUserRepository;
+import core.mvc.Controller;
 import jwp.model.User;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
-public class LoginController implements Controller {
+public class LogInController implements Controller {
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        User user = MemoryUserRepository.getInstance().findUserById(req.getParameter("userId"));
-        // 유저아이디와 패스워드가 올바르면 로그인을 한다.
-        if(user != null && user.getPassword().equals(req.getParameter("password"))){
-            HttpSession session = req.getSession();
+    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+        HttpSession session = req.getSession();
+        String userId = req.getParameter("userId");
+        String password = req.getParameter("password");
+        User user = MemoryUserRepository.getInstance().findUserById(userId);
+
+        if (user != null && user.isSameUser(userId, password)) {
             session.setAttribute("user", user);
-            return "redirect:/";       // redirect인가?
+            return REDIRECT + "/";
         }
-        return "/user/login_failed.jsp";
+        return REDIRECT + "/user/loginFailed";
     }
 }
