@@ -14,11 +14,9 @@ public class LogInController implements Controller {
         HttpSession session = req.getSession();
         String userId = req.getParameter("userId");
         String password = req.getParameter("password");
-        //해당 아이디를 가진 사용자 검색
         User user = MemoryUserRepository.getInstance().findUserById(userId);
 
         if (user != null && user.isSameUser(userId, password)) {
-            // 유효하면 세션에 사용자 저장
             session.setAttribute("user", user);
             return REDIRECT + "/";
         }

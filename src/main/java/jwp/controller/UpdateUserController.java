@@ -4,10 +4,13 @@ import core.db.MemoryUserRepository;
 import core.mvc.Controller;
 import jwp.model.User;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
-//업데이트 작업처리
 public class UpdateUserController implements Controller {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
