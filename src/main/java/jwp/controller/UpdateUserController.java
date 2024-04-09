@@ -11,18 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class CreateUserController implements Controller {
-
-
+public class UpdateUserController implements Controller{
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+
         User user = new User(req.getParameter("userId"),
                 req.getParameter("password"),
                 req.getParameter("name"),
                 req.getParameter("email"));
 
-        MemoryUserRepository.getInstance().addUser(user);
+        MemoryUserRepository.getInstance().changeUserInfo(user);
 
-        return  "redirect:/user/userList";
+        return "redirect:/user/userList";
+
     }
 }
