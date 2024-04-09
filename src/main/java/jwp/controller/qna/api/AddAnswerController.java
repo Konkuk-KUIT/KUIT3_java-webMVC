@@ -5,6 +5,7 @@ import core.db.MemoryAnswerRepository;
 import core.db.MemoryQuestionRepository;
 import core.mvc.Controller;
 import core.mvc.ModelAndView;
+import core.mvc.View;
 import jwp.model.Answer;
 import jwp.model.Question;
 
@@ -27,13 +28,10 @@ public class AddAnswerController implements Controller {
         question.increaseCountOfAnswer();
         questionRepository.update(question);
 
-        // Jackson 라이브러리 활용
-        ObjectMapper mapper = new ObjectMapper();
-        resp.setContentType("application/json;charset=UTF-8");
-        PrintWriter out = resp.getWriter();
-        out.print(mapper.writeValueAsString(savedAnswer));
-
+        View view=new View("json");
+        ModelAndView mav =new ModelAndView(view);
+        mav.addModel("Json",savedAnswer);
         // 페이지가 아니므로 null 반환
-        return null;
+        return mav;
     }
 }
