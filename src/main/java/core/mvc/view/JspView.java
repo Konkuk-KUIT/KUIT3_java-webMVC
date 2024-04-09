@@ -1,14 +1,15 @@
 package core.mvc.view;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 public class JspView implements View{
-    private String path;
+    private String url;
 
-    public JspView(String path) {
-        this.path = path;
+    public JspView(String url) {
+        this.url = url;
     }
 
     @Override
@@ -16,6 +17,8 @@ public class JspView implements View{
         for (Map.Entry<String, ?> entry : model.entrySet()) {
             request.setAttribute(entry.getKey(), entry.getValue());
         }
-        request.getRequestDispatcher(path).forward(request, response);
+
+        RequestDispatcher rd = request.getRequestDispatcher(url);
+        rd.forward(request, response);
     }
 }

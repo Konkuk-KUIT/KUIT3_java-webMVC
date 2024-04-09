@@ -5,6 +5,5 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public interface Controller {
-    static final String REDIRECT = "redirect:";
     ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws IOException;
 }

@@ -2,18 +2,24 @@ package jwp.controller;
 
 import core.db.MemoryUserRepository;
 import core.mvc.Controller;
+import core.mvc.ModelAndView;
+import core.mvc.view.JspView;
 import jwp.util.UserSessionUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class ListUserController implements Controller {
+    private static final String LOGIN_FORM_PATH = "/user/loginForm";
+
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) {
-        if(UserSessionUtils.isLogined(req.getSession())){
-            req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
-            return "/user/list.jsp";
+    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
+        if (UserSessionUtils.isLogined(req.getSession())) {
+            ModelAndView mav = new ModelAndView(new JspView("/user/list.jsp"));
+            mav.addModel("users", MemoryUserRepository.getInstance().findAll());
+            return mav;
+        } else {
+            return ModelAndView.redirect(LOGIN_FORM_PATH);
         }
-        return REDIRECT + "/user/loginForm";
     }
 }

@@ -2,14 +2,16 @@ package jwp.controller;
 
 import core.db.MemoryUserRepository;
 import core.mvc.Controller;
+import core.mvc.ModelAndView;
 import jwp.model.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class CreateUserController implements Controller {
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         User user = new User(req.getParameter("userId"),
                 req.getParameter("password"),
                 req.getParameter("name"),
@@ -17,6 +19,7 @@ public class CreateUserController implements Controller {
 
         MemoryUserRepository.getInstance().addUser(user);
 
-        return REDIRECT + "/user/userList";
+        // 리다이렉트를 위한 ModelAndView 객체 반환
+        return ModelAndView.redirect("/user/userList");
     }
 }

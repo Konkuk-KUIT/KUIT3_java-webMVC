@@ -1,5 +1,7 @@
 package core.mvc;
 
+import core.mvc.view.RedirectView;
+import core.mvc.view.View;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
@@ -22,9 +24,7 @@ public class ModelAndView {
     }
 
     public static ModelAndView redirect(String redirectUrl) {
-        ModelAndView mv = new ModelAndView(null);
-        mv.addModel("redirect", redirectUrl);
-        return mv;
+        return new ModelAndView(new RedirectView(redirectUrl));
     }
 
     public Map<String, Object> getModel() {

@@ -3,6 +3,8 @@ package jwp.controller.qna;
 import core.db.MemoryAnswerRepository;
 import core.db.MemoryQuestionRepository;
 import core.mvc.Controller;
+import core.mvc.ModelAndView;
+import core.mvc.view.JspView;
 import jwp.model.Answer;
 import jwp.model.Question;
 
@@ -15,14 +17,15 @@ public class ShowQuestionController implements Controller {
     private static final MemoryAnswerRepository memoryAnswerRepository = MemoryAnswerRepository.getInstance();
 
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
 
         Long questionId = Long.parseLong(req.getParameter("questionId"));
         Question question = questionRepository.findQuestionById(questionId);
         List<Answer> answers = memoryAnswerRepository.findAnswersByQuestionId(questionId);
 
-        req.setAttribute("question", question);
-        req.setAttribute("answers", answers);
-        return "/qna/show.jsp";
+        ModelAndView mav = new ModelAndView(new JspView("/qna/show.jsp"));
+        mav.addModel("question", question);
+        mav.addModel("answers", answers);
+        return mav;
     }
 }
