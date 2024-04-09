@@ -1,6 +1,8 @@
 package jwp.controller;
 
 import core.mvc.Controller;
+import core.mvc.ModelAndView;
+import core.mvc.View;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,9 +14,11 @@ import java.io.IOException;
 
 public class LogOutController implements Controller {
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session = req.getSession();
         session.removeAttribute("user");
-        return REDIRECT + "/";
+
+        View view=new View(REDIRECT + "/");
+        return new ModelAndView(view);
     }
 }

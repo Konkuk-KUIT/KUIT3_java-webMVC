@@ -12,6 +12,9 @@ public class ModelAndView {
     View view;
     Map<String, Object> model = new HashMap<>();
 
+    public ModelAndView(){
+        this.view=null;
+    }
     public ModelAndView(View view) {
         this.view = view;
     }
