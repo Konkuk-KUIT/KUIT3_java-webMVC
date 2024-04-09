@@ -8,4 +8,6 @@ public interface Repository {
     void addUser(User user);
     User findUserById(String id);
     Collection<User> findAll();
+
+    void changeUserInfo(User user);
 }
