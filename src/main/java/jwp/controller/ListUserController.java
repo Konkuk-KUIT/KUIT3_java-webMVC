@@ -5,17 +5,20 @@ import core.db.MemoryUserRepository;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 
-@WebServlet("/user/userList")
-public class ListUserController extends HttpServlet {
+public class ListUserController implements Controller {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
-        RequestDispatcher rd = req.getRequestDispatcher("/user/list.jsp");
-        rd.forward(req,resp);
+    public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        HttpSession session = req.getSession();
+        // 로그인되어 있다면 리스트를 보여준다.
+        if(session.getAttribute("user") != null){
+            req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
+            return "/user/list.jsp";
+        }
+        return "redirect:/";
     }
 }
