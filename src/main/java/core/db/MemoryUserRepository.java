@@ -5,6 +5,7 @@ import jwp.model.User;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class MemoryUserRepository {
     private Map<String, User> users = new HashMap<>();
@@ -37,5 +38,15 @@ public class MemoryUserRepository {
         if (users.get(user.getUserId()) != null) {
             users.put(user.getUserId(), user);
         }
+    }
+
+    public Optional<User> findUserByIdAndPassword(String userId, String userPassword){
+
+        User userById = this.findUserById(userId);
+        if(userById==null)
+            return Optional.empty();
+        if(userById.getPassword().equals(userPassword))
+            return Optional.of(userById);
+        return Optional.empty();
     }
 }
