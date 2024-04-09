@@ -6,13 +6,15 @@ import java.io.IOException;
 import java.util.Map;
 
 public class AbstractController implements Controller {
+
+    public final String JSON = "json:";
     public ModelAndView jspView(String viewName){
         View view=new View(viewName);
         return new ModelAndView(view);
     }
 
     public ModelAndView jsonView(Map<String,Object> map){
-        View view=new View("json");
+        View view=new View(JSON);
         ModelAndView mav = new ModelAndView(view);
         for (String key : map.keySet()) {
             mav.addModel(key,map.get(key));

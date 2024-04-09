@@ -32,7 +32,7 @@ public class AddAnswerController extends AbstractController {
         questionRepository.update(question);
 
         Map<String,Object> map=new HashMap<>();
-        map.put("Json",savedAnswer);
+        map.put(JSON,savedAnswer);
         return jsonView(map);
 
     }
