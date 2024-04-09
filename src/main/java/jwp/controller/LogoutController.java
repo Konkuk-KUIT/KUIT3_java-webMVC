@@ -3,7 +3,6 @@ package jwp.controller;
 import core.db.MemoryUserRepository;
 import core.mvc.Controller;
 import jwp.model.User;
-import jwp.util.UserSessionUtils;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,15 +13,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class ListUserController extends HttpServlet implements Controller {
+import static jwp.util.UserSessionUtils.USER_SESSION_KEY;
+
+public class LogoutController implements Controller {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        // 로그인되어있는 경우
-        if (UserSessionUtils.isLogined(request.getSession())) {
-            request.setAttribute("users", MemoryUserRepository.getInstance().findAll());
-            return "/user/list.jsp";
-        }
-        return "redirect:/user/loginForm";
+        // URL에서 userId 파라미터 값 가져오기
+        // 세션 데이터 삭제
+        HttpSession session = request.getSession();
+        session.removeAttribute(USER_SESSION_KEY);
+        return "redirect:/";
     }
 }
