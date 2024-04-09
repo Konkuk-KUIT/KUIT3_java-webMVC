@@ -20,7 +20,7 @@ public class DispatcherServlet extends HttpServlet {
     }
 
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
         Controller controller = requestMapping.getController(req);
         try {
             ModelAndView mav = controller.execute(req, resp);
