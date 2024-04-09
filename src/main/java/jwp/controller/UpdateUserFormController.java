@@ -12,15 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class ListUserController implements Controller {
+public class UpdateUserFormController implements Controller {
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession();
         Object value = session.getAttribute("user");
-        if (value != null) {
-            request.setAttribute("users", MemoryUserRepository.getInstance().findAll());
-            return "redirect:/users/loginForm";
+        User Loginuser = (User) value;
+        User user = MemoryUserRepository.getInstance().findUserById(request.getParameter("userId"));
+        if (user != null && user.getUserId().equals(Loginuser.getUserId())) {
+            request.setAttribute("user", user);
+            return "/user/updateForm.jsp";
         }
-        return "/user/list.jsp";
+        return REDIRECT + "/";
     }
 }
