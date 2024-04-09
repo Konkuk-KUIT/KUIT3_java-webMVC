@@ -1,6 +1,7 @@
 package jwp.controller;
 
 import core.db.MemoryUserRepository;
+import core.mvc.AbstractController;
 import core.mvc.Controller;
 import core.mvc.ModelAndView;
 import core.mvc.View;
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class LogInController implements Controller {
+public class LogInController extends AbstractController {
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session = req.getSession();
@@ -21,10 +22,9 @@ public class LogInController implements Controller {
         if (user != null && user.isSameUser(userId, password)) {
             session.setAttribute("user", user);
 
-            View view=new View(REDIRECT + "/");
-            return new ModelAndView(view);
+            return jspView(REDIRECT + "/");
         }
-        View view=new View(REDIRECT + "/user/loginFailed");
-        return new ModelAndView(view);
+        return jspView(REDIRECT + "/user/loginFailed");
+
     }
 }

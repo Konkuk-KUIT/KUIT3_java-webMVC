@@ -22,13 +22,11 @@ public class View {
 
     public void render(Map<String, Object> model, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String type= (String) model.get("type");
         if(viewName.endsWith("json")){
             renderJson(model,req,resp);
             return;
         }
         renderJsp(model,req,resp);
-
 
     }
     public void renderJson(Map<String, Object> model, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -45,7 +43,6 @@ public class View {
             resp.sendRedirect(viewName.substring(REDIRECT_PREFIX.length()));
             return;
         }
-
         RequestDispatcher rd = req.getRequestDispatcher(viewName);
         rd.forward(req, resp);
     }

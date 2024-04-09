@@ -3,6 +3,7 @@ package jwp.controller.qna.api;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import core.db.MemoryAnswerRepository;
 import core.db.MemoryQuestionRepository;
+import core.mvc.AbstractController;
 import core.mvc.Controller;
 import core.mvc.ModelAndView;
 import core.mvc.View;
@@ -13,8 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
-public class AddAnswerController implements Controller {
+public class AddAnswerController extends AbstractController {
     private final MemoryAnswerRepository answerRepository = MemoryAnswerRepository.getInstance();
     private final MemoryQuestionRepository questionRepository = MemoryQuestionRepository.getInstance();
     @Override
@@ -28,10 +31,9 @@ public class AddAnswerController implements Controller {
         question.increaseCountOfAnswer();
         questionRepository.update(question);
 
-        View view=new View("json");
-        ModelAndView mav =new ModelAndView(view);
-        mav.addModel("Json",savedAnswer);
-        // 페이지가 아니므로 null 반환
-        return mav;
+        Map<String,Object> map=new HashMap<>();
+        map.put("Json",savedAnswer);
+        return jsonView(map);
+
     }
 }
