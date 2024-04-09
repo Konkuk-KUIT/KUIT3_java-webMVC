@@ -13,6 +13,10 @@ public class View {
 
     private static final String REDIRECT_PREFIX="redirect:";
 
+    public View(String viewName){
+        this.viewName=viewName;
+    }
+
     public void render(Map<String, Object> model, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (viewName.startsWith(REDIRECT_PREFIX)) {
             resp.sendRedirect(viewName.substring(REDIRECT_PREFIX.length()));
