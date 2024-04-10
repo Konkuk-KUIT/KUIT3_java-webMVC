@@ -1,5 +1,6 @@
 package jwp.controller;
 
+
 import core.db.MemoryUserRepository;
 import jwp.model.User;
 
@@ -12,16 +13,23 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+import static jwp.util.UserSessionUtils.getUserFromSession;
 import static jwp.util.UserSessionUtils.isLogined;
 
-public class ListUserController implements Controller {
+public class UpdateUserFormController implements Controller{
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response0) throws Exception {
-        if(isLogined(request.getSession())){
-            request.setAttribute("users", MemoryUserRepository.getInstance().findAll());
-            return "/user/list.jsp";
-        } else {
-            return "redirect:/users/loginForm";
+        String id = request.getParameter("userId");
+
+        if (isLogined(request.getSession())) {
+            User user = getUserFromSession(request.getSession());
+            if(user.getUserId().equals(id)){
+                request.setAttribute("user", user);
+                return "/user/updateForm.jsp";
+            }
         }
+        return "redirect:/user/userList";
+
+
     }
 }

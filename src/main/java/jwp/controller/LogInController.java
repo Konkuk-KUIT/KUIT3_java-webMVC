@@ -12,16 +12,22 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-import static jwp.util.UserSessionUtils.isLogined;
-
-public class ListUserController implements Controller {
+public class LogInController implements Controller {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response0) throws Exception {
-        if(isLogined(request.getSession())){
-            request.setAttribute("users", MemoryUserRepository.getInstance().findAll());
-            return "/user/list.jsp";
-        } else {
-            return "redirect:/users/loginForm";
+        String loginId = request.getParameter("userId");
+        User user = MemoryUserRepository.getInstance().findUserById(loginId);
+
+
+        if(user == null) return "/user/login_failed.jsp";
+
+
+        if(user.getPassword().equals(request.getParameter("password"))){
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+            return "redirect:/";
         }
+
+        return "/user/login_failed.jsp";
     }
 }
