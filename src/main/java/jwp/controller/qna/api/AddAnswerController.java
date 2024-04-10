@@ -33,7 +33,11 @@ public class AddAnswerController implements Controller {
         questionRepository.update(question);
 
         ModelAndView mav = new ModelAndView(new JsonView());
-        mav.addModel("answer",answer);
+        mav.addModel("questionId", savedAnswer.getQuestionId());
+        mav.addModel("author", savedAnswer.getAuthor());
+        mav.addModel("contents", savedAnswer.getContents());
+        mav.addModel("answerId", savedAnswer.getAnswerId());
+        mav.addModel("createdDate", savedAnswer.getCreatedDate());
         return mav;
     }
 }
