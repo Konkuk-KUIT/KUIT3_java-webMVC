@@ -4,6 +4,8 @@ import core.db.MemoryUserRepository;
 import jwp.constants.JspPath;
 import jwp.constants.URL;
 import jwp.model.User;
+import jwp.util.UserSessionUtil;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,8 +19,7 @@ public class LoginController implements Controller {
 
         User user = MemoryUserRepository.getInstance().findUserById(loginId);
         if(user != null && user.getPassword().equals(pwd)) {
-            HttpSession session = req.getSession();
-            session.setAttribute("key", loginId);
+            UserSessionUtil.login(req.getSession(), loginId);
             return new Request(Type.REDIRECT, URL.HOME);
         }
 

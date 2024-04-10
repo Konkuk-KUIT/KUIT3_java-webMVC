@@ -27,7 +27,7 @@
                     </th>
                     <th class="col-md-3">${user.email}
                     </th>
-                    <c:if test="${user.userId eq sessionScope.key}">
+                    <c:if test="${user.userId eq sessionScope.userKey}">
                     <th class="col-md-3"><a href="/user/updateForm?userId=${user.userId}" class="btn btn-success" role="button">수정</a></th>
                     </c:if>
                 </tr>

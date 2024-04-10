@@ -3,6 +3,7 @@ package jwp.controller;
 import core.db.MemoryUserRepository;
 import jwp.constants.JspPath;
 import jwp.constants.URL;
+import jwp.util.UserSessionUtil;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,8 +18,7 @@ public class ListUserController implements Controller {
 
     @Override
     public Request execute(HttpServletRequest req, HttpServletResponse resp) {
-        HttpSession session = req.getSession();
-        if(session.getAttribute("key") == null) {
+        if(!UserSessionUtil.isLogin(req.getSession())) {
             return new Request(Type.REDIRECT, URL.USER_LOGIN);
         }
 
