@@ -14,11 +14,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LogInController extends AbstractController {
+    private HttpSession httpSession;
     @Override
-    public ModelAndView execute(HttpServletRequest req) {
-        HttpSession session = req.getSession();
-        String userId = req.getParameter("userId");
-        String password = req.getParameter("password");
+    public ModelAndView execute(Map<String, String> req) {
+        HttpSession session = httpSession;
+        String userId = req.get("userId");
+        String password = req.get("password");
         User user = MemoryUserRepository.getInstance().findUserById(userId);
 
         if (user != null && user.isSameUser(userId, password)) {
@@ -28,5 +29,10 @@ public class LogInController extends AbstractController {
         }
         return jspView(REDIRECT + "/user/loginFailed");
 
+    }
+
+    @Override
+    public void setSession(HttpSession httpSession) {
+        this.httpSession = httpSession;
     }
 }

@@ -19,8 +19,8 @@ import java.util.Map;
 
 public class UpdateUserFormController extends AbstractController {
     @Override
-    public ModelAndView execute(HttpServletRequest req) {
-        String userId = req.getParameter("userId");
+    public ModelAndView execute(Map<String, String> req) {
+        String userId = req.get("userId");
         User user = MemoryUserRepository.getInstance().findUserById(userId);
         if (user != null) {
             return jspView("/user/updateForm.jsp")

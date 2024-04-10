@@ -21,10 +21,10 @@ public class AddAnswerController extends AbstractController {
     private final MemoryAnswerRepository answerRepository = MemoryAnswerRepository.getInstance();
     private final MemoryQuestionRepository questionRepository = MemoryQuestionRepository.getInstance();
     @Override
-    public ModelAndView execute(HttpServletRequest req) throws IOException {
-        Answer answer = new Answer(Long.parseLong(req.getParameter("questionId")),
-                req.getParameter("author"),
-                req.getParameter("contents"));
+    public ModelAndView execute(Map<String, String> req) throws IOException {
+        Answer answer = new Answer(Long.parseLong(req.get("questionId")),
+                req.get("author"),
+                req.get("contents"));
         Answer savedAnswer = answerRepository.insert(answer);
 
         Question question = questionRepository.findQuestionById(answer.getQuestionId());
