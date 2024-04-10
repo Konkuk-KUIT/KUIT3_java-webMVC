@@ -3,10 +3,8 @@
 <!doctype html>
 <html lang="ko">
 <%@ include file="../include/header.jspf" %>
-
-  <body>
-  <%@ include file="../include/navigation.jspf" %>
-
+<body>
+<%@ include file="../include/navigation.jspf" %>
     <div class="container">
       <main class="form-signin">
         <div>
