@@ -39,16 +39,16 @@ public class User {
         if (password == null) {
             return false;
         }
-
         return this.password.equals(password);
     }
 
+    //로그인할 때 쓰는거 같음
     public boolean isSameUser(User user) {
-        return isSameUser(user.getUserId());
+        return isSameUser(user.getUserId(), user.getPassword());
     }
 
-    public boolean isSameUser(String userId) {
-        return userId.equals(this.userId);
+    public boolean isSameUser(String userId, String password) {
+        return userId.equals(this.userId) && matchPassword(password);
     }
 
     @Override
