@@ -1,5 +1,7 @@
 package core.mvc;
 
+import core.mvc.view.View;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,21 +25,21 @@ public class DispatcherServlet extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Controller controller = requestMapping.getController(req);
         try {
-            String viewName = controller.execute(req, resp);
-            if(viewName == null) return;
-            move(viewName, req, resp);
+            View view = controller.execute(req, resp);
+            if(view == null) return;
+            view.render(req, resp);
         } catch (Throwable e) {
             throw new ServletException(e.getMessage());
         }
     }
 
-    private void move(String viewName, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (viewName.startsWith(REDIRECT_PREFIX)) {
-            resp.sendRedirect(viewName.substring(REDIRECT_PREFIX.length()));
-            return;
-        }
-
-        RequestDispatcher rd = req.getRequestDispatcher(viewName);
-        rd.forward(req, resp);
-    }
+//    private void move(String viewName, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        if (viewName.startsWith(REDIRECT_PREFIX)) {
+//            resp.sendRedirect(viewName.substring(REDIRECT_PREFIX.length()));
+//            return;
+//        }
+//
+//        RequestDispatcher rd = req.getRequestDispatcher(viewName);
+//        rd.forward(req, resp);
+//    }
 }
