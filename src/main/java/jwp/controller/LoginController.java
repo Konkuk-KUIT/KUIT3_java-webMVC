@@ -18,7 +18,7 @@ public class LoginController implements Controller {
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = MemoryUserRepository.getInstance().findUserById(req.getParameter("userId"));
 
-        if (user != null && user.getPassword().equals(req.getParameter("password"))) {
+        if (user != null && user.matchPassword(req.getParameter("password"))) {
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
             return "redirect:/";
