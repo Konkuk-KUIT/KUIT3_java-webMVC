@@ -30,7 +30,10 @@ public class RequestMapper {
         controllers.put("/user/update", new UpdateUserController());
         controllers.put("/user/login", new LoginController());
         controllers.put("/user/logout", new LogoutController());
+
+        // 4주차
         controllers.put("/qna/show", new ShowQuestionController());
+        controllers.put("/qna/signup", new CreateQuestionController());
     }
 
     public Controller getController(HttpServletRequest req) {
