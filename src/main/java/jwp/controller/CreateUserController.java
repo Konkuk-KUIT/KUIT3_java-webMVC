@@ -1,24 +1,22 @@
 package jwp.controller;
 
 import core.db.MemoryUserRepository;
-import core.mvc.Controller;
-import core.mvc.view.JspView;
-import core.mvc.view.View;
+import core.mvc.AbstractController;
+import core.mvc.view.ModelAndView;
 import jwp.model.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CreateUserController implements Controller {
+public class CreateUserController extends AbstractController {
     @Override
-    public View execute(HttpServletRequest req, HttpServletResponse resp) {
+    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
         User user = new User(req.getParameter("userId"),
                 req.getParameter("password"),
                 req.getParameter("name"),
                 req.getParameter("email"));
 
         MemoryUserRepository.getInstance().addUser(user);
-
-        return new JspView("redirect:/user/userList");
+        return jspView("/user/userList");
     }
 }
