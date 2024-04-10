@@ -33,7 +33,7 @@ public class MemoryQuestionRepository {
         return questions.values();
     }
 
-    public Question findQuestionById(String questionId) {
-        return questions.get(Integer.parseInt(questionId));
+    public Question findQuestionById(int questionId) {
+        return questions.get(questionId);
     }
 }

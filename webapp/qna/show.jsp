@@ -50,70 +50,42 @@
 
         <div class="qna-comment">
             <div class="qna-comment-kuit">
-                <p class="qna-comment-count"><strong>2</strong>개의 의견</p>
+                <p class="qna-comment-count"><strong>${question.countOfAnswer}</strong>개의 의견</p>
                 <div>
-                    <article class="article" id="answer-1405">
-                        <div class="article-header">
-                            <div class="article-header-thumb">
-                                <img src="../img/picture.jpeg" class="article-author-thumb" alt="">
+                    <c:forEach var="answer" items="${answerList}">
+                        <article class="article" id="${answer.answerId}">
+                            <div class="article-header">
+                                <div class="article-header-thumb">
+                                    <img src="../img/picture.jpeg" class="article-author-thumb" alt="">
+                                </div>
+                                <div class="article-header-text">
+                                    <span class="article-author-name">${answer.author}</span>
+                                    <span class="article-header-time">
+                                       ${answer.createdDate}
+                                    </span>
+                                </div>
                             </div>
-                            <div class="article-header-text">
-                                <span class="article-author-name">김정우</span>
-                                <span class="article-header-time">
-                                           2024-03-24 02:03
-                                        </span>
+                            <div class="article-doc comment-doc">
+                                <p>${answer.contents}</p>
                             </div>
-                        </div>
-                        <div class="article-doc comment-doc">
-                            <p>장단점은 뭐라고 생각하세요?</p>
-                        </div>
-                        <div class="article-util">
-                            <ul class="article-util-list">
-                                <li>
-                                    <!-- 수정, 삭제 API 연결 필요 -->
-                                    <a class="link-modify-article" href="/questions/1/answers/1/form">수정</a>
-                                </li>
-                                <li>
-                                    <!-- 수정, 삭제 API 연결 필요 -->
-                                    <form class="delete-answer-form" action="/questions/1/answers/1" method="POST">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <button type="submit" class="delete-answer-button">삭제</button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
-                    </article>
-                    <article class="article" id="answer-1406">
-                        <div class="article-header">
-                            <div class="article-header-thumb">
-                                <img src="../img/picture.jpeg" class="article-author-thumb" alt="">
+                            <div class="article-util">
+                                <ul class="article-util-list">
+                                    <li>
+                                        <!-- 수정, 삭제 API 연결 필요 -->
+                                        <a class="link-modify-article" href="/questions/1/answers/1/form">수정</a>
+                                    </li>
+                                    <li>
+                                        <!-- 수정, 삭제 API 연결 필요 -->
+                                        <form class="delete-answer-form" action="/questions/1/answers/1" method="POST">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <button type="submit" class="delete-answer-button">삭제</button>
+                                        </form>
+                                    </li>
+                                </ul>
                             </div>
-                            <div class="article-header-text">
-                                <span class="article-author-name">강지윤</span>
-                                <span class="article-header-time">
-                                          2024-03-24 02:10
-                                        </span>
-                            </div>
-                        </div>
-                        <div class="article-doc comment-doc">
-                            <p>뭐..어쩌고저쩌고...</p>
-                        </div>
-                        <div class="article-util">
-                            <ul class="article-util-list">
-                                <li>
-                                    <!-- 수정, 삭제 API 연결 필요 -->
-                                    <a class="link-modify-article" href="/questions/1/answers/2/form">수정</a>
-                                </li>
-                                <li>
-                                    <!-- 수정, 삭제 API 연결 필요 -->
-                                    <form class="form-delete" action="/questions/1/answers/2" method="POST">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <button type="submit" class="delete-answer-button">삭제</button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
-                    </article>
+                        </article>
+                    </c:forEach>
+
                     <form class="submit-write">
                         <div class="form-group" style="padding:14px;">
                             <textarea class="form-control" placeholder="Update your status"></textarea>
