@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class ListUserController extends AbstractController {
     @Override
-    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
+    public ModelAndView execute(HttpServletRequest req) {
         if(UserSessionUtils.isLogined(req.getSession())){
             req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
 

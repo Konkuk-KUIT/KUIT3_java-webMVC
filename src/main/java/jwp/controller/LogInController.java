@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class LogInController extends AbstractController {
     @Override
-    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
+    public ModelAndView execute(HttpServletRequest req) {
         HttpSession session = req.getSession();
         String userId = req.getParameter("userId");
         String password = req.getParameter("password");

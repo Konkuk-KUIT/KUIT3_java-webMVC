@@ -19,7 +19,7 @@ import java.util.Map;
 
 public class UpdateUserFormController extends AbstractController {
     @Override
-    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
+    public ModelAndView execute(HttpServletRequest req) {
         String userId = req.getParameter("userId");
         User user = MemoryUserRepository.getInstance().findUserById(userId);
         if (user != null) {

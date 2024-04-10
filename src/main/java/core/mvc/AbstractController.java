@@ -23,7 +23,7 @@ public abstract class AbstractController implements Controller {
 
 
     @Override
-    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public ModelAndView execute(HttpServletRequest req) throws IOException {
         throw new RuntimeException("구현되지 않았습니다");
     }
 }
