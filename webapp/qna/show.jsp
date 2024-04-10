@@ -9,7 +9,7 @@
 
 <div class="container" id="main">
     <header class="qna-header">
-        <h2 class="qna-title">객체지향에서 가장 중요하다고 생각하는 것이 무엇인가요?</h2>
+        <h2 class="qna-title">${question.title}</h2>
     </header>
     <div class="content-main">
         <article class="article">
@@ -19,19 +19,14 @@
                 </div>
                 <div class="article-header-text">
                     <!-- 사용자 프로필 추가 할거면 span -> a 태그로 바꾸고 API 연결 -->
-                    <span class="article-author-name">강지윤</span>
+                    <span class="article-author-name">${question.author}</span>
                     <span class="article-header-time">
-                              2024-03-24 02:00
+                              ${question.createdDate}
                             </span>
                 </div>
             </div>
             <div class="article-doc">
-                <p>객체지향의 특징 4가지</p>
-                <p>추상화</p>
-                <p>캡슐화</p>
-                <p>상속</p>
-                <p>다형성</p>
-                <p> ??? </p>
+                ${question.contents}
             </div>
             <div class="article-util">
                 <ul class="article-util-list">

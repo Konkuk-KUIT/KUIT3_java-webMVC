@@ -11,6 +11,8 @@ public class MemoryUserRepository {
     private static MemoryUserRepository memoryUserRepository;
 
     private MemoryUserRepository() {
+        addUser(new User("ms", "ms", "민석", "ms@kuit.com"));
+        addUser(new User("aa", "bb", "테스트1", "test@kuit.com"));
     }
 
     public static MemoryUserRepository getInstance() {
