@@ -20,7 +20,7 @@ public class RequestMapper {
     }
 
     private void init() {
-        controllers.put(toKey(HttpMethod.GET, URL.HOME), new ForwardController(JspPath.HOME));
+        controllers.put(toKey(HttpMethod.GET, URL.HOME), new HomeController());
 
         controllers.put(toKey(HttpMethod.GET, URL.USER_LOGIN), new ForwardController(JspPath.USER_LOGIN));
         controllers.put(toKey(HttpMethod.POST, URL.USER_LOGIN), new LoginController());
