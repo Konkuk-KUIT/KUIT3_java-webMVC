@@ -1,6 +1,7 @@
 package jwp.controller;
 
 
+import core.mvc.view.ModelAndView;
 import jwp.controller.Controller;
 
 import javax.servlet.ServletException;
@@ -15,10 +16,12 @@ import java.util.logging.Logger;
 public class HTTPController implements Controller {
     private static final Logger log = Logger.getLogger(HTTPController.class.getName());
     static final String REDIRECT = "redirect:";
+    ModelAndView modelAndView;
     /*private request req;
     private response res;*/
+
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp){
+    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp){
         try {
             if (req.getMethod().equals("GET")) {
                 return doGet(req, resp);
@@ -35,7 +38,7 @@ public class HTTPController implements Controller {
 
 
 
-    protected String doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{return null;};
-    protected String doGet(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException{return null;};
+    protected ModelAndView doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{return null;};
+    protected ModelAndView doGet(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException{return null;};
 
 }

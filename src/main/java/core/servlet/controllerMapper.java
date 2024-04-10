@@ -1,6 +1,8 @@
 package core.servlet;
 
 import jwp.controller.*;
+import jwp.controller.qna.ShowQuestionController;
+import jwp.controller.qna.api.AddAnswerController;
 
 import java.net.http.HttpRequest;
 import java.util.HashMap;
@@ -14,10 +16,16 @@ public class controllerMapper {
         controllers.put("/user/userList",new ListUserController());
         controllers.put("/user/update",new UpdateUserController());
         controllers.put("/user/updateForm",new UpdateUserFormController());
-        controllers.put("/user/login",new UserLoginController());
-        controllers.put("/user/logout",new UserLogoutController());
+        controllers.put("/user/login",new LogInController());
+        controllers.put("/user/logout",new LogOutController());
+
         controllers.put("/user/form",new ForwardController("/user/form.jsp"));
-        controllers.put("/user/login_failed",new ForwardController("/user/login_failed.jsp"));
+        controllers.put("/user/loginFailed",new ForwardController("/user/login_failed.jsp"));
+
+        controllers.put("/qna/form", new ForwardController("/qna/form.jsp"));
+        controllers.put("/qna/show", new ShowQuestionController());
+        controllers.put("/api/qna/addAnswer", new AddAnswerController());
+
     }
 
     public Controller mapController(String URL){

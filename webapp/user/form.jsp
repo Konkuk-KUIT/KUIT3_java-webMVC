@@ -2,9 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
+
 <%@ include file="../include/header.jspf" %>
   <body>
     <%@ include file="../include/navigation.jspf" %>
+
 
     <div class="container" id="main">
 

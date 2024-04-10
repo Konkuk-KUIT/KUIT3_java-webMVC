@@ -1,10 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
+<!doctype html>
+<html lang="ko">
 <%@ include file="../include/header.jspf" %>
-  <body>
-    <%@ include file="../include/navigation.jspf" %>
+<body>
+<%@ include file="../include/navigation.jspf" %>
 
     <div class="container" id="main">
 
@@ -12,6 +13,7 @@
 
           <form name="sign-up" method="post" action="/user/update">
             <div class="form-floating">
+<<<<<<< HEAD
               <input type="hidden" name="userId" value="${user.userId}">
               <input type="text" class="form-control" value="${user.userId}" id="userId" name="userId" aria-label="Disabled input example" disabled readonly>
               <label for="userId">User Id</label>
@@ -26,11 +28,14 @@
             </div>
             <div class="form-floating">
               <input type="email" class="form-control" value="${user.email}" id="email" name="email" placeholder="name@example.com">
+
               <label for="email">Email address</label>
             </div>
             <div style="height:10px;">
             </div>
+
             <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
+
           </form>
         </main>
     </div>
