@@ -1,6 +1,7 @@
-package jwp.server;
+package jwp.mvc;
 
 import jwp.controller.Controller;
+import jwp.mvc.RequestMapper;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,6 +26,7 @@ public class DispatcherServlet extends HttpServlet {
         Controller controller = mapper.getController(req);
         Controller.Request result = controller.execute(req, resp);
 
+        if(result == null) return;
         if(result.getType() == Controller.Type.REDIRECT) {
             resp.sendRedirect(result.getURL());
             return;

@@ -1,9 +1,11 @@
-package jwp.server;
+package jwp.mvc;
 
 import jwp.constants.HttpMethod;
 import jwp.constants.JspPath;
 import jwp.constants.URL;
 import jwp.controller.*;
+import jwp.controller.qna.ShowQuestionController;
+import jwp.controller.qna.api.AddAnswerController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -36,7 +38,9 @@ public class RequestMapper {
 
         controllers.put(toKey(HttpMethod.GET, URL.QNA_FORM), new ForwardController(JspPath.QNA_FORM));
         controllers.put(toKey(HttpMethod.POST, URL.QNA_FORM), new ForwardController(JspPath.QNA_FORM));
-        controllers.put(toKey(HttpMethod.GET, URL.QNA_SHOW), new ForwardController(JspPath.QNA_SHOW));
+        controllers.put(toKey(HttpMethod.GET, URL.QNA_SHOW), new ShowQuestionController());
+
+        controllers.put(toKey(HttpMethod.POST, URL.API_ADD_ANSWER), new AddAnswerController());
     }
 
     public Controller getController(HttpServletRequest req) {

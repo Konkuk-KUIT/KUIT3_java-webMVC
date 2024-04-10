@@ -9,7 +9,8 @@ public enum URL {
     USER_UPDATE_FORM("/user/updateForm"),
     USER_LIST("/user/userList"),
     QNA_FORM("/qna/form"),
-    QNA_SHOW("/qna/show");
+    QNA_SHOW("/qna/show"),
+    API_ADD_ANSWER("/api/qna/addAnswer");
 
     private final String url;
 

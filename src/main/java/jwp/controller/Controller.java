@@ -5,6 +5,7 @@ import jwp.constants.URL;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public interface Controller {
 
@@ -42,6 +43,6 @@ public interface Controller {
         }
     }
 
-    Request execute(HttpServletRequest req, HttpServletResponse resp);
+    Request execute(HttpServletRequest req, HttpServletResponse resp) throws Exception;
 
 }
