@@ -2,6 +2,7 @@ package jwp.mvc;
 
 import jwp.controller.Controller;
 import jwp.mvc.RequestMapper;
+import jwp.mvc.view.ModelAndView;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,17 +25,9 @@ public class DispatcherServlet extends HttpServlet {
     @Override
     public void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Controller controller = mapper.getController(req);
-        Controller.Request result = controller.execute(req, resp);
-
+        ModelAndView result = controller.execute(req, resp);
         if(result == null) return;
-        if(result.getType() == Controller.Type.REDIRECT) {
-            resp.sendRedirect(result.getURL());
-            return;
-        }
-        if(result.getType() == Controller.Type.FORWARD) {
-            RequestDispatcher rd = req.getRequestDispatcher(result.getURL());
-            rd.forward(req, resp);
-        }
+        result.render(req, resp);
     }
 
 }

@@ -1,17 +1,18 @@
 package jwp.controller;
 
 import jwp.constants.URL;
+import jwp.mvc.view.ModelAndView;
 import jwp.util.UserSessionUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class LogoutController implements Controller {
+public class LogoutController extends AbstractController {
 
     @Override
-    public Request execute(HttpServletRequest req, HttpServletResponse resp) {
+    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
         UserSessionUtil.logout(req.getSession());
-        return new Request(Type.REDIRECT, URL.HOME);
+        return getJspView(new Request(Type.REDIRECT, URL.HOME));
     }
 
 }
