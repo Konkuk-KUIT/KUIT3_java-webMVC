@@ -10,27 +10,28 @@ import java.io.IOException;
 
 @WebServlet(name = "dispatcher", urlPatterns = "/", loadOnStartup = 1)
 public class DispatcherServlet extends HttpServlet {
-    private RequestMapper requestMapper;
+
+    private RequestMapping requestMapping;
     private static final String REDIRECT_PREFIX = "redirect:";
 
     @Override
     public void init() throws ServletException {
-        this.requestMapper = new RequestMapper();
+        this.requestMapping = new RequestMapping();
     }
 
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp){
-        Controller controller = requestMapper.getController(req);
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Controller controller = requestMapping.getController(req);
         try {
             String viewName = controller.execute(req, resp);
-            // forward 및 redirect 처리
+            if(viewName == null) return;
             move(viewName, req, resp);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (Throwable e) {
+            throw new ServletException(e.getMessage());
         }
     }
 
-    private void move(String viewName, HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+    private void move(String viewName, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (viewName.startsWith(REDIRECT_PREFIX)) {
             resp.sendRedirect(viewName.substring(REDIRECT_PREFIX.length()));
             return;
