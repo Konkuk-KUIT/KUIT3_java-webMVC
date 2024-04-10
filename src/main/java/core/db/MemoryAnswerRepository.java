@@ -4,6 +4,7 @@ import jwp.model.Answer;
 import jwp.model.Question;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class MemoryAnswerRepository {
     private Map<Long, Answer> answers = new HashMap<>();
@@ -47,8 +48,7 @@ public class MemoryAnswerRepository {
 
     public List<Answer> findAnswersByQuestionId(Long quesionId) {
         return answers.values().stream()
-        .filter(answer -> Objects.equals(answer.getQuestionId(), quesionId))
-        .toList();
+        .filter(answer -> Objects.equals(answer.getQuestionId(), quesionId)).collect(Collectors.toList());
     }
 
 }

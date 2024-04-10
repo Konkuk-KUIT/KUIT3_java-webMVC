@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import core.db.MemoryAnswerRepository;
 import core.db.MemoryQuestionRepository;
 import core.mvc.Controller;
+import core.mvc.view.JsonView;
+import core.mvc.view.View;
 import jwp.model.Answer;
 import jwp.model.Question;
 
@@ -16,7 +18,7 @@ public class AddAnswerController implements Controller {
     private final MemoryAnswerRepository answerRepository = MemoryAnswerRepository.getInstance();
     private final MemoryQuestionRepository questionRepository = MemoryQuestionRepository.getInstance();
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public View execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Answer answer = new Answer(Long.parseLong(req.getParameter("questionId")),
                 req.getParameter("author"),
                 req.getParameter("contents"));
@@ -33,6 +35,6 @@ public class AddAnswerController implements Controller {
         out.print(mapper.writeValueAsString(savedAnswer));
 
         // 페이지가 아니므로 null 반환
-        return null;
+        return new JsonView();
     }
 }
