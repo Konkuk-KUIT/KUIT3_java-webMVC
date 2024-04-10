@@ -8,6 +8,8 @@ import jwp.controller.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class RequestMapper {
 
@@ -38,6 +40,7 @@ public class RequestMapper {
     }
 
     public Controller getController(HttpServletRequest req) {
+        Logger.getLogger("mapper").log(Level.INFO, req.getRequestURI());
         return controllers.get(toKey(req.getMethod(), req.getRequestURI()));
     }
 
