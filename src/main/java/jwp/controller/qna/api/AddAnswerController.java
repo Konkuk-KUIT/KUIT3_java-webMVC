@@ -4,8 +4,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import core.db.MemoryAnswerRepository;
 import core.db.MemoryQuestionRepository;
 import core.mvc.Controller;
+import core.mvc.ModelAndView;
 import core.view.JsonView;
+import core.view.JspView;
 import core.view.View;
+import jwp.controller.AbstractController;
 import jwp.model.Answer;
 import jwp.model.Question;
 
@@ -14,11 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class AddAnswerController implements Controller {
+public class AddAnswerController implements AbstractController {
     private final MemoryAnswerRepository answerRepository = MemoryAnswerRepository.getInstance();
     private final MemoryQuestionRepository questionRepository = MemoryQuestionRepository.getInstance();
     @Override
-    public View execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Answer answer = new Answer(Long.parseLong(req.getParameter("questionId")),
                 req.getParameter("author"),
                 req.getParameter("contents"));
@@ -30,6 +33,16 @@ public class AddAnswerController implements Controller {
 
         req.setAttribute("answer", savedAnswer);
 
-        return new JsonView();
+        return jsonView();
+    }
+
+    @Override
+    public ModelAndView jspView(String url) {
+        return new ModelAndView(new JspView(url));
+    }
+
+    @Override
+    public ModelAndView jsonView() {
+        return new ModelAndView(new JsonView());
     }
 }

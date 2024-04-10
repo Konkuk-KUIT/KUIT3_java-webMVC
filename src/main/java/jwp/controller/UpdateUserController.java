@@ -2,6 +2,8 @@ package jwp.controller;
 
 import core.db.MemoryUserRepository;
 import core.mvc.Controller;
+import core.mvc.ModelAndView;
+import core.view.JsonView;
 import core.view.JspView;
 import core.view.View;
 import jwp.model.User;
@@ -13,9 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class UpdateUserController implements Controller {
+public class UpdateUserController implements AbstractController {
     @Override
-    public View execute(HttpServletRequest req, HttpServletResponse resp) {
+    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
         User user = new User(req.getParameter("userId"),
                 req.getParameter("password"),
                 req.getParameter("name"),
@@ -23,6 +25,15 @@ public class UpdateUserController implements Controller {
 
         MemoryUserRepository.getInstance().changeUserInfo(user);
 
-        return new JspView(REDIRECT + "/user/userList");
+        return jspView(REDIRECT + "/user/userList");
+    }
+
+    @Override
+    public ModelAndView jspView(String url) {
+        return new ModelAndView(new JspView(url));
+    }
+
+    public ModelAndView jsonView() {
+        return new ModelAndView(new JsonView());
     }
 }

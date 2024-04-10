@@ -2,6 +2,8 @@ package jwp.controller;
 
 import core.db.MemoryUserRepository;
 import core.mvc.Controller;
+import core.mvc.ModelAndView;
+import core.view.JsonView;
 import core.view.JspView;
 import core.view.View;
 import jwp.model.User;
@@ -10,9 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class LogInController implements Controller {
+public class LogInController implements AbstractController {
     @Override
-    public View execute(HttpServletRequest req, HttpServletResponse resp) {
+    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session = req.getSession();
         String userId = req.getParameter("userId");
         String password = req.getParameter("password");
@@ -20,8 +22,17 @@ public class LogInController implements Controller {
 
         if (user != null && user.isSameUser(userId, password)) {
             session.setAttribute("user", user);
-            return new JspView(REDIRECT + "/");
+            return jspView(REDIRECT + "/");
         }
-        return new JspView(REDIRECT + "/user/loginFailed");
+        return jspView(REDIRECT + "/user/loginFailed");
+    }
+
+    @Override
+    public ModelAndView jspView(String url) {
+        return new ModelAndView(new JspView(url));
+    }
+
+    public ModelAndView jsonView() {
+        return new ModelAndView(new JsonView());
     }
 }
