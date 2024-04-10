@@ -15,7 +15,7 @@ public abstract class AbstractController implements Controller {
 
     }
 
-    public ModelAndView jsonView(Map<String,Object> map){
+    public ModelAndView jsonView(){
         View view=new View(JSON);
 
         return new ModelAndView(view);

@@ -31,9 +31,8 @@ public class AddAnswerController extends AbstractController {
         question.increaseCountOfAnswer();
         questionRepository.update(question);
 
-        Map<String,Object> map=new HashMap<>();
-        map.put(JSON,savedAnswer);
-        return jsonView(map);
+        return jsonView()
+                .addModel(JSON,savedAnswer);
 
     }
 }

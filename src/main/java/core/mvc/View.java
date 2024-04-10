@@ -33,8 +33,10 @@ public class View {
         // Jackson 라이브러리 활용
         ObjectMapper mapper = new ObjectMapper();
         resp.setContentType("application/json;charset=UTF-8");
+
         PrintWriter out = resp.getWriter();
-        out.print(mapper.writeValueAsString(model.get("Json")));
+
+        out.print(mapper.writeValueAsString(model.get("json")));
 
     }
     public void renderJsp(Map<String, Object> model, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
