@@ -17,7 +17,8 @@ public class JsonView implements View{
         ObjectMapper mapper = new ObjectMapper();
         resp.setContentType("application/json;charset=UTF-8");
         PrintWriter out = resp.getWriter();
-        out.print(mapper.writeValueAsString(createModel(req)));
+        model.forEach((key, value) -> req.setAttribute(key, value));
+        out.print(mapper.writeValueAsString(model));
     }
 
     private Map<String, Object> createModel(HttpServletRequest req){
