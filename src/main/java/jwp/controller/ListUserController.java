@@ -1,21 +1,39 @@
 package jwp.controller;
 
 import core.db.MemoryUserRepository;
+import jwp.model.User;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import javax.servlet.http.HttpSession;
+import java.util.Optional;
 
-@WebServlet("/user/userList")
-public class ListUserController extends HttpServlet {
+public class ListUserController implements Controller{
+
+    private static User getUserSession(HttpSession session) {
+        Object user = session.getAttribute("user");
+        if (user != null) {
+            return (User) user;
+        }
+        return null;
+    }
+
+    private boolean isLogined(HttpSession session) {
+        if (getUserSession(session) != null) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
-        RequestDispatcher rd = req.getRequestDispatcher("/user/list.jsp");
-        rd.forward(req,resp);
+    public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        //session이 있으면 들여보내 주고 아니면 login으로 보내기
+        HttpSession userSession = req.getSession();
+        if(!isLogined(userSession)) {
+            req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
+            return "/user/list.jsp";
+        }
+        return "redirect:/user/loginForm";
     }
 }
