@@ -19,6 +19,6 @@ public class UpdateUserController implements Controller {
 
         MemoryUserRepository.getInstance().changeUserInfo(user);
 
-        return new JspView(REDIRECT + "/user/userList");
+        return new ModelAndView(REDIRECT + "/user/userList");
     }
 }

@@ -17,7 +17,7 @@ public class JspView implements View{
     }
 
     @Override
-    public void render(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void render(Map mode,HttpServletRequest request, HttpServletResponse response) throws Exception {
         if (viewName.startsWith(REDIRECT_PREFIX)) {
             response.sendRedirect(viewName.substring(REDIRECT_PREFIX.length()));
             return;

@@ -19,6 +19,6 @@ public class CreateUserController implements Controller {
 
         MemoryUserRepository.getInstance().addUser(user);
 
-        return new JspView(REDIRECT + "/user/userList");
+        return new ModelAndView(REDIRECT + "/user/userList");
     }
 }
