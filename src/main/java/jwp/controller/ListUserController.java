@@ -13,8 +13,7 @@ public class ListUserController extends AbstractController {
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
         if(UserSessionUtils.isLogined(req.getSession())){
-            req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
-            return jspView("/user/list.jsp");
+            return jspView("/user/list.jsp").addModel("users",MemoryUserRepository.getInstance().findAll());
         }
 
         return jspView("redirect:/user/loginForm");
