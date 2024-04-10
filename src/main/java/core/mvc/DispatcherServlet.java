@@ -22,17 +22,22 @@ public class DispatcherServlet extends HttpServlet {
         Controller controller = requestMapper.getController(req);
 
         // 비즈니스 로직 처리
-        String result = controller.execute(req, resp);
+        String viewName = controller.execute(req, resp);
 
+        // redirect or forward
+        move(viewName, req, resp);
+    }
+
+    private void move(String viewName, HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         // redirect
-        if (result.startsWith("redirect:")) {
-            int index = result.indexOf(":");
-            String url = result.substring(index + 1);
+        if (viewName.startsWith("redirect:")) {
+            int index = viewName.indexOf(":");
+            String url = viewName.substring(index + 1);
             resp.sendRedirect(url);
             return;
         }
         // forward
-        RequestDispatcher rd = req.getRequestDispatcher(result);
+        RequestDispatcher rd = req.getRequestDispatcher(viewName);
         rd.forward(req, resp);
     }
 }
