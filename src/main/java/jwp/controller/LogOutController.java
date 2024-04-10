@@ -13,6 +13,8 @@ public class LogOutController implements Controller {
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session = req.getSession();
         session.removeAttribute("user");
-        return new ModelAndView(REDIRECT + "/");
+        JspView jspView= new JspView(REDIRECT + "/");
+
+        return new ModelAndView(jspView);
     }
 }

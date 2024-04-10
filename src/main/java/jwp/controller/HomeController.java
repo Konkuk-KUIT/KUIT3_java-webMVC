@@ -13,6 +13,8 @@ public class HomeController implements Controller {
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
         req.setAttribute("questions", questionRepository.findAll());
-        return new ModelAndView( "/home.jsp");
+        JspView jspView= new JspView("/home.jsp");
+
+        return new ModelAndView(jspView);
     }
 }

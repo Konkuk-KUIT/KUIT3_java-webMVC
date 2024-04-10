@@ -25,6 +25,8 @@ public class ShowQuestionController implements Controller {
 
         req.setAttribute("question", question);
         req.setAttribute("answers", answers);
-        return new JspView("/qna/show.jsp");
+        JspView jspView= new JspView("/qna/show.jsp");
+
+        return new ModelAndView(jspView);
     }
 }

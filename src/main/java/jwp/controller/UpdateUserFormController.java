@@ -16,8 +16,12 @@ public class UpdateUserFormController implements Controller {
         User user = MemoryUserRepository.getInstance().findUserById(userId);
         if (user != null) {
             req.setAttribute("user", user);
-            return new ModelAndView("/user/updateForm.jsp");
+            JspView jspView= new JspView("/user/updateForm.jsp");
+
+            return new ModelAndView(jspView);
         }
-        return new ModelAndView(REDIRECT + "/");
+        JspView jspView= new JspView(REDIRECT + "/");
+
+        return new ModelAndView(jspView);
     }
 }

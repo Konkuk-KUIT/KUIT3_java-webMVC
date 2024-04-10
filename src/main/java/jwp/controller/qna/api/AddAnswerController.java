@@ -28,6 +28,8 @@ public class AddAnswerController implements Controller {
 
         req.setAttribute("answer", savedAnswer);
 
-        return new JsonView();
+        JsonView jsonView=new JsonView();
+
+        return new ModelAndView(jsonView);
     }
 }

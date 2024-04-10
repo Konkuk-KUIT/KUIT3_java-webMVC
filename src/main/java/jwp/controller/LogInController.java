@@ -20,8 +20,11 @@ public class LogInController implements Controller {
 
         if (user != null && user.isSameUser(userId, password)) {
             session.setAttribute("user", user);
-            return new ModelAndView(REDIRECT + "/");
+            JspView jspView= new JspView(REDIRECT + "/");
+            return new ModelAndView(jspView);
         }
-        return new ModelAndView(REDIRECT + "/user/loginFailed");
+        JspView jspView= new JspView(REDIRECT + "/user/loginFailed");
+
+        return new ModelAndView(jspView);
     }
 }

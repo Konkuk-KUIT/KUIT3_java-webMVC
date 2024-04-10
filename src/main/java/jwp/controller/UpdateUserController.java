@@ -18,7 +18,9 @@ public class UpdateUserController implements Controller {
                 req.getParameter("email"));
 
         MemoryUserRepository.getInstance().changeUserInfo(user);
+        JspView jspView= new JspView(REDIRECT + "/user/userList");
 
-        return new ModelAndView(REDIRECT + "/user/userList");
+
+        return new ModelAndView(jspView);
     }
 }
