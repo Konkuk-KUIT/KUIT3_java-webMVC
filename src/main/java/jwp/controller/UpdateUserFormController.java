@@ -23,12 +23,10 @@ public class UpdateUserFormController extends AbstractController {
         String userId = req.getParameter("userId");
         User user = MemoryUserRepository.getInstance().findUserById(userId);
         if (user != null) {
-
-            Map<String,Object> map=new HashMap<>();
-            map.put("user",user);
-            return jspView("/user/updateForm.jsp",map);
+            return jspView("/user/updateForm.jsp")
+                    .addModel("user",user);
         }
 
-        return jspView(REDIRECT + "/",null);
+        return jspView(REDIRECT + "/");
     }
 }

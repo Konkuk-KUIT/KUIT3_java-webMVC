@@ -18,12 +18,10 @@ public class ListUserController extends AbstractController {
         if(UserSessionUtils.isLogined(req.getSession())){
             req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
 
-            Map<String,Object> map=new HashMap<>();
-            map.put("users",MemoryUserRepository.getInstance().findAll());
-
-            return jspView("/user/list.jsp",map);
+            return jspView("/user/list.jsp")
+                    .addModel("users",MemoryUserRepository.getInstance().findAll());
         }
 
-        return jspView(REDIRECT + "/user/loginForm",null);
+        return jspView(REDIRECT + "/user/loginForm");
     }
 }

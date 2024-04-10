@@ -26,9 +26,8 @@ public class ShowQuestionController extends AbstractController {
         Question question = questionRepository.findQuestionById(questionId);
         List<Answer> answers = memoryAnswerRepository.findAnswersByQuestionId(questionId);
 
-        Map<String,Object> map=new HashMap<>();
-        map.put("question",question);
-        map.put("answers",answers);
-        return jspView("/qna/show.jsp",map);
+        return jspView("/qna/show.jsp")
+                .addModel("question",question)
+                .addModel("answers",answers);
     }
 }

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class ModelAndView {
 
@@ -19,11 +20,14 @@ public class ModelAndView {
         this.view = view;
     }
 
-    public void addModel(String key, Object val) {
-        model.put(key, val);
+    public ModelAndView addModel(String key,Object val){
+        model.put(key,val);
+        return this;
     }
 
     public void render(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         view.render(model, req, resp);
     }
+
+
 }

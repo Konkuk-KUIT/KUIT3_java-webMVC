@@ -17,8 +17,7 @@ public class HomeController extends AbstractController {
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
         req.setAttribute("questions", questionRepository.findAll());
 
-        Map<String,Object> map=new HashMap<>();
-        map.put("questions",questionRepository.findAll());
-        return jspView("/home.jsp",map);
+        return jspView("/home.jsp")
+                .addModel("questions",questionRepository.findAll());
     }
 }
