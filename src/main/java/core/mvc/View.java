@@ -22,7 +22,7 @@ public class View {
 
     public void render(Map<String, Object> model, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        if(viewName.endsWith("json")){
+        if(viewName.equals("json")){
             renderJson(model,req,resp);
             return;
         }
@@ -42,6 +42,9 @@ public class View {
         if (viewName.startsWith(REDIRECT_PREFIX)) {
             resp.sendRedirect(viewName.substring(REDIRECT_PREFIX.length()));
             return;
+        }
+        for (String key : model.keySet()) {
+            req.setAttribute(key,model.get(key));
         }
         RequestDispatcher rd = req.getRequestDispatcher(viewName);
         rd.forward(req, resp);

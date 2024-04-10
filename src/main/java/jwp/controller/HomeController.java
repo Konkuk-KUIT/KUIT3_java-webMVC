@@ -8,6 +8,8 @@ import core.mvc.View;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
 
 public class HomeController extends AbstractController {
     private final MemoryQuestionRepository questionRepository = MemoryQuestionRepository.getInstance();
@@ -15,6 +17,8 @@ public class HomeController extends AbstractController {
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
         req.setAttribute("questions", questionRepository.findAll());
 
-        return jspView("/home.jsp");
+        Map<String,Object> map=new HashMap<>();
+        map.put("questions",questionRepository.findAll());
+        return jspView("/home.jsp",map);
     }
 }

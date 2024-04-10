@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UpdateUserFormController extends AbstractController {
     @Override
@@ -21,11 +23,12 @@ public class UpdateUserFormController extends AbstractController {
         String userId = req.getParameter("userId");
         User user = MemoryUserRepository.getInstance().findUserById(userId);
         if (user != null) {
-            req.setAttribute("user", user);
 
-            return jspView("/user/updateForm.jsp");
+            Map<String,Object> map=new HashMap<>();
+            map.put("user",user);
+            return jspView("/user/updateForm.jsp",map);
         }
 
-        return jspView(REDIRECT + "/");
+        return jspView(REDIRECT + "/",null);
     }
 }

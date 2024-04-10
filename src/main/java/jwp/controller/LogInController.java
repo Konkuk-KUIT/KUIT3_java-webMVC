@@ -10,6 +10,8 @@ import jwp.model.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LogInController extends AbstractController {
     @Override
@@ -22,9 +24,9 @@ public class LogInController extends AbstractController {
         if (user != null && user.isSameUser(userId, password)) {
             session.setAttribute("user", user);
 
-            return jspView(REDIRECT + "/");
+            return jspView(REDIRECT + "/",null);
         }
-        return jspView(REDIRECT + "/user/loginFailed");
+        return jspView(REDIRECT + "/user/loginFailed",null);
 
     }
 }

@@ -11,7 +11,9 @@ import jwp.model.Question;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ShowQuestionController extends AbstractController {
     private static final MemoryQuestionRepository questionRepository = MemoryQuestionRepository.getInstance();
@@ -24,11 +26,9 @@ public class ShowQuestionController extends AbstractController {
         Question question = questionRepository.findQuestionById(questionId);
         List<Answer> answers = memoryAnswerRepository.findAnswersByQuestionId(questionId);
 
-        req.setAttribute("question", question);
-        req.setAttribute("answers", answers);
-
-
-        View view=new View("/qna/show.jsp");
-        return new ModelAndView(view);
+        Map<String,Object> map=new HashMap<>();
+        map.put("question",question);
+        map.put("answers",answers);
+        return jspView("/qna/show.jsp",map);
     }
 }

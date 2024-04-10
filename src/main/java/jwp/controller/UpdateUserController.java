@@ -24,6 +24,6 @@ public class UpdateUserController extends AbstractController {
 
         MemoryUserRepository.getInstance().changeUserInfo(user);
 
-        return jspView(REDIRECT + "/user/userList");
+        return jspView(REDIRECT + "/user/userList",null);
     }
 }
