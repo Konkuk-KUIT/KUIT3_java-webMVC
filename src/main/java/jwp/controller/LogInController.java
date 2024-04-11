@@ -5,7 +5,7 @@ import core.mvc.AbstractController;
 import core.mvc.Controller;
 import core.mvc.ModelAndView;
 import core.mvc.View;
-import jwp.util.UserSessionUtils;
+import jwp.model.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,23 +13,26 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ListUserController extends AbstractController {
-
+public class LogInController extends AbstractController {
     private HttpSession httpSession;
-
     @Override
     public ModelAndView execute(Map<String, String> req) {
-        if(UserSessionUtils.isLogined(httpSession)){
+        HttpSession session = httpSession;
+        String userId = req.get("userId");
+        String password = req.get("password");
+        User user = MemoryUserRepository.getInstance().findUserById(userId);
 
-            return jspView("/user/list.jsp")
-                    .addModel("users",MemoryUserRepository.getInstance().findAll());
+        if (user != null && user.isSameUser(userId, password)) {
+            session.setAttribute("user", user);
+
+            return jspView(REDIRECT + "/");
         }
+        return jspView(REDIRECT + "/user/loginFailed");
 
-        return jspView(REDIRECT + "/user/loginForm");
     }
 
     @Override
     public void setSession(HttpSession httpSession) {
-        this.httpSession=httpSession;
+        this.httpSession = httpSession;
     }
 }

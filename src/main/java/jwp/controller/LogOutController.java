@@ -1,35 +1,31 @@
 package jwp.controller;
 
-import core.db.MemoryUserRepository;
 import core.mvc.AbstractController;
 import core.mvc.Controller;
 import core.mvc.ModelAndView;
 import core.mvc.View;
-import jwp.util.UserSessionUtils;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
+import java.io.IOException;
 import java.util.Map;
 
-public class ListUserController extends AbstractController {
-
+public class LogOutController extends AbstractController {
     private HttpSession httpSession;
-
     @Override
     public ModelAndView execute(Map<String, String> req) {
-        if(UserSessionUtils.isLogined(httpSession)){
+        HttpSession session = httpSession;
+        session.removeAttribute("user");
 
-            return jspView("/user/list.jsp")
-                    .addModel("users",MemoryUserRepository.getInstance().findAll());
-        }
-
-        return jspView(REDIRECT + "/user/loginForm");
+        return jspView(REDIRECT + "/");
     }
 
     @Override
     public void setSession(HttpSession httpSession) {
-        this.httpSession=httpSession;
+        this.httpSession = httpSession;
     }
 }
