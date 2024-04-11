@@ -1,6 +1,6 @@
 package core.mvc;
 
-import core.mvc.view.View;
+import core.mvc.view.ModelAndView;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,17 +17,18 @@ public class DispatcherServlet extends HttpServlet {
     private static final String REDIRECT_PREFIX = "redirect:";
 
     @Override
-    public void init() throws ServletException {
-        this.requestMapping = new RequestMapping();
+    public void init() {
+        requestMapping = new RequestMapping();
     }
 
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
         Controller controller = requestMapping.getController(req);
+        // if (controller == null) return;
+
         try {
-            View view = controller.execute(req, resp);
-            if (view == null) return;
-            view.render(req, resp);
+            ModelAndView mav = controller.execute(req, resp);
+            mav.render(req, resp);
         } catch (Throwable e) {
             throw new ServletException(e.getMessage());
         }
