@@ -5,19 +5,19 @@ import core.mvc.AbstractController;
 import core.mvc.view.ModelAndView;
 import jwp.model.User;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
-public class CreateUserController extends AbstractController {
+public class UpdateUserFormController extends AbstractController {
     @Override
     public ModelAndView execute(Map<String, String> params) {
-        User user = new User(params.get("userId"),
-                params.get("password"),
-                params.get("name"),
-                params.get("email"));
-
-        MemoryUserRepository.getInstance().addUser(user);
-        return jspView("/user/userList");
+        String userId = params.get("userId");
+        User user = MemoryUserRepository.getInstance().findUserById(userId);
+        if (user != null) {
+            return jspView("/user/updateForm.jsp").addModel("user",user);
+        }
+        return jspView("redirect:/");
     }
 }

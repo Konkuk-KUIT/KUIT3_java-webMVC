@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
-public class CreateUserController extends AbstractController {
+public class UpdateUserController extends AbstractController {
     @Override
     public ModelAndView execute(Map<String, String> params) {
         User user = new User(params.get("userId"),
@@ -17,7 +17,8 @@ public class CreateUserController extends AbstractController {
                 params.get("name"),
                 params.get("email"));
 
-        MemoryUserRepository.getInstance().addUser(user);
-        return jspView("/user/userList");
+        MemoryUserRepository.getInstance().changeUserInfo(user);
+
+        return jspView("redirect:/user/userList");
     }
 }
