@@ -12,21 +12,21 @@ import javax.servlet.http.HttpServletResponse;
 public class JsonView implements View{
 
     @Override
-    public void render(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public void render(HttpServletRequest req, HttpServletResponse resp, Map<String, Object> model) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         resp.setContentType("application/json;charset=UTF-8");
         PrintWriter out = resp.getWriter();
-        out.print(mapper.writeValueAsString(createModel(req)));
+        out.print(mapper.writeValueAsString(model));
     }
 
-    private Map<String, Object> createModel(HttpServletRequest req) {
-        Enumeration<String> names = req.getAttributeNames();
-        Map<String, Object> model = new HashMap<>();
-        while(names.hasMoreElements()){
-            String name = names.nextElement();
-            System.out.println(req.getAttribute(name));
-            model.put(name, req.getAttribute(name));
-        }
-        return model;
-    }
+//    private Map<String, Object> createModel(HttpServletRequest req) {
+//        Enumeration<String> names = req.getAttributeNames();
+//        Map<String, Object> model = new HashMap<>();
+//        while(names.hasMoreElements()){
+//            String name = names.nextElement();
+//            System.out.println(req.getAttribute(name));
+//            model.put(name, req.getAttribute(name));
+//        }
+//        return model;
+//    }
 }

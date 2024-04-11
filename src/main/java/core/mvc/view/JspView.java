@@ -20,7 +20,7 @@ public class JspView implements View{
             resp.sendRedirect(path.substring("redirect:".length()));
             return;
         }
-
+        model.forEach(req::setAttribute);
         RequestDispatcher rd = req.getRequestDispatcher(path);
         rd.forward(req, resp);
     }

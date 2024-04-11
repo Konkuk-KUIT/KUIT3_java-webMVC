@@ -24,8 +24,8 @@ public class DispatcherServlet extends HttpServlet {
         Controller controller = requestMapping.getController(req);
         try {
             ModelAndView mv = controller.execute(req, resp);
-            mv.render(req, resp);
-        } catch (Throwable e) {
+            mv.render(req, resp);   // resp -> 답장 쓰는거 : view한테 주면 되 OK
+        } catch (Throwable e) {     // req  -> rd는 못 없애..? jsp view
             throw new ServletException(e.getMessage());
         }
     }
