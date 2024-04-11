@@ -1,22 +1,29 @@
 package jwp.controller;
 
 import core.db.MemoryUserRepository;
-import core.mvc.Controller;
+import core.mvc.AbstractController;
 import core.mvc.ModelAndView;
-import core.view.JsonView;
-import core.view.JspView;
-import core.view.View;
 import jwp.util.UserSessionUtils;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.Map;
 
 public class ListUserController extends AbstractController {
+
+    HttpSession session;
     @Override
-    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
-        if(UserSessionUtils.isLogined(req.getSession())){
-            req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
-            return jspView( "/user/list.jsp");
+    public void setSession(HttpSession httpSession) {
+        this.session = httpSession;
+    }
+
+    @Override
+    public ModelAndView execute(Map<String, String> paraMap) throws IOException {
+        if(UserSessionUtils.isLogined(session)){
+             ModelAndView mav = jspView("/user/list.jsp");
+             mav.addModel("users",MemoryUserRepository.getInstance().findAll() );
+//            req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
+            return mav;
         }
         return jspView(REDIRECT + "/user/loginForm");
     }

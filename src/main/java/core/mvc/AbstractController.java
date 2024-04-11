@@ -1,4 +1,4 @@
-package jwp.controller;
+package core.mvc;
 
 import core.mvc.Controller;
 import core.mvc.ModelAndView;

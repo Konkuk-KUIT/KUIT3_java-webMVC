@@ -1,12 +1,7 @@
 package core.mvc;
 
-import core.view.JsonView;
-import core.view.JspView;
-import core.view.View;
-import jwp.controller.AbstractController;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Map;
 
 public class ForwardController extends AbstractController {
     private String forwardUrl;
@@ -18,7 +13,7 @@ public class ForwardController extends AbstractController {
         }
     }
     @Override
-    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp){
+    public ModelAndView execute(Map<String, String> paraMap) throws IOException {
         return jspView(forwardUrl);
     }
 }

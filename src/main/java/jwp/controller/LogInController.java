@@ -1,23 +1,28 @@
 package jwp.controller;
 
 import core.db.MemoryUserRepository;
-import core.mvc.Controller;
+import core.mvc.AbstractController;
 import core.mvc.ModelAndView;
-import core.view.JsonView;
-import core.view.JspView;
-import core.view.View;
 import jwp.model.User;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 public class LogInController extends AbstractController {
+
+
+    HttpSession session;
     @Override
-    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
-        HttpSession session = req.getSession();
-        String userId = req.getParameter("userId");
-        String password = req.getParameter("password");
+    public void setSession(HttpSession httpSession) {
+        this.session = httpSession;
+    }
+
+
+    @Override
+    public ModelAndView execute(Map<String, String> paraMap) {
+//        HttpSession session = req.getSession();
+        String userId = paraMap.get("userId");
+        String password = paraMap.get("password");
         User user = MemoryUserRepository.getInstance().findUserById(userId);
 
         if (user != null && user.isSameUser(userId, password)) {
