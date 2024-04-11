@@ -8,7 +8,7 @@ import jwp.model.User;
 import java.io.IOException;
 import java.util.Map;
 
-public class CreateUserController extends AbstractController {
+public class UpdateUserController extends AbstractController {
 
     @Override
     public ModelAndView execute(Map<String, String> paraMap) throws IOException {
@@ -17,7 +17,8 @@ public class CreateUserController extends AbstractController {
                 paraMap.get("name"),
                 paraMap.get("email"));
 
-        MemoryUserRepository.getInstance().addUser(user);
+        MemoryUserRepository.getInstance().changeUserInfo(user);
+
         return jspView(REDIRECT + "/user/userList");
     }
 }
