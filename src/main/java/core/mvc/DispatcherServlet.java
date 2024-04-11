@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet(name = "dispatcher", urlPatterns = "/", loadOnStartup = 1)
@@ -26,10 +28,13 @@ public class DispatcherServlet extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Controller controller = requestMapping.getController(req);
         try {
+            ModelAndView modelAndView = ModelAndView.from(controller.execute(req, resp));
+            modelAndView.render(req, resp);
+            /*
             View view = controller.execute(req, resp);
-
             if(view == null) return;
             view.render(req, resp);
+             */
         } catch (Throwable e) {
             throw new ServletException(e.getMessage());
         }
