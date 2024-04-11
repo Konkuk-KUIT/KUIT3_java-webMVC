@@ -2,10 +2,15 @@ package jwp.controller;
 
 import core.mvc.Controller;
 import core.mvc.ModelAndView;
+import core.view.JsonView;
+import core.view.JspView;
 
-public interface AbstractController extends Controller {
-    abstract ModelAndView jspView(String url);
+public abstract class AbstractController implements Controller {
+    public ModelAndView jspView(String url) {
+        return new ModelAndView(new JspView(url));
+    }
 
-    abstract ModelAndView jsonView();
-
+    public ModelAndView jsonView() {
+        return new ModelAndView(new JsonView());
+    }
 }

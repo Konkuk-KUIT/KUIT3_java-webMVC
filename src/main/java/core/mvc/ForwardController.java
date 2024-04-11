@@ -8,7 +8,7 @@ import jwp.controller.AbstractController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ForwardController implements AbstractController {
+public class ForwardController extends AbstractController {
     private String forwardUrl;
 
     public ForwardController(String forwardUrl) {
@@ -20,14 +20,5 @@ public class ForwardController implements AbstractController {
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp){
         return jspView(forwardUrl);
-    }
-
-    @Override
-    public ModelAndView jspView(String url) {
-        return new ModelAndView(new JspView(url));
-    }
-
-    public ModelAndView jsonView() {
-        return new ModelAndView(new JsonView());
     }
 }

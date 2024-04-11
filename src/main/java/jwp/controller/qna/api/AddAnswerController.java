@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class AddAnswerController implements AbstractController {
+public class AddAnswerController extends AbstractController {
     private final MemoryAnswerRepository answerRepository = MemoryAnswerRepository.getInstance();
     private final MemoryQuestionRepository questionRepository = MemoryQuestionRepository.getInstance();
     @Override
@@ -34,15 +34,5 @@ public class AddAnswerController implements AbstractController {
         req.setAttribute("answer", savedAnswer);
 
         return jsonView();
-    }
-
-    @Override
-    public ModelAndView jspView(String url) {
-        return new ModelAndView(new JspView(url));
-    }
-
-    @Override
-    public ModelAndView jsonView() {
-        return new ModelAndView(new JsonView());
     }
 }

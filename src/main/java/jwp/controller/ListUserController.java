@@ -11,7 +11,7 @@ import jwp.util.UserSessionUtils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ListUserController implements AbstractController {
+public class ListUserController extends AbstractController {
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
         if(UserSessionUtils.isLogined(req.getSession())){
@@ -19,14 +19,5 @@ public class ListUserController implements AbstractController {
             return jspView( "/user/list.jsp");
         }
         return jspView(REDIRECT + "/user/loginForm");
-    }
-
-    @Override
-    public ModelAndView jspView(String url) {
-        return new ModelAndView(new JspView(url));
-    }
-
-    public ModelAndView jsonView() {
-        return new ModelAndView(new JsonView());
     }
 }

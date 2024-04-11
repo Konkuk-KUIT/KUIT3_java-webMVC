@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class UpdateUserFormController implements AbstractController {
+public class UpdateUserFormController extends AbstractController {
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
         String userId = req.getParameter("userId");
@@ -26,14 +26,5 @@ public class UpdateUserFormController implements AbstractController {
             return jspView( "/user/updateForm.jsp");
         }
         return jspView(REDIRECT + "/");
-    }
-
-    @Override
-    public ModelAndView jspView(String url) {
-        return new ModelAndView(new JspView(url));
-    }
-
-    public ModelAndView jsonView() {
-        return new ModelAndView(new JsonView());
     }
 }

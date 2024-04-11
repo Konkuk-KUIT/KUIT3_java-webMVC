@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class ShowQuestionController implements AbstractController {
+public class ShowQuestionController extends AbstractController {
     private static final MemoryQuestionRepository questionRepository = MemoryQuestionRepository.getInstance();
     private static final MemoryAnswerRepository memoryAnswerRepository = MemoryAnswerRepository.getInstance();
 
@@ -29,14 +29,5 @@ public class ShowQuestionController implements AbstractController {
         req.setAttribute("question", question);
         req.setAttribute("answers", answers);
         return jspView( "/qna/show.jsp");
-    }
-
-    @Override
-    public ModelAndView jspView(String url) {
-        return new ModelAndView(new JspView(url));
-    }
-
-    public ModelAndView jsonView() {
-        return new ModelAndView(new JsonView());
     }
 }

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
-public class CreateUserController implements AbstractController {
+public class CreateUserController extends AbstractController {
 
     private ModelAndView mav;
     @Override
@@ -25,14 +25,5 @@ public class CreateUserController implements AbstractController {
 
         MemoryUserRepository.getInstance().addUser(user);
         return jspView(REDIRECT + "user/userList");
-    }
-
-    @Override
-    public ModelAndView jspView(String url) {
-        return new ModelAndView(new JspView(url));
-    }
-
-    public ModelAndView jsonView() {
-        return new ModelAndView(new JsonView());
     }
 }
