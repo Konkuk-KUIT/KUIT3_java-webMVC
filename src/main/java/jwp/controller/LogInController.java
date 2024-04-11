@@ -20,7 +20,6 @@ public class LogInController extends AbstractController {
 
     @Override
     public ModelAndView execute(Map<String, String> paraMap) {
-//        HttpSession session = req.getSession();
         String userId = paraMap.get("userId");
         String password = paraMap.get("password");
         User user = MemoryUserRepository.getInstance().findUserById(userId);

@@ -30,12 +30,6 @@ public class DispatcherServlet extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Controller controller = requestMapping.getController(req);
         controller.setSession(req.getSession());
-        //Controller가 NULL일때
-        if (controller == null) {
-            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            return;
-        }
-        logger.info(controller.toString());
         try {
             ModelAndView mav = controller.execute(createParams(req));
             mav.render(req,resp);
