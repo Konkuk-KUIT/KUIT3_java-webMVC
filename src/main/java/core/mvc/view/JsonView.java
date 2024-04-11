@@ -11,12 +11,11 @@ import java.util.Map;
 
 public class JsonView implements View{
     @Override
-    public void render(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void render(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
         out.print(mapper.writeValueAsString(createModel(request)));
-
     }
 
     private Map<String, Object> createModel(HttpServletRequest request) {
@@ -28,4 +27,5 @@ public class JsonView implements View{
         }
         return model;
     }
+
 }
