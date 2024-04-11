@@ -14,7 +14,7 @@ import java.io.IOException;
 public class DispatcherServlet extends HttpServlet {
 
     private RequestMapping requestMapping;
-    private static final String REDIRECT_PREFIX = "redirect:";
+    private static final String REDIRECT = "redirect:";
 
     @Override
     public void init() throws ServletException {
@@ -37,8 +37,8 @@ public class DispatcherServlet extends HttpServlet {
     }
 
     private void move(String viewName, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (viewName.startsWith(REDIRECT_PREFIX)) {
-            resp.sendRedirect(viewName.substring(REDIRECT_PREFIX.length()));
+        if (viewName.startsWith(REDIRECT)) {
+            resp.sendRedirect(viewName.substring(REDIRECT.length()));
             return;
         }
 

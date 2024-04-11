@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-// 이제는 View를 반환하니깐 Controller 또한 View를 반환하도록 코드를 리팩토링하자
+// 이제는 View를 반환하니깐 Controller 또한 View를 반환하도록 코드를 리팩토링!!
+// Servlet에 대한 종속성을 해결
+
 public class CreateUserController implements Controller {
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) {

@@ -15,6 +15,7 @@ public class JsonView implements View {
     public void render(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         resp.setContentType("application/json;charset=UTF-8");
+        // 응답해 주는 부분 추가
         PrintWriter out = resp.getWriter();
         out.print(mapper.writeValueAsString(createModel(req)));
     }
