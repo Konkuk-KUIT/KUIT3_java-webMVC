@@ -1,13 +1,12 @@
 package core.mvc;
 
-import core.view.View;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Map;
 
 public interface Controller {
     static final String REDIRECT = "redirect:";
-    ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws IOException;
+    ModelAndView execute(Map<String, String> paraMap) throws IOException;
+
+    default void setSession(HttpSession httpSession){};
 }

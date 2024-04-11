@@ -9,9 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Logger;
 
 @WebServlet(name = "dispatcher", urlPatterns = "/", loadOnStartup = 1)
 public class DispatcherServlet extends HttpServlet {
+    private static final Logger logger = Logger.getLogger(DispatcherServlet.class.getName());
+
 
     private RequestMapping requestMapping;
     private static final String REDIRECT_PREFIX = "redirect:";
@@ -24,11 +29,25 @@ public class DispatcherServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Controller controller = requestMapping.getController(req);
+        controller.setSession(req.getSession());
+        //Controller가 NULL일때
+        if (controller == null) {
+            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return;
+        }
+        logger.info(controller.toString());
         try {
-            ModelAndView mav = controller.execute(req, resp);
+            ModelAndView mav = controller.execute(createParams(req));
             mav.render(req,resp);
         } catch (Throwable e) {
             throw new ServletException(e.getMessage());
         }
+    }
+
+    private Map<String, String> createParams(HttpServletRequest request){
+        Map<String, String> params = new HashMap<>();
+        request.getParameterNames().asIterator().forEachRemaining(
+                paramName -> params.put(paramName, request.getParameter(paramName)));
+        return params;
     }
 }
