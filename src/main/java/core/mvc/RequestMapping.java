@@ -18,7 +18,7 @@ public class RequestMapping {
     private void initControllers() {
         controllers.put("/", new HomeController());
 
-        controllers.put("/user/form", new ForwardController("/user/form.jsp"));
+        controllers.put("/user/singupForm", new ForwardController("/user/form.jsp"));
         controllers.put("/user/loginForm", new ForwardController("/user/login.jsp"));
         controllers.put("/user/loginFailed", new ForwardController("/user/login_failed.jsp"));
 
@@ -36,6 +36,7 @@ public class RequestMapping {
     }
 
     public Controller getController(HttpServletRequest request) {
+        System.out.println("requestmapping : " + request.getRequestURI());
         return controllers.get(request.getRequestURI());
     }
 }

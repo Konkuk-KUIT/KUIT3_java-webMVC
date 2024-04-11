@@ -1,5 +1,6 @@
 package core.mvc;
 
+import core.mvc.view.ModelAndView;
 import core.mvc.view.View;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,5 +9,5 @@ import java.io.IOException;
 
 public interface Controller {
     static final String REDIRECT = "redirect:";
-    View execute(HttpServletRequest req, HttpServletResponse resp) throws IOException;
+    ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws IOException;
 }
