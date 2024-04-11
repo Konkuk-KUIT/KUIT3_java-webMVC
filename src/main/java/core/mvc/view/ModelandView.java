@@ -8,7 +8,8 @@ import java.util.Map;
 public class ModelandView {
     View view;
     Map<String,Object> model = new HashMap<>();
-    public void ModelAndView(View view){
+
+    public ModelandView(View view){
         this.view = view;
     }
 

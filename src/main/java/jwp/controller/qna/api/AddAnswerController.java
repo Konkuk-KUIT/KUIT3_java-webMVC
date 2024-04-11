@@ -2,6 +2,7 @@ package jwp.controller.qna.api;
 
 import core.db.MemoryAnswerRepository;
 import core.db.MemoryQuestionRepository;
+import core.mvc.AbstractController;
 import core.mvc.Controller;
 import core.mvc.view.JsonView;
 import core.mvc.view.ModelandView;
@@ -12,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class AddAnswerController implements Controller {
+public class AddAnswerController extends AbstractController {
     private final MemoryAnswerRepository answerRepository = MemoryAnswerRepository.getInstance();
     private final MemoryQuestionRepository questionRepository = MemoryQuestionRepository.getInstance();
     @Override
@@ -28,6 +29,6 @@ public class AddAnswerController implements Controller {
 
         req.setAttribute("answer", savedAnswer);
 
-        return new JsonView();
+        return jsonView();
     }
 }
