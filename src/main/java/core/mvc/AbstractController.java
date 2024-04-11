@@ -7,11 +7,11 @@ import core.mvc.view.ModelandView;
 
 public abstract class AbstractController implements Controller {
 
-    public ModelandView jspView(String viewname) {
+    protected ModelandView jspView(String viewname) {
         return new ModelandView(new JspView(viewname));
     }
 
-    public ModelandView jsonView() {
+    protected ModelandView jsonView() {
         return new ModelandView(new JsonView());
     }
 

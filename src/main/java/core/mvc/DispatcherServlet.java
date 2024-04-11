@@ -27,7 +27,6 @@ public class DispatcherServlet extends HttpServlet {
         Controller controller = requestMapping.getController(req);
         try {
             ModelandView mav = controller.execute(req, resp);
-            //mav가 json 인지 jsp인지 판단 후 render
             mav.render(req,resp);
         } catch (Throwable e) {
             throw new ServletException(e.getMessage());

@@ -29,6 +29,6 @@ public class AddAnswerController extends AbstractController {
 
         req.setAttribute("answer", savedAnswer);
 
-        return jsonView();
+        return jsonView().addModel("answer",savedAnswer);
     }
 }
