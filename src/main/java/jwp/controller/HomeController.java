@@ -1,18 +1,20 @@
 package jwp.controller;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import core.db.MemoryQuestionRepository;
 import core.mvc.Controller;
 
-public class HomeController implements Controller {
-    @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) {
-        return "/home.jsp";
-    }
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import core.mvc.view.View;
+import core.mvc.view.JspView;
+
+public class HomeController implements Controller {
+    private final MemoryQuestionRepository questionRepository = MemoryQuestionRepository.getInstance();
+    @Override
+    public View execute(HttpServletRequest req, HttpServletResponse resp) {
+        req.setAttribute("questions", questionRepository.findAll());
+//        return "/home.jsp";
+        return new JspView("/home.jsp");
+    }
 }

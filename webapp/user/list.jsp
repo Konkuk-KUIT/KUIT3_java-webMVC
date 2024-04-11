@@ -32,7 +32,7 @@
                                 <a href="/user/updateForm?userId=${user.userId}" class="btn btn-success" role="button">수정</a>
                             </c:when>
                             <c:otherwise>
-                                <a href="#" class="btn" role="button" disabled></a>
+                                <a href="#" class="btn" role="button" disabled>-</a>
                             </c:otherwise>
                         </c:choose>
                     </th>

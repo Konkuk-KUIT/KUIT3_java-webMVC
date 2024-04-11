@@ -7,25 +7,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import core.mvc.view.View;
 
-//loaldOnStartup : 값이 0보다 크거나 같으면, 서블릿은 애플리케이션 시작 시점에 로드
-@WebServlet(name = "dispathcer", urlPatterns = "/",  loadOnStartup = 1)
+@WebServlet(name = "dispatcher", urlPatterns = "/", loadOnStartup = 1)
 public class DispatcherServlet extends HttpServlet {
 
-    private RequestMapper requestMapper;
+    private RequestMapping requestMapping;
     private static final String REDIRECT_PREFIX = "redirect:";
 
     @Override
     public void init() throws ServletException {
-        this.requestMapper = new RequestMapper();
+        this.requestMapping = new RequestMapping();
     }
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Controller controller = requestMapper.getController(req);
+        Controller controller = requestMapping.getController(req);
         try {
-            String viewName = controller.execute(req, resp);
-            move(viewName, req, resp);
+            View view = controller.execute(req, resp);
+            if(view == null) return;
+            view.render(req, resp);
         } catch (Throwable e) {
             throw new ServletException(e.getMessage());
         }
@@ -40,4 +41,5 @@ public class DispatcherServlet extends HttpServlet {
         RequestDispatcher rd = req.getRequestDispatcher(viewName);
         rd.forward(req, resp);
     }
+
 }

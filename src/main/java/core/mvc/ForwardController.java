@@ -3,6 +3,10 @@ package core.mvc;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import core.mvc.view.JspView;
+import core.mvc.view.View;
+import core.mvc.view.JspView;
+
 public class ForwardController implements Controller {
     private String forwardUrl;
 
@@ -13,7 +17,8 @@ public class ForwardController implements Controller {
         }
     }
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp){
-        return forwardUrl;
+    public View execute(HttpServletRequest req, HttpServletResponse resp){
+    // 동적 페이지 반환
+        return new JspView(forwardUrl);
     }
 }
