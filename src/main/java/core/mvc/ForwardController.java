@@ -1,6 +1,7 @@
 package core.mvc;
 
 import core.mvc.view.JspView;
+import core.mvc.view.ModelAndView;
 import core.mvc.view.View;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,8 +19,8 @@ public class ForwardController implements Controller {
 
     // String 대신 이제는 View 반환하도록 변경
     @Override
-    public View execute(HttpServletRequest req, HttpServletResponse resp){
+    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp){
 
-        return new JspView(forwardUrl);
+        return new ModelAndView(new JspView(forwardUrl));
     }
 }
