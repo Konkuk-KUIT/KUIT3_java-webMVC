@@ -47,10 +47,6 @@ public class User {
         return isSameUser(user.getUserId(), user.getPassword());
     }
 
-    public boolean isSameUser(String userId, String password) {
-        return userId.equals(this.userId) && matchPassword(password);
-    }
-
     // 로그인 시에 존재하는 회원인지 확인
     public boolean isSameUser(String userId, String password) {
         return userId.equals(this.userId) && matchPassword(password);
