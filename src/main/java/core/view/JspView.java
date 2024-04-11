@@ -8,11 +8,12 @@ import java.util.Map;
 public class JspView implements View{
     private final String viewName;
 
-    private static final String REDIRECT_PREFIX = "redirect:/";
+    private static final String REDIRECT_PREFIX = "redirect:";
 
     public JspView(String viewName){
         this.viewName = viewName;
     }
+
     @Override
     public void render(Map<String, Object> model, HttpServletRequest req, HttpServletResponse resp) throws Exception {
         model.forEach((key, value) -> req.setAttribute(key, value));

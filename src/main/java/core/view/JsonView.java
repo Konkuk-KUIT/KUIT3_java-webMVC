@@ -18,16 +18,7 @@ public class JsonView implements View{
         resp.setContentType("application/json;charset=UTF-8");
         PrintWriter out = resp.getWriter();
         model.forEach((key, value) -> req.setAttribute(key, value));
-        out.print(mapper.writeValueAsString(model));
+        out.print(mapper.writeValueAsString(req));
     }
 
-    private Map<String, Object> createModel(HttpServletRequest req){
-        Enumeration<String> names = req.getAttributeNames();
-        Map<String, Object> model = new HashMap<>();
-        while (names.hasMoreElements()){
-            String name = names.nextElement();
-            model.put(name, req.getAttribute(name));
-        }
-        return model;
-    }
 }
