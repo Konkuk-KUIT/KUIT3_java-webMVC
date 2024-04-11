@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 
 public class LogOutController extends AbstractController {
     @Override
-    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
+    public ModelAndView execute(HttpServletRequest req) {
         HttpSession session = req.getSession();
         session.removeAttribute("user");
         return jspView("redirect:/");
