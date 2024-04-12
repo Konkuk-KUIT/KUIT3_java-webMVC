@@ -10,5 +10,5 @@ import java.io.IOException;
 public interface Controller {
     String REDIRECT_PREFIX = "redirect:";
 
-    ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws IOException;
+    ModelAndView execute(HttpServletRequest req) throws IOException;
 }
