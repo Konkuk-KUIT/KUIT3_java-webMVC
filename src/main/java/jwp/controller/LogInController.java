@@ -8,13 +8,20 @@ import jwp.model.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 public class LogInController implements Controller {
+    HttpSession session;
+
     @Override
-    public ModelAndView execute(HttpServletRequest req) {
-        HttpSession session = req.getSession();
-        String userId = req.getParameter("userId");
-        String password = req.getParameter("password");
+    public void setSession(HttpSession httpSession) {
+        this.session = httpSession;
+    }
+
+    @Override
+    public ModelAndView execute(Map<String, String> params) {
+        String userId = params.get("userId");
+        String password = params.get("password");
         User user = MemoryUserRepository.getInstance().findUserById(userId);
 
         if (user != null && user.isSameUser(userId, password)) {

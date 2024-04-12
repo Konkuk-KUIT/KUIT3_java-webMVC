@@ -8,12 +8,13 @@ import core.mvc.view.JspView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 public class HomeController extends AbstractController {
     private final MemoryQuestionRepository questionRepository = MemoryQuestionRepository.getInstance();
 
     @Override
-    public ModelAndView execute(HttpServletRequest req) {
+    public ModelAndView execute(Map<String, String> params) {
 
         ModelAndView mav = JspView("/home.jsp");
         mav.addModel("questions", questionRepository.findAll());

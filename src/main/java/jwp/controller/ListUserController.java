@@ -9,13 +9,22 @@ import jwp.util.UserSessionUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 public class ListUserController extends AbstractController {
     private static final String LOGIN_FORM_PATH = "/user/loginForm";
 
+    HttpSession session;
     @Override
-    public ModelAndView execute(HttpServletRequest req) {
-        if (UserSessionUtils.isLogined(req.getSession())) {
+    public void setSession(HttpSession httpSession) {
+        this.session = httpSession;
+    }
+
+    @Override
+    public ModelAndView execute(Map<String, String> params) {
+
+        if (UserSessionUtils.isLogined(session)) {
             ModelAndView mav = JspView("/user/list.jsp");
             mav.addModel("users", MemoryUserRepository.getInstance().findAll());
             return mav;

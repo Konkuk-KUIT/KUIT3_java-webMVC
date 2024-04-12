@@ -4,6 +4,7 @@ import core.mvc.view.JspView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 public class ForwardController implements Controller {
     private String forwardUrl;
@@ -15,7 +16,7 @@ public class ForwardController implements Controller {
         }
     }
     @Override
-    public ModelAndView execute(HttpServletRequest req) {
+    public ModelAndView execute(Map<String, String> params) {
         return new ModelAndView(new JspView(forwardUrl));
     }
 }
