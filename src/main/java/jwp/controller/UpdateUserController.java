@@ -10,7 +10,7 @@ import jwp.model.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CreateUserController extends AbstractController {
+public class UpdateUserController extends AbstractController {
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
         User user = new User(req.getParameter("userId"),
@@ -18,10 +18,11 @@ public class CreateUserController extends AbstractController {
                 req.getParameter("name"),
                 req.getParameter("email"));
 
-        MemoryUserRepository.getInstance().addUser(user);
+        MemoryUserRepository.getInstance().changeUserInfo(user);
 
-
-        return jspView(REDIRECT + "/user/userList");
+//        JspView jspView= new JspView(REDIRECT + "/user/userList");
+//        return new ModelAndView(jspView);
+        return jspView (REDIRECT + "/user/userList");
 
     }
 }
