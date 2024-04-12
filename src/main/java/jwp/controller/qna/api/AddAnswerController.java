@@ -30,6 +30,8 @@ public class AddAnswerController extends AbstractController {
         questionRepository.update(question);
 
         req.setAttribute("answer", savedAnswer);
-        return jsonView();
+        ModelAndView mav = jsonView();
+        mav.addModel("answer", savedAnswer);
+        return mav;
     }
 }

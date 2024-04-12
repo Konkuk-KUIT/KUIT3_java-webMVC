@@ -25,6 +25,9 @@ public class ShowQuestionController extends AbstractController {
 
         req.setAttribute("question", question);
         req.setAttribute("answers", answers);
-        return jspView("/qna/show.jsp");
+        ModelAndView mav = jspView("/qna/show.jsp");
+        mav.addModel("question", question);
+        mav.addModel("answers", answers);
+        return mav;
     }
 }

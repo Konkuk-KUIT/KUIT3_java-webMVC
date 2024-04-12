@@ -11,6 +11,9 @@ public class HomeController extends AbstractController {
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
         req.setAttribute("questions", questionRepository.findAll());
-        return jspView("/home.jsp");
+
+        ModelAndView mav = jspView("/home.jsp");
+        mav.addModel("questions", questionRepository.findAll());
+        return mav;
     }
 }

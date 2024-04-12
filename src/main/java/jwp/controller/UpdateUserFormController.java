@@ -14,7 +14,9 @@ public class UpdateUserFormController extends AbstractController {
         User user = MemoryUserRepository.getInstance().findUserById(userId);
         if (user != null) {
             req.setAttribute("user", user);
-            return jspView("/user/updateForm.jsp");
+            ModelAndView mav = jspView("/user/updateForm.jsp");
+            mav.addModel("user",user);
+            return mav;
         }
         return jspView(REDIRECT + "/");
     }
