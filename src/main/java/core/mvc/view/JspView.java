@@ -17,7 +17,7 @@ public class JspView implements View{
             response.sendRedirect(viewName.substring(REDIRECT_PREFIX.length()));
             return;
         }
-
+        model.forEach( (key, value) -> request.setAttribute(key, value));
         RequestDispatcher rd = request.getRequestDispatcher(viewName);
         rd.forward(request, response);
     }
