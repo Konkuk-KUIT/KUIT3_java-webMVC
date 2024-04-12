@@ -4,15 +4,18 @@ import core.db.MemoryUserRepository;
 import core.mvc.AbstractController;
 import core.mvc.Controller;
 import core.mvc.ModelAndView;
-import core.mvc.view.JsonView;
 import core.mvc.view.JspView;
 import core.mvc.view.View;
 import jwp.model.User;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
-public class CreateUserController extends AbstractController {
+public class UpdateUserController extends AbstractController {
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
         User user = new User(req.getParameter("userId"),
@@ -20,7 +23,7 @@ public class CreateUserController extends AbstractController {
                 req.getParameter("name"),
                 req.getParameter("email"));
 
-        MemoryUserRepository.getInstance().addUser(user);
+        MemoryUserRepository.getInstance().changeUserInfo(user);
 
         return jspModelAndView(REDIRECT + "/user/userList");
     }
