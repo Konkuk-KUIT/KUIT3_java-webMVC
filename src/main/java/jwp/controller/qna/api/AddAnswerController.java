@@ -3,6 +3,7 @@ package jwp.controller.qna.api;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import core.db.MemoryAnswerRepository;
 import core.db.MemoryQuestionRepository;
+import core.mvc.AbstractController;
 import core.mvc.Controller;
 import core.mvc.view.JsonView;
 import core.mvc.view.ModelAndView;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class AddAnswerController implements Controller {
+public class AddAnswerController extends AbstractController {
     private final MemoryAnswerRepository answerRepository = MemoryAnswerRepository.getInstance();
     private final MemoryQuestionRepository questionRepository = MemoryQuestionRepository.getInstance();
 
@@ -30,7 +31,7 @@ public class AddAnswerController implements Controller {
         question.increaseCountOfAnswer();
         questionRepository.update(question);
 
-        return new ModelAndView(new JsonView())
+        return jsonView()
                 .addObject("answer", savedAnswer);
     }
 }
