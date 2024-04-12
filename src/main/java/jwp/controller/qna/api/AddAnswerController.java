@@ -13,23 +13,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
 
 public class AddAnswerController extends AbstractController {
     private final MemoryAnswerRepository answerRepository = MemoryAnswerRepository.getInstance();
     private final MemoryQuestionRepository questionRepository = MemoryQuestionRepository.getInstance();
 
     @Override
-    public ModelAndView execute(HttpServletRequest req) throws IOException {
-        Answer answer = new Answer(Long.parseLong(req.getParameter("questionId")),
-                req.getParameter("author"),
-                req.getParameter("contents"));
+    public ModelAndView execute(Map<String,String> paramMap) throws IOException {
+        Answer answer = new Answer(Long.parseLong(paramMap.get("questionId")),
+                paramMap.get("author"),
+                paramMap.get("contents"));
         Answer savedAnswer = answerRepository.insert(answer);
 
         Question question = questionRepository.findQuestionById(answer.getQuestionId());
         question.increaseCountOfAnswer();
         questionRepository.update(question);
 
-        req.setAttribute("answer", savedAnswer);
         ModelAndView mav = jsonView();
         mav.addModel("answer", savedAnswer);
         return mav;
