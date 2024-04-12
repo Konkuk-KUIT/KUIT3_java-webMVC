@@ -13,7 +13,7 @@ public class JspView implements View{
     }
 
     @Override
-    public void render(Map<String, ?> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void render(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
         for (Map.Entry<String, ?> entry : model.entrySet()) {
             request.setAttribute(entry.getKey(), entry.getValue());
         }
