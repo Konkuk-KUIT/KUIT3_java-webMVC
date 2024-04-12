@@ -5,6 +5,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 public class JSPView implements View{
     private String viewPath;
@@ -16,6 +17,7 @@ public class JSPView implements View{
 
     @Override
     public void render(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        //request에 model을 저장
         //jsp로 이동
         if (viewPath.startsWith(REDIRECT_PREFIX)) {
             resp.sendRedirect(viewPath.substring(REDIRECT_PREFIX.length()));
