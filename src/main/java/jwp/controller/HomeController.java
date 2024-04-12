@@ -13,7 +13,7 @@ public class HomeController extends AbstractController {
     private final MemoryQuestionRepository questionRepository = MemoryQuestionRepository.getInstance();
 
     @Override
-    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
+    public ModelAndView execute(HttpServletRequest req) {
 
         ModelAndView mav = JspView("/home.jsp");
         mav.addModel("questions", questionRepository.findAll());

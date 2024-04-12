@@ -5,5 +5,5 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public interface Controller {
-    ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws IOException;
+    ModelAndView execute(HttpServletRequest req) throws IOException;
 }

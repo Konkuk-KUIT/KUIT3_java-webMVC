@@ -14,7 +14,7 @@ public class ListUserController extends AbstractController {
     private static final String LOGIN_FORM_PATH = "/user/loginForm";
 
     @Override
-    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
+    public ModelAndView execute(HttpServletRequest req) {
         if (UserSessionUtils.isLogined(req.getSession())) {
             ModelAndView mav = JspView("/user/list.jsp");
             mav.addModel("users", MemoryUserRepository.getInstance().findAll());
