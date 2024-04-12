@@ -16,9 +16,6 @@ public class HomeController extends AbstractController {
     @Override
     public ModelAndView execute(Map<String, String> params) {
 
-        ModelAndView mav = JspView("/home.jsp");
-        mav.addModel("questions", questionRepository.findAll());
-
-        return mav;
+        return JspView("/home.jsp").addModel("questions", questionRepository.findAll());
     }
 }

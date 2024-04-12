@@ -15,8 +15,9 @@ public class ModelAndView {
         this.view = view;
     }
 
-    public void addModel(String key, Object val){
+    public ModelAndView addModel(String key, Object val){
         model.put(key, val);
+        return this;
     }
 
     public void render(HttpServletRequest req, HttpServletResponse resp) throws Exception {

@@ -25,9 +25,7 @@ public class ListUserController extends AbstractController {
     public ModelAndView execute(Map<String, String> params) {
 
         if (UserSessionUtils.isLogined(session)) {
-            ModelAndView mav = JspView("/user/list.jsp");
-            mav.addModel("users", MemoryUserRepository.getInstance().findAll());
-            return mav;
+            return JspView("/user/list.jsp").addModel("users", MemoryUserRepository.getInstance().findAll());
         } else {
             return ModelAndView.redirect(LOGIN_FORM_PATH);
         }

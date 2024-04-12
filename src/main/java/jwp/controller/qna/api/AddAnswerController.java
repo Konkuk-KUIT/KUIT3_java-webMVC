@@ -32,13 +32,11 @@ public class AddAnswerController extends AbstractController {
         Question question = questionRepository.findQuestionById(answer.getQuestionId());
         question.increaseCountOfAnswer();
         questionRepository.update(question);
-//
-        ModelAndView mav = JsonView();
-        mav.addModel("questionId", savedAnswer.getQuestionId());
-        mav.addModel("author", savedAnswer.getAuthor());
-        mav.addModel("contents", savedAnswer.getContents());
-        mav.addModel("answerId", savedAnswer.getAnswerId());
-        mav.addModel("createdDate", savedAnswer.getCreatedDate());
-        return mav;
+
+        return JsonView().addModel("questionId", savedAnswer.getQuestionId())
+                .addModel("author", savedAnswer.getAuthor())
+                .addModel("contents", savedAnswer.getContents())
+                .addModel("answerId", savedAnswer.getAnswerId())
+                .addModel("createdDate", savedAnswer.getCreatedDate())
     }
 }

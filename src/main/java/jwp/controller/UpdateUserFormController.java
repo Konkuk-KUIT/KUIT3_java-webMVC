@@ -22,10 +22,8 @@ public class UpdateUserFormController extends AbstractController {
         String userId = params.get("userId");
         User user = MemoryUserRepository.getInstance().findUserById(userId);
         if (user != null) {
-            ModelAndView mav = JspView("/user/updateForm.jsp");
-            mav.addModel("user", user); // ModelAndView 객체에 사용자 정보를 추가
-            return mav;
+            return JspView("/user/updateForm.jsp").addModel("user", user);
         }
-        return ModelAndView.redirect("/"); // 사용자 정보가 없는 경우 홈페이지로 리다이렉션
+        return ModelAndView.redirect("/");
     }
 }
