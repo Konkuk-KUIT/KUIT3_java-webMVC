@@ -30,9 +30,7 @@ public class AddAnswerController extends AbstractController {
         question.increaseCountOfAnswer();
         questionRepository.update(question);
 
-        req.setAttribute("answer", savedAnswer);
-
-        return jsonView();
+        return jsonView().addModel("answer",savedAnswer);
 //        return new JsonView();
     }
 }

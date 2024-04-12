@@ -25,9 +25,8 @@ public class ShowQuestionController extends AbstractController {
         Question question = questionRepository.findQuestionById(questionId);
         List<Answer> answers = memoryAnswerRepository.findAnswersByQuestionId(questionId);
 
-        req.setAttribute("question", question);
-        req.setAttribute("answers", answers);
-//        return new JspView("/qna/show.jsp");
-        return jspView("/qna/show.jsp");
+        return jspView("/qna/show.jsp")
+                .addModel("question",question)
+                .addModel("answers",answers);
     }
 }

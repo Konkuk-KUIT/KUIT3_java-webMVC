@@ -15,9 +15,9 @@ public class ModelAndView {
         this.view = view;
     }
 
-    public Map<String, Object> addModel(String key, Object val){
+    public ModelAndView addModel(String key, Object val){
         model.put(key, val);
-        return this.model; // 메소드 체이닝
+        return this; // 메소드 체이닝
     }
 
     public void render(HttpServletRequest req, HttpServletResponse resp) throws Exception {

@@ -16,14 +16,14 @@ public class JspView implements View{
 
     @Override
     public void render(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        request.setAttribute("model", model);
+        model.forEach(request::setAttribute);
 
         if (viewName.startsWith(REDIRECT_PREFIX)) {
             response.sendRedirect(viewName.substring(REDIRECT_PREFIX.length()));
             return;
         }
 
-    RequestDispatcher rd = request.getRequestDispatcher(viewName);
-    rd.forward(request, response);
+        RequestDispatcher rd = request.getRequestDispatcher(viewName);
+        rd.forward(request, response);
     }
 }
