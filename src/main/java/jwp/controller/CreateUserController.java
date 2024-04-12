@@ -20,8 +20,8 @@ public class CreateUserController extends AbstractController {
 
         MemoryUserRepository.getInstance().addUser(user);
 
-        JspView jspView= new JspView(REDIRECT + "/user/userList");
 
-        return new ModelAndView(jspView);
+        return jspView(REDIRECT + "/user/userList");
+
     }
 }

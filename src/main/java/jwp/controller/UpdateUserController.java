@@ -19,9 +19,10 @@ public class UpdateUserController extends AbstractController {
                 req.getParameter("email"));
 
         MemoryUserRepository.getInstance().changeUserInfo(user);
-        JspView jspView= new JspView(REDIRECT + "/user/userList");
 
+//        JspView jspView= new JspView(REDIRECT + "/user/userList");
+//        return new ModelAndView(jspView);
+        return jspView (REDIRECT + "/user/userList");
 
-        return new ModelAndView(jspView);
     }
 }

@@ -26,7 +26,7 @@ public class ShowQuestionController extends AbstractController {
 
 //        req.setAttribute("question", question);
 //        req.setAttribute("answers", answers);
-        JspView jspView= new JspView("/qna/show.jsp");
-        return new ModelAndView(jspView).addModel("question", question).addModel("answers", answers);
+//        JspView jspView= new JspView("/qna/show.jsp");
+        return  jspView("/qna/show.jsp").addModel("question", question).addModel("answers", answers);
     }
 }

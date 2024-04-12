@@ -19,8 +19,8 @@ public class ListUserController extends AbstractController {
             JspView jspView= new JspView("/user/list.jsp");
             return new ModelAndView(jspView).addModel("users", MemoryUserRepository.getInstance().findAll());
         }
+//        JspView jspView= new JspView(REDIRECT + "/user/loginForm");
+        return  jspView(REDIRECT + "/user/loginForm");
 
-        JspView jspView= new JspView(REDIRECT + "/user/loginForm");
-        return new ModelAndView(jspView);
     }
 }

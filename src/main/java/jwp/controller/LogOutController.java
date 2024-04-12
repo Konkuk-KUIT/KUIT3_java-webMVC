@@ -14,8 +14,9 @@ public class LogOutController extends AbstractController {
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session = req.getSession();
         session.removeAttribute("user");
-        JspView jspView= new JspView(REDIRECT + "/");
 
-        return new ModelAndView(jspView);
+//        JspView jspView= new JspView(REDIRECT + "/");
+
+        return jspView (REDIRECT + "/");
     }
 }

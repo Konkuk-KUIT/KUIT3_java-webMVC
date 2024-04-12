@@ -15,7 +15,7 @@ public class HomeController extends AbstractController {
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
 
 //        req.setAttribute("questions", questionRepository.findAll());
-        JspView jspView= new JspView("/home.jsp");
-        return new ModelAndView(jspView).addModel("questions", questionRepository.findAll());
+//        JspView jspView= new JspView("/home.jsp");
+        return jspView("/home.jsp").addModel("questions", questionRepository.findAll());
     }
 }
