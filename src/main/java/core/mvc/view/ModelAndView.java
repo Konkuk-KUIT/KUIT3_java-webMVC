@@ -20,7 +20,8 @@ public class ModelAndView {
             throw new RuntimeException(e);
         }
     }
-    public void addModel(String key, Object value){
+    public ModelAndView addModel(String key, Object value){
         model.put(key, value);
+        return this;
     }
 }
