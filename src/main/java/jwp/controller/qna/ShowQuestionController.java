@@ -27,7 +27,7 @@ public class ShowQuestionController extends AbstractController {
 
 
         ModelAndView mv = jspModelAndView("/qna/show.jsp");
-        mv.setAttribute("question", question).setAttribute("answers", answers); // why method chaining? other use?
+        mv.setAttribute("question", question).setAttribute("answers", answers);
         return mv;
     }
 }

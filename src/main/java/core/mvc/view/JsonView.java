@@ -18,15 +18,4 @@ public class JsonView implements View{
         PrintWriter out = resp.getWriter();
         out.print(mapper.writeValueAsString(model));
     }
-
-//    private Map<String, Object> createModel(HttpServletRequest req) {
-//        Enumeration<String> names = req.getAttributeNames();
-//        Map<String, Object> model = new HashMap<>();
-//        while(names.hasMoreElements()){
-//            String name = names.nextElement();
-//            System.out.println(req.getAttribute(name));
-//            model.put(name, req.getAttribute(name));
-//        }
-//        return model;
-//    }
 }

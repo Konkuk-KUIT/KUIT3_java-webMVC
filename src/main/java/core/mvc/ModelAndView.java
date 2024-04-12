@@ -25,6 +25,4 @@ public class ModelAndView{
     public void render(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         view.render(req, resp, model);
     }
-
-    // 8 11 17 만 쓰
 }
