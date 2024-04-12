@@ -23,7 +23,7 @@ public class DispatcherServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Controller controller = requestMapping.getController(req);
+        Controller controller = getController(req, resp);
         try {
             ModelAndView view = controller.execute(req, resp);
             if(view == null) return;
@@ -33,6 +33,13 @@ public class DispatcherServlet extends HttpServlet {
         }
     }
 
+    private Controller getController(HttpServletRequest req, HttpServletResponse resp) {
+        Controller controller = requestMapping.getController(req);
+        if(controller == null) {
+            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return null;
         }
+        return controller;
     }
+
 }
