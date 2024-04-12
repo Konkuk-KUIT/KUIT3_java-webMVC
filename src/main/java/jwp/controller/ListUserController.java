@@ -5,16 +5,24 @@ import core.mvc.AbstractController;
 import core.mvc.view.ModelAndView;
 import jwp.util.UserSessionUtils;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 public class ListUserController extends AbstractController {
+    private final MemoryUserRepository memoryUserRepository = MemoryUserRepository.getInstance();
+
+    HttpSession session;
+
     @Override
-    public ModelAndView execute(HttpServletRequest req) {
-        if(UserSessionUtils.isLogined(req.getSession())){
-            req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
-            return jspView("/user/list.jsp");
+    public void setSession(HttpSession session) {
+        this.session = session;
+    }
+
+    @Override
+    public ModelAndView execute(Map<String, String> params){
+        if (UserSessionUtils.isLogined(session)) {
+            return jspView("/user/list.jsp").addObject("users", memoryUserRepository.findAll());
         }
-        return jspView(REDIRECT + "/user/loginForm");
+        return jspView(REDIRECT+"/user/loginForm");
     }
 }
