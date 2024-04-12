@@ -22,6 +22,6 @@ public class ModelAndView {
     }
     public ModelAndView addModel(String key, Object value){
         model.put(key, value);
-        return this;
+        return this;     // 메소드 체이닝을 사용해야 하는 이유는 무엇일까요??
     }
 }

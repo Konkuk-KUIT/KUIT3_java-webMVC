@@ -27,7 +27,7 @@ public class ShowQuestionController extends AbstractController {
         System.out.println("showQuestionCon : " + question);
 
         ModelAndView mav = jspView("/qna/show.jsp");
-        mav.addModel("question", question);  // model에 담을 수 있을까? 담으면 어떻게 사용해야할까?
+        mav.addModel("question", question);
         mav.addModel("answers", answers);
         return mav;
     }
