@@ -1,6 +1,6 @@
 package core.mvc;
 
-import core.mvc.view.View;
+import core.mvc.view.ModelAndView;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,7 +25,7 @@ public class DispatcherServlet extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Controller controller = requestMapping.getController(req);
         try {
-            View view = controller.execute(req, resp);
+            ModelAndView view = controller.execute(req, resp);
             if(view == null) return;
             view.render(req, resp);
         } catch (Throwable e) {
@@ -33,13 +33,6 @@ public class DispatcherServlet extends HttpServlet {
         }
     }
 
-    private void move(String viewName, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (viewName.startsWith(REDIRECT_PREFIX)) {
-            resp.sendRedirect(viewName.substring(REDIRECT_PREFIX.length()));
-            return;
         }
-
-        RequestDispatcher rd = req.getRequestDispatcher(viewName);
-        rd.forward(req, resp);
     }
 }
