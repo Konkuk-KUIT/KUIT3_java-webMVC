@@ -16,7 +16,7 @@ public class AbstractController implements Controller{
     public ModelAndView jsonView() {
         return new ModelAndView(new JsonView());
     }
-    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public ModelAndView execute(HttpServletRequest req) throws IOException {
         return null;
     }
 }
