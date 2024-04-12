@@ -1,16 +1,18 @@
 package jwp.controller;
 
 import core.db.MemoryQuestionRepository;
-import core.mvc.Controller;
+import core.mvc.view.AbstractController;
+import core.mvc.view.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Map;
 
-public class HomeController implements Controller {
-    private final MemoryQuestionRepository questionRepository = MemoryQuestionRepository.getInstance();
-    @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) {
-        req.setAttribute("questions", questionRepository.findAll());
-        return "/home.jsp";
-    }
+public class HomeController extends AbstractController {
+  private final MemoryQuestionRepository questionRepository = MemoryQuestionRepository.getInstance();
+
+  @Override
+  public ModelAndView execute(Map<String, String> params) throws IOException {
+    return jspView("/home.jsp")
+      .addModel("questions", questionRepository.findAll());
+  }
 }

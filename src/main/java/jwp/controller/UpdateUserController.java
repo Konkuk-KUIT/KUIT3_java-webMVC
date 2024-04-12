@@ -1,26 +1,24 @@
 package jwp.controller;
 
 import core.db.MemoryUserRepository;
-import core.mvc.Controller;
+import core.mvc.view.AbstractController;
+import core.mvc.view.ModelAndView;
 import jwp.model.User;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
-public class UpdateUserController implements Controller {
-    @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) {
-        User user = new User(req.getParameter("userId"),
-                req.getParameter("password"),
-                req.getParameter("name"),
-                req.getParameter("email"));
+public class UpdateUserController extends AbstractController {
 
-        MemoryUserRepository.getInstance().changeUserInfo(user);
+  @Override
+  public ModelAndView execute(Map<String, String> params) throws IOException {
+    User user = new User(params.get("userId"),
+      params.get("password"),
+      params.get("name"),
+      params.get("email"));
 
-        return REDIRECT + "/user/userList";
-    }
+    MemoryUserRepository.getInstance().changeUserInfo(user);
+
+    return jspView(REDIRECT + "/user/userList");
+  }
 }
