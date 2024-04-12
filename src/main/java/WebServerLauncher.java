@@ -4,7 +4,8 @@ import org.apache.catalina.startup.Tomcat;
 import java.io.File;
 import java.util.logging.Logger;
 
-public class WebServerLauncher {
+public class
+WebServerLauncher {
     private static final Logger logger = Logger.getLogger(WebServerLauncher.class.getName());
 
     public static void main(String[] args) throws Exception {
