@@ -8,11 +8,15 @@ import core.mvc.view.ModelAndView;
 import core.mvc.view.View;
 import jwp.model.User;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Map;
 
-public class CreateUserController extends AbstractController {
+public class UpdateUserController extends AbstractController {
     @Override
     public ModelAndView execute(Map<String, String> params) {
         User user = new User(params.get("userId"),
@@ -20,7 +24,7 @@ public class CreateUserController extends AbstractController {
                 params.get("name"),
                 params.get("email"));
 
-        MemoryUserRepository.getInstance().addUser(user);
+        MemoryUserRepository.getInstance().changeUserInfo(user);
 
         return jspView(REDIRECT_PREFIX + "/user/userList");
     }
