@@ -3,6 +3,7 @@ package jwp.controller;
 import core.db.MemoryUserRepository;
 import core.mvc.Controller;
 import core.mvc.ModelAndView;
+import core.mvc.view.AbstractController;
 import core.mvc.view.JspView;
 import jwp.model.User;
 
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class LogInController implements Controller {
+public class LogInController extends AbstractController {
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session = req.getSession();
