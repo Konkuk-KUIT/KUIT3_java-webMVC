@@ -3,6 +3,7 @@ package jwp.controller.qna.api;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import core.db.MemoryAnswerRepository;
 import core.db.MemoryQuestionRepository;
+import core.mvc.AbstractController;
 import core.mvc.Controller;
 import core.mvc.view.JsonView;
 import core.mvc.view.JspView;
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class AddAnswerController implements Controller {
+public class AddAnswerController extends AbstractController {
     private final MemoryAnswerRepository answerRepository = MemoryAnswerRepository.getInstance();
     private final MemoryQuestionRepository questionRepository = MemoryQuestionRepository.getInstance();
     @Override
@@ -31,7 +32,8 @@ public class AddAnswerController implements Controller {
         questionRepository.update(question);
 
         // 화면 다시 랜더링 하면 안되니깐 JsonView 반환
-        req.setAttribute("answer", savedAnswer);
-        return new ModelAndView(new JspView( REDIRECT+ "/"));
+        ModelAndView mav = jsonView();
+
+        return jsonView().addModel("answer", savedAnswer); //return this를 통한 chaining
     }
 }
