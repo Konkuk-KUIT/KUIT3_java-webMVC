@@ -3,6 +3,7 @@ package jwp.controller.qna.api;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import core.db.MemoryAnswerRepository;
 import core.db.MemoryQuestionRepository;
+import core.mvc.AbstractController;
 import core.mvc.Controller;
 import core.mvc.ModelAndView;
 import core.mvc.view.JsonView;
@@ -18,7 +19,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddAnswerController implements Controller {
+public class AddAnswerController extends AbstractController {
     private final MemoryAnswerRepository answerRepository = MemoryAnswerRepository.getInstance();
     private final MemoryQuestionRepository questionRepository = MemoryQuestionRepository.getInstance();
     @Override
@@ -31,8 +32,8 @@ public class AddAnswerController implements Controller {
         Question question = questionRepository.findQuestionById(answer.getQuestionId());
         question.increaseCountOfAnswer();
         questionRepository.update(question);
-
-        ModelAndView mav = new ModelAndView(new JsonView());
+//
+        ModelAndView mav = JsonView();
         mav.addModel("questionId", savedAnswer.getQuestionId());
         mav.addModel("author", savedAnswer.getAuthor());
         mav.addModel("contents", savedAnswer.getContents());
