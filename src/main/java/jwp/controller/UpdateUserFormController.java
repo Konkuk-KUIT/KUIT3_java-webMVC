@@ -5,18 +5,20 @@ import core.mvc.AbstractController;
 import core.mvc.Controller;
 import core.mvc.view.JspView;
 import core.mvc.view.ModelandView;
-import jwp.util.UserSessionUtils;
+import jwp.model.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ListUserController extends AbstractController {
+public class UpdateUserFormController extends AbstractController {
     @Override
     public ModelandView execute(HttpServletRequest req, HttpServletResponse resp) {
-        if(UserSessionUtils.isLogined(req.getSession())){
-            req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
-            return jspView("/user/list.jsp");
+        String userId = req.getParameter("userId");
+        User user = MemoryUserRepository.getInstance().findUserById(userId);
+        if (user != null) {
+            req.setAttribute("user", user);
+            return jspView("/user/updateForm.jsp");
         }
-        return jspView(REDIRECT + "/user/loginForm");
+        return jspView(REDIRECT + "/");
     }
 }
