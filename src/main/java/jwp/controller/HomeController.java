@@ -3,6 +3,7 @@ package jwp.controller;
 import core.db.MemoryQuestionRepository;
 import core.mvc.Controller;
 import core.mvc.view.JspView;
+import core.mvc.view.ModelAndView;
 import core.mvc.view.View;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,8 +13,8 @@ public class HomeController implements Controller {
     private final MemoryQuestionRepository questionRepository = MemoryQuestionRepository.getInstance();
 
     @Override
-    public View execute(HttpServletRequest req, HttpServletResponse resp) {
-        req.setAttribute("questions", questionRepository.findAll());
-        return new JspView("/home.jsp");
+    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
+        return new ModelAndView(new JspView("/home.jsp"))
+                .addObject("questions", questionRepository.findAll());
     }
 }

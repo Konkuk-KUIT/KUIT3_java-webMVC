@@ -2,13 +2,13 @@ $(".answerWrite input[type=submit]").click(addAnswer);
 
 function addAnswer(e) {
     e.preventDefault();
-    var queryString = $(".submit-write").serialize();
+    var queryString = $(".submit-write").serialize();   // 해당 form 내용을 한 번에 전송 가능한 데이터로 만들기 위함
 
     $.ajax({
         type: 'post',
         url: '/api/qna/addAnswer',
-        data: queryString,
-        dataType: 'json',
+        data: queryString,  // 서버로 전송할 데이터
+        dataType: 'json',   // 응답받을 데이터 타입
         error: onError,
         success: onSuccess,
     });
