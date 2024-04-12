@@ -14,14 +14,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 public class UpdateUserController extends AbstractController {
     @Override
-    public ModelAndView execute(HttpServletRequest req) {
-        User user = new User(req.getParameter("userId"),
-                req.getParameter("password"),
-                req.getParameter("name"),
-                req.getParameter("email"));
+    public ModelAndView execute(Map<String, String> params) {
+        User user = new User(params.get("userId"),
+                params.get("password"),
+                params.get("name"),
+                params.get("email"));
 
         MemoryUserRepository.getInstance().changeUserInfo(user);
 
