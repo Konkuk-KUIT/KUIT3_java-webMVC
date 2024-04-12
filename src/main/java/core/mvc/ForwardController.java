@@ -15,7 +15,7 @@ public class ForwardController extends AbstractController {
         }
     }
     @Override
-    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp){
+    public ModelAndView execute(HttpServletRequest req){
         return jspView(forwardUrl);
     }
 }

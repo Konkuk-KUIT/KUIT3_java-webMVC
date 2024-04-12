@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class ListUserController extends AbstractController {
     @Override
-    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
+    public ModelAndView execute(HttpServletRequest req) {
         if(UserSessionUtils.isLogined(req.getSession())){
             req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
             return jspView("/user/list.jsp");

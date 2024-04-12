@@ -25,7 +25,7 @@ public class DispatcherServlet extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Controller controller = getController(req, resp);
         try {
-            ModelAndView view = controller.execute(req, resp);
+            ModelAndView view = controller.execute(req);
             if(view == null) return;
             view.render(req, resp);
         } catch (Throwable e) {
