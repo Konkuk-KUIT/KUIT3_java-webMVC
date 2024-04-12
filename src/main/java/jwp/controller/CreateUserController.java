@@ -10,7 +10,7 @@ import jwp.model.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CreateUserController implements Controller {
+public class CreateUserController extends AbstractController {
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
         User user = new User(req.getParameter("userId"),
@@ -20,6 +20,6 @@ public class CreateUserController implements Controller {
 
         MemoryUserRepository.getInstance().addUser(user);
 
-        return new ModelAndView(new JspView(REDIRECT + "/user/userList"));
+        return jspView(REDIRECT + "/user/userList");
     }
 }

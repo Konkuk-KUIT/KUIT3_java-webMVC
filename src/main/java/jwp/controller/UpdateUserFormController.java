@@ -15,16 +15,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class UpdateUserFormController implements Controller {
+public class UpdateUserFormController extends AbstractController {
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
         String userId = req.getParameter("userId");
         User user = MemoryUserRepository.getInstance().findUserById(userId);
         if (user != null) {
-            ModelAndView mav = new ModelAndView(new JspView("/user/updateForm.jsp"));
+            ModelAndView mav = jspView("/user/updateForm.jsp");
             mav.addModel("user", user);
             return mav;
         }
-        return new ModelAndView(new JspView(REDIRECT + "/"));
+        return jspView(REDIRECT + "/");
     }
 }

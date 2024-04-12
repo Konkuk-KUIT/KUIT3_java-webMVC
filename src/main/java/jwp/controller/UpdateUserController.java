@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class UpdateUserController implements Controller {
+public class UpdateUserController extends AbstractController {
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
         User user = new User(req.getParameter("userId"),
@@ -24,6 +24,6 @@ public class UpdateUserController implements Controller {
 
         MemoryUserRepository.getInstance().changeUserInfo(user);
 
-        return new ModelAndView(new JspView(REDIRECT + "/user/userList"));
+        return jspView(REDIRECT + "/user/userList");
     }
 }

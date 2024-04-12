@@ -6,6 +6,7 @@ import core.mvc.Controller;
 import core.mvc.view.JsonView;
 import core.mvc.view.ModelAndView;
 import core.mvc.view.View;
+import jwp.controller.AbstractController;
 import jwp.model.Answer;
 import jwp.model.Question;
 
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class AddAnswerController implements Controller {
+public class AddAnswerController extends AbstractController {
     private final MemoryAnswerRepository answerRepository = MemoryAnswerRepository.getInstance();
     private final MemoryQuestionRepository questionRepository = MemoryQuestionRepository.getInstance();
     @Override
@@ -27,7 +28,7 @@ public class AddAnswerController implements Controller {
         question.increaseCountOfAnswer();
         questionRepository.update(question);
 
-        ModelAndView mav = new ModelAndView(new JsonView());
+        ModelAndView mav = jsonView();
 
         mav.addModel("answer", savedAnswer);
 

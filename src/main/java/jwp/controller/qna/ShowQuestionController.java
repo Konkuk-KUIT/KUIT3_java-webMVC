@@ -6,6 +6,7 @@ import core.mvc.Controller;
 import core.mvc.view.JspView;
 import core.mvc.view.ModelAndView;
 import core.mvc.view.View;
+import jwp.controller.AbstractController;
 import jwp.model.Answer;
 import jwp.model.Question;
 
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class ShowQuestionController implements Controller {
+public class ShowQuestionController extends AbstractController {
     private static final MemoryQuestionRepository questionRepository = MemoryQuestionRepository.getInstance();
     private static final MemoryAnswerRepository memoryAnswerRepository = MemoryAnswerRepository.getInstance();
 
@@ -25,9 +26,9 @@ public class ShowQuestionController implements Controller {
 
         System.out.println("showQuestionCon : " + question);
 
-        ModelAndView mav = new ModelAndView(new JspView("/qna/show.jsp"));
-        req.setAttribute("question", question);  // model에 담을 수 있을까? 담으려면 어떻게 해야할까?
-        req.setAttribute("answers", answers);
+        ModelAndView mav = jspView("/qna/show.jsp");
+        mav.addModel("question", question);  // model에 담을 수 있을까? 담으면 어떻게 사용해야할까?
+        mav.addModel("answers", answers);
         return mav;
     }
 }
