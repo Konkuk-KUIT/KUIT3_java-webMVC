@@ -16,10 +16,13 @@ public class JspView implements view {
     }
     @Override
     public void render(Map<String,Object> model, HttpServletRequest req, HttpServletResponse resp)throws Exception{
-
+        System.out.println("Jsp View : "+ this.viewName);
+        System.out.println("model");
         for (Map.Entry<String, Object> entry : model.entrySet()) {
             String attributeName = entry.getKey();
             Object attributeValue = entry.getValue();
+
+            System.out.println( attributeName+":" + attributeValue);
             req.setAttribute(attributeName, attributeValue);
         }
 

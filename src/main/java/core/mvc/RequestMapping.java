@@ -1,3 +1,4 @@
+/*
 package core.mvc;
 
 import jwp.controller.*;
@@ -20,7 +21,7 @@ public class RequestMapping {
 
         controllers.put("/user/form", new ForwardController("/user/form.jsp"));
         controllers.put("/user/loginForm", new ForwardController("/user/login.jsp"));
-        controllers.put("/user/loginFailed", new ForwardController("/user/login_failed.jsp"));
+        controllers.put("/user/login_failed", new ForwardController("/user/login_failed.jsp"));
 
 
         controllers.put("/user/userList", new ListUserController());
@@ -39,3 +40,4 @@ public class RequestMapping {
         return controllers.get(request.getRequestURI());
     }
 }
+*/

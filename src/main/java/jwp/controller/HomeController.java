@@ -1,6 +1,7 @@
 package jwp.controller;
 
 
+import core.db.MemoryQuestionRepository;
 import core.db.MemoryUserRepository;
 import core.mvc.view.JspView;
 import core.mvc.view.ModelAndView;
@@ -15,12 +16,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 //@WebServlet("/")
 public class HomeController extends HTTPController {
+    private MemoryQuestionRepository questionRepository = MemoryQuestionRepository.getInstance();
     @Override
-    protected ModelAndView doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected ModelAndView doGet(HttpServletRequest req) throws ServletException, IOException {
         //req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
-        modelAndView = new ModelAndView(new JspView("/index.jsp"));
+        modelAndView = new ModelAndView(new JspView("/home.jsp"));
         modelAndView.putModel("users", MemoryUserRepository.getInstance().findAll());
-        return modelAndView;
+
+        return modelAndView.addModel("questions", questionRepository.findAll());
 
     }
 }

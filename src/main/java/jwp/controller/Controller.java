@@ -8,6 +8,6 @@ import java.io.IOException;
 
 public interface Controller {
 
-    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws IOException;
+    public ModelAndView execute(HttpServletRequest req) throws IOException;
 
 }

@@ -20,7 +20,7 @@ import java.io.IOException;
 //@WebServlet("/user/updateForm")
 public class UpdateUserFormController extends HTTPController {
     @Override
-    protected ModelAndView doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected ModelAndView doGet(HttpServletRequest req) throws ServletException, IOException {
         String id = req.getParameter("userId");
         HttpSession userSession = req.getSession();
         if(!LoginUtil.isLogin(userSession)){
@@ -36,19 +36,4 @@ public class UpdateUserFormController extends HTTPController {
 
     }
 }
-/*=======
-import java.io.IOException;
 
-public class UpdateUserFormController implements Controller {
-    @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) {
-        String userId = req.getParameter("userId");
-        User user = MemoryUserRepository.getInstance().findUserById(userId);
-        if (user != null) {
-            req.setAttribute("user", user);
-            return "/user/updateForm.jsp";
-        }
-        return REDIRECT + "/";
-    }
-}
->>>>>>> upstream/week4_step3-qna*/

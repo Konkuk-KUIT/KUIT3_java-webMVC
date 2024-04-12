@@ -12,6 +12,7 @@ public class controllerMapper {
     private static Map<String, Controller> controllers= new HashMap<String, Controller>();
     static {
         controllers.put("/",new HomeController());
+        controllers.put("/home",new HomeController());
         controllers.put("/user/signup",new CreateUserController());
         controllers.put("/user/userList",new ListUserController());
         controllers.put("/user/update",new UpdateUserController());
@@ -20,7 +21,7 @@ public class controllerMapper {
         controllers.put("/user/logout",new LogOutController());
 
         controllers.put("/user/form",new ForwardController("/user/form.jsp"));
-        controllers.put("/user/loginFailed",new ForwardController("/user/login_failed.jsp"));
+        controllers.put("/user/login_failed",new ForwardController("/user/login_failed.jsp"));
 
         controllers.put("/qna/form", new ForwardController("/qna/form.jsp"));
         controllers.put("/qna/show", new ShowQuestionController());

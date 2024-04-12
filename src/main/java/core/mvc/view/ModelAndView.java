@@ -25,6 +25,15 @@ public class ModelAndView {
         this.model.put(key,value);
     }
 
+    public ModelAndView addModel(String key, Object value){
+        putModel(key,value);
+        return this;
+    }
+    public ModelAndView addModel(Map<String , Object> model){
+        this.model = model;
+        return this;
+    }
+
 
 
 }
