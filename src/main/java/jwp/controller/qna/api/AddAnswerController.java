@@ -37,6 +37,7 @@ public class AddAnswerController extends AbstractController {
                 .addModel("author", savedAnswer.getAuthor())
                 .addModel("contents", savedAnswer.getContents())
                 .addModel("answerId", savedAnswer.getAnswerId())
-                .addModel("createdDate", savedAnswer.getCreatedDate())
+                .addModel("createdDate", savedAnswer.getCreatedDate());
+        //return JsonView().addModel("answer",savedAnswer);
     }
 }
