@@ -18,7 +18,7 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${users}" var="user">
+                <c:forEach items="${users}" var="user">
                 <tr>
                     <th class="col-md-3">${user.userId}
                     </th>
