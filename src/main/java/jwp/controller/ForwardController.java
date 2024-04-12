@@ -21,7 +21,8 @@ public class ForwardController extends HTTPController {
         }
         this.forwardPath = forwardURI;
     }
-    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp){
+    @Override
+    public ModelAndView execute(HttpServletRequest req){
 
         /*String re = req.getRequestURI();
         if(re.endsWith(".jsp"))

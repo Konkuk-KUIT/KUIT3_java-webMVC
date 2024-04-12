@@ -13,7 +13,7 @@
 
           <form name="sign-up" method="post" action="/user/update">
             <div class="form-floating">
-<<<<<<< HEAD
+
               <input type="hidden" name="userId" value="${user.userId}">
               <input type="text" class="form-control" value="${user.userId}" id="userId" name="userId" aria-label="Disabled input example" disabled readonly>
               <label for="userId">User Id</label>

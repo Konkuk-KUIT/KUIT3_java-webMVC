@@ -6,7 +6,7 @@
   <body>
   <%@ include file="./include/navigation.jspf" %>
     <div class="container" id="main">
-        <h2>Q&A</h2>
+        <h2>Q&AA</h2>
         <div class="qna-list">
           <ul class="list">
               <c:forEach items="${questions}" var="question" varStatus="status">

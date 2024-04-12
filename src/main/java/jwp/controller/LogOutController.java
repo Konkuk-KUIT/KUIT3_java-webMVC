@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class LogOutController extends HTTPController {
     @Override
-    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
+    public ModelAndView execute(HttpServletRequest req) {
         HttpSession session = req.getSession();
         session.removeAttribute("user");
         return new ModelAndView( new JspView(REDIRECT+"/"));

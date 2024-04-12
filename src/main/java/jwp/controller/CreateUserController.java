@@ -16,7 +16,7 @@ import java.io.IOException;
 //@WebServlet("/user/signup")
 public class CreateUserController extends HTTPController {
     @Override
-    protected ModelAndView doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected ModelAndView doPost(HttpServletRequest req) throws ServletException, IOException {
 
         User user = new User(req.getParameter("userId"),
                 req.getParameter("password"),

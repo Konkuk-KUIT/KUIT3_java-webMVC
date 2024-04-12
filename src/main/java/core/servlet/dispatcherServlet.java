@@ -1,6 +1,6 @@
 package core.servlet;
 
-import core.mvc.RequestMapping;
+/*import core.mvc.RequestMapping;*/
 import core.mvc.view.ModelAndView;
 import jwp.controller.Controller;
 import jwp.controller.ForwardController;
@@ -34,7 +34,7 @@ public class dispatcherServlet extends HttpServlet {
         Controller controller = mapper.mapController(req.getRequestURI());
         ModelAndView commend;
         if(controller!= null){
-            commend = controller.execute(req,resp);
+            commend = controller.execute(req);
         }else{
             System.out.println("mapper cannot found Controller : "+req.getRequestURI());
             return;
@@ -44,13 +44,7 @@ public class dispatcherServlet extends HttpServlet {
         }
         move(commend,req,resp);
 
-        /*
-        if(commend.startsWith("redirect:")){
-            String redirectURL = commend.substring(9);
-            System.out.println("redirect URL : "+ redirectURL);
-            resp.sendRedirect(redirectURL);
-            return;
-        }*/
+
     }
 
     private void move(ModelAndView modelAndView, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
