@@ -3,10 +3,6 @@ package core.mvc.view;
 import core.mvc.Controller;
 import core.mvc.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
 public abstract class AbstractController implements Controller {
     public ModelAndView jsonView(){
         JsonView jsonView=new JsonView();
@@ -18,8 +14,4 @@ public abstract class AbstractController implements Controller {
     }
 
 
-    @Override
-    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        return null;
-    }
 }
