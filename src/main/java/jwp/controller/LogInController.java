@@ -5,8 +5,6 @@ import core.mvc.Controller;
 import core.mvc.ModelAndView;
 import jwp.model.User;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 

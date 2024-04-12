@@ -2,12 +2,7 @@ package jwp.controller;
 
 import core.db.MemoryQuestionRepository;
 import core.mvc.AbstractController;
-import core.mvc.Controller;
 import core.mvc.ModelAndView;
-import core.mvc.view.JspView;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 public class HomeController extends AbstractController {

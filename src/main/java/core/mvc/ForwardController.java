@@ -2,8 +2,6 @@ package core.mvc;
 
 import core.mvc.view.JspView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 public class ForwardController implements Controller {
