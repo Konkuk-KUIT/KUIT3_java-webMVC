@@ -7,14 +7,14 @@ import core.mvc.view.ModelAndView;
 import core.mvc.view.View;
 import jwp.model.User;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
-
-// 이제는 View를 반환하니깐 Controller 또한 View를 반환하도록 코드를 리팩토링!!
-// Servlet에 대한 종속성을 해결
-
-public class CreateUserController implements Controller {
+public class UpdateUserController implements Controller {
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
         User user = new User(req.getParameter("userId"),
@@ -22,8 +22,8 @@ public class CreateUserController implements Controller {
                 req.getParameter("name"),
                 req.getParameter("email"));
 
-        MemoryUserRepository.getInstance().addUser(user);
+        MemoryUserRepository.getInstance().changeUserInfo(user);
 
-        return new ModelAndView(new JspView("/user/userList"));
+        return new ModelAndView(new JspView(REDIRECT + "/user/list"));
     }
 }
