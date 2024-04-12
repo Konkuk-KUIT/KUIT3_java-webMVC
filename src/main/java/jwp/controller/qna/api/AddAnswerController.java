@@ -8,6 +8,7 @@ import jwp.model.Answer;
 import jwp.model.Question;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Map;
 
 public class AddAnswerController extends AbstractController {
@@ -25,7 +26,11 @@ public class AddAnswerController extends AbstractController {
     question.increaseCountOfAnswer();
     questionRepository.update(question);
 
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    String formattedDate = dateFormat.format(savedAnswer.getCreatedDate());
+
     return jsonView()
-      .addModel("answer", savedAnswer);
+      .addModel("answer", savedAnswer)
+      .addModel("formattedDate", formattedDate);
   }
 }

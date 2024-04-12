@@ -13,7 +13,7 @@ public class JsonView implements View {
   @Override
   public void render(Map<String, Object> models, HttpServletRequest req, HttpServletResponse resp) throws Exception {
     ObjectMapper mapper = new ObjectMapper();
-    resp.setCharacterEncoding(APPLICATION_JSON_UTF8_VALUE);
+    resp.setContentType(APPLICATION_JSON_UTF8_VALUE);
     PrintWriter writer = resp.getWriter();
     writer.print(mapper.writeValueAsString(models));
   }
