@@ -3,7 +3,9 @@ package jwp.controller.qna.api;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import core.db.MemoryAnswerRepository;
 import core.db.MemoryQuestionRepository;
+import core.mvc.AbstractController;
 import core.mvc.Controller;
+import core.mvc.ModelAndView;
 import jwp.model.Answer;
 import jwp.model.Question;
 
@@ -14,11 +16,11 @@ import java.io.PrintWriter;
 import core.mvc.view.View;
 import core.mvc.view.JsonView;
 
-public class AddAnswerController implements Controller {
+public class AddAnswerController extends AbstractController {
     private final MemoryAnswerRepository answerRepository = MemoryAnswerRepository.getInstance();
     private final MemoryQuestionRepository questionRepository = MemoryQuestionRepository.getInstance();
     @Override
-    public View execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Answer answer = new Answer(Long.parseLong(req.getParameter("questionId")),
                 req.getParameter("author"),
                 req.getParameter("contents"));
@@ -36,6 +38,7 @@ public class AddAnswerController implements Controller {
         req.setAttribute("answer", savedAnswer);
 
         // 페이지가 아니므로 null 반환
-        return new JsonView();
+//        return new JsonView();
+        return jsonView();
     }
 }
