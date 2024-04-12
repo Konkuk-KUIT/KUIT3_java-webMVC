@@ -28,13 +28,14 @@ public class DispatcherServlet extends HttpServlet {
         try {
             // string이 아니라 View를 return받아야 함
             // String viewName = controller.execute(req, resp);
-             View view = controller.execute(req, resp);
-//            ModelAndView mav = controller.execute(req, resp);
-            // jackson으로 json파일을 보여주므로 페이지를 반환할 것이 없음
+            // View view = controller.execute(req, resp);
+
+            ModelAndView mav = controller.execute(req, resp); //ModelAndVew안에 Veiw의 정보가 들어있음
+
             // if(viewName == null) return;
             //move(viewName, req, resp);
-            if(view == null) return;
-            view.render(req, resp);
+            if(mav == null) return;
+            mav.render(req, resp);
         } catch (Throwable e) {
             throw new ServletException(e.getMessage());
         }

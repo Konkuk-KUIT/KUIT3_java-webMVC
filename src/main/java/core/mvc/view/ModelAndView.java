@@ -15,11 +15,12 @@ public class ModelAndView {
         this.view = view;
     }
 
-    public void addModel(String key, Object val){
+    public ModelAndView addModel(String key, Object val){
         model.put(key, val);
+        return this; //메소드 체이닝 기법
     }
 
     public void render(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //view.render(model, req, resp);
+        view.render(model, req, resp);
     }
 }
