@@ -1,22 +1,19 @@
 package jwp.controller;
 
-import core.db.MemoryUserRepository;
+import core.db.MemoryQuestionRepository;
 import core.mvc.AbstractController;
 import core.mvc.Controller;
 import core.mvc.ModelAndView;
 import core.mvc.view.JspView;
 import core.mvc.view.View;
-import jwp.util.UserSessionUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ListUserController extends AbstractController {
+public class HomeController extends AbstractController {
+    private final MemoryQuestionRepository questionRepository = MemoryQuestionRepository.getInstance();
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
-        if(UserSessionUtils.isLogined(req.getSession())){
-            return jspView("/user/list.jsp").addModel("users", MemoryUserRepository.getInstance().findAll());
-        }
-        return jspView(REDIRECT + "/user/loginForm");
+        return jspView("/home.jsp").addModel("questions", questionRepository.findAll());
     }
 }
