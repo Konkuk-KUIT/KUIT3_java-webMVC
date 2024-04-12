@@ -23,10 +23,9 @@ public class ShowQuestionController implements Controller {
         Question question = questionRepository.findQuestionById(questionId);
         List<Answer> answers = memoryAnswerRepository.findAnswersByQuestionId(questionId);
 
-        req.setAttribute("question", question);
-        req.setAttribute("answers", answers);
+//        req.setAttribute("question", question);
+//        req.setAttribute("answers", answers);
         JspView jspView= new JspView("/qna/show.jsp");
-
-        return new ModelAndView(jspView);
+        return new ModelAndView(jspView).addModel("question", question).addModel("answers", answers);
     }
 }

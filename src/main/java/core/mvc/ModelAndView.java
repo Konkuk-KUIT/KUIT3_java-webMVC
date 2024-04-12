@@ -16,8 +16,10 @@ public class ModelAndView{
         this.view = view;
     }
 
-    public void addModel(String key, Object val){
+    public ModelAndView addModel(String key, Object val){
         model.put(key, val);
+        //메서드 체이닝 기법 이용
+        return this;
     }
 
     public void render( HttpServletRequest req, HttpServletResponse resp) throws Exception {

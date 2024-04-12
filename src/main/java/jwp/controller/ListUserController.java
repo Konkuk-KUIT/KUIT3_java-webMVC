@@ -13,13 +13,13 @@ public class ListUserController implements Controller {
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
         if(UserSessionUtils.isLogined(req.getSession())){
-            req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
+//            req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
+
             JspView jspView= new JspView("/user/list.jsp");
-
-            return new ModelAndView(jspView);
+            return new ModelAndView(jspView).addModel("users", MemoryUserRepository.getInstance().findAll());
         }
-        JspView jspView= new JspView(REDIRECT + "/user/loginForm");
 
+        JspView jspView= new JspView(REDIRECT + "/user/loginForm");
         return new ModelAndView(jspView);
     }
 }

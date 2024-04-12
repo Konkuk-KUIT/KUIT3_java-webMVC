@@ -12,9 +12,9 @@ public class HomeController implements Controller {
     private final MemoryQuestionRepository questionRepository = MemoryQuestionRepository.getInstance();
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) {
-        req.setAttribute("questions", questionRepository.findAll());
-        JspView jspView= new JspView("/home.jsp");
 
-        return new ModelAndView(jspView);
+//        req.setAttribute("questions", questionRepository.findAll());
+        JspView jspView= new JspView("/home.jsp");
+        return new ModelAndView(jspView).addModel("questions", questionRepository.findAll());
     }
 }

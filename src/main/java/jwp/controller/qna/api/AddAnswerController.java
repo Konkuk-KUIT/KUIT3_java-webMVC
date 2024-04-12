@@ -25,11 +25,9 @@ public class AddAnswerController implements Controller {
         Question question = questionRepository.findQuestionById(answer.getQuestionId());
         question.increaseCountOfAnswer();
         questionRepository.update(question);
-
-        req.setAttribute("answer", savedAnswer);
-
+//        req.setAttribute("answer", savedAnswer);
         JsonView jsonView=new JsonView();
 
-        return new ModelAndView(jsonView);
+        return new ModelAndView(jsonView).addModel("answer", savedAnswer);
     }
 }

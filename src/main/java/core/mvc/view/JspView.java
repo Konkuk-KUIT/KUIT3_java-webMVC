@@ -17,11 +17,17 @@ public class JspView implements View{
     }
 
     @Override
-    public void render(Map mode,HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void render(Map model,HttpServletRequest request, HttpServletResponse response) throws Exception {
         if (viewName.startsWith(REDIRECT_PREFIX)) {
             response.sendRedirect(viewName.substring(REDIRECT_PREFIX.length()));
             return;
         }
+
+        Set<String> modelKeys = model.keySet();
+        for (String key : modelKeys) {
+            request.setAttribute(key, model.get(key));
+        }
+
 
         RequestDispatcher rd = request.getRequestDispatcher(viewName);
         rd.forward(request, response);
