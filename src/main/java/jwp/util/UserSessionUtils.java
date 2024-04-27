@@ -13,7 +13,7 @@ public class UserSessionUtils {
         return (User) user;
     }
 
-    public static boolean isLogined(HttpSession session) {
+    public static boolean isLoggedIn(HttpSession session) {
         return getUserFromSession(session) != null;
     }
 }

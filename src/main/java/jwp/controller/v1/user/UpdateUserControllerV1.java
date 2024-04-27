@@ -1,14 +1,17 @@
-package jwp.controller;
+package jwp.controller.v1.user;
 
 import core.db.MemoryUserRepository;
-import core.mvc.AbstractController;
+import core.mvc.v1.ControllerV1;
 import core.mvc.view.ModelAndView;
 import jwp.model.User;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
 
-public class UpdateUserController extends AbstractController {
+@Slf4j
+public class UpdateUserControllerV1 implements ControllerV1 {
     public ModelAndView execute(Map<String, String> params) {
+        log.info("UpdateUserControllerV1");
         User user = new User(params.get("userId"),
                 params.get("password"),
                 params.get("name"),
@@ -16,6 +19,6 @@ public class UpdateUserController extends AbstractController {
 
         MemoryUserRepository.getInstance().changeUserInfo(user);
 
-        return jspView(REDIRECT + "/user/userList");
+        return new ModelAndView(REDIRECT + "/v1/user/userList");
     }
 }

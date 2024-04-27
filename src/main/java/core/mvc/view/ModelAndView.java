@@ -6,20 +6,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ModelAndView {
-    private View view;
+    private String viewName;
     private Map<String, Object> model = new HashMap<>();
 
-    public ModelAndView(View view){
-        this.view = view;
+    public ModelAndView(String viewName){
+        this.viewName = viewName;
     }
 
-    // 메소드 체이닝
-    public ModelAndView addObject(String key, Object val){
-        model.put(key, val);
-        return this;
+    public String getViewName() {
+        return viewName;
     }
 
-    public void render(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        view.render(model, req, resp);
+    public Map<String, Object> getModel() {
+        return model;
+    }
+
+    public void setViewName(String viewName) {
+        this.viewName = viewName;
+    }
+
+    public void setModel(Map<String, Object> model) {
+        this.model = model;
     }
 }

@@ -1,12 +1,14 @@
-package jwp.controller;
+package jwp.controller.v1.login;
 
-import core.mvc.AbstractController;
+import core.mvc.v1.ControllerV1;
 import core.mvc.view.ModelAndView;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
-public class LogOutController extends AbstractController {
+@Slf4j
+public class LogOutControllerV1 implements ControllerV1 {
     HttpSession session;
     @Override
     public void setSession(HttpSession session) {
@@ -15,7 +17,8 @@ public class LogOutController extends AbstractController {
 
     @Override
     public ModelAndView execute(Map<String, String> params) {
+        log.info("LogOutControllerV1");
         session.removeAttribute("user");
-        return jspView(REDIRECT + "/");
+        return new ModelAndView(REDIRECT + "/v1");
     }
 }

@@ -1,14 +1,16 @@
-package jwp.controller;
+package jwp.controller.v1.login;
 
 import core.db.MemoryUserRepository;
-import core.mvc.AbstractController;
+import core.mvc.v1.ControllerV1;
 import core.mvc.view.ModelAndView;
 import jwp.model.User;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
-public class LogInController extends AbstractController {
+@Slf4j
+public class LogInControllerV1 implements ControllerV1 {
     private final MemoryUserRepository memoryUserRepository = MemoryUserRepository.getInstance();
 
     HttpSession session;
@@ -20,14 +22,16 @@ public class LogInController extends AbstractController {
 
     @Override
     public ModelAndView execute(Map<String, String> params) {
+        log.info("LogInControllerV1");
+
         String userId = params.get("userId");
         String password = params.get("password");
         User user = memoryUserRepository.findUserById(userId);
 
         if (user != null && user.isSameUser(userId, password)) {
             session.setAttribute("user", user);
-            return jspView(REDIRECT + "/");
+            return new ModelAndView(REDIRECT + "/v1");
         }
-        return jspView(REDIRECT + "/user/loginFailed");
+        return new ModelAndView(REDIRECT + "/v1/user/loginFailed");
     }
 }
