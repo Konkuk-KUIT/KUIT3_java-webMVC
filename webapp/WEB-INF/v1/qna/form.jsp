@@ -2,16 +2,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="ko">
-<%@ include file="../include/header.jspf" %>
+<%@ include file="../../../include/v1/headerV1.jspf" %>
 <body>
-<%@ include file="../include/navigation.jspf" %>
+<%@ include file="../../../include/v1/navigationV1.jspf" %>
     <div class="container" id="main">
       <div class="col-md-12 col-sm-12 col-lg-10 col-lg-offset-1">
          <div class="panel panel-default content-main">
-             <form name="question" method="post" action="">
+             <form name="question" method="post" action="/v1/qna/create">
                  <div class="form-group">
                      <label for="writer">글쓴이</label>
-                     <input class="form-control" id="writer" name="writer" placeholder="글쓴이"/>
+                     <input type="text" class="form-control" value="${sessionScope.user.userId}" id="writer"
+                            name="writer" placeholder="글쓴이" readonly/>
                  </div>
                  <div class="form-group">
                      <label for="title">제목</label>
@@ -29,6 +30,6 @@
    </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/scripts.js"></script>
+    <script src="../../../js/v1/scriptsV1.js"></script>
   </body>
 </html>

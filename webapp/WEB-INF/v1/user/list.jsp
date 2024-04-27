@@ -3,9 +3,9 @@
 
 <!doctype html>
 <html lang="ko">
-<%@ include file="../include/header.jspf" %>
+<%@ include file="../../../include/v1/headerV1.jspf" %>
 <body>
-<%@ include file="../include/navigation.jspf" %>
+<%@ include file="../../../include/v1/navigationV1.jspf" %>
     <div class="container" id="main">
         <table class="table table-striped">
             <thead class="col-md-12">
@@ -29,7 +29,7 @@
                     <th class="col-md-3">
                         <c:choose>
                             <c:when test="${user.userId eq sessionScope.user.userId}">
-                                <a href="/user/updateForm?userId=${user.userId}" class="btn btn-success" role="button">수정</a>
+                                <a href="/v1/user/updateForm?userId=${user.userId}" class="btn btn-success" role="button">수정</a>
                             </c:when>
                             <c:otherwise>
                                 <a href="#" class="btn" role="button" disabled>-</a>
@@ -43,6 +43,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/scripts.js"></script>
+    <script src="../../../js/v1/scriptsV1.js"></script>
 </body>
 </html>

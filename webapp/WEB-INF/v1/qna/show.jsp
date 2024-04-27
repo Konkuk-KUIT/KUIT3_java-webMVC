@@ -2,9 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="ko">
-<%@ include file="../include/header.jspf" %>
+<%@ include file="../../../include/v1/headerV1.jspf" %>
 <body>
-<%@ include file="../include/navigation.jspf" %>
+<%@ include file="../../../include/v1/navigationV1.jspf" %>
     <div class="container" id="main">
             <header class="qna-header">
                 <h2 class="qna-title">${question.title}</h2>
@@ -13,7 +13,7 @@
                 <article class="article">
                     <div class="article-header">
                         <div class="article-header-thumb">
-                            <img src="../img/picture.jpeg" class="article-author-thumb" alt="">
+                            <img src="../../../img/picture.jpeg" class="article-author-thumb" alt="">
                         </div>
                         <div class="article-header-text">
                           <!-- 사용자 프로필 추가 할거면 span -> a 태그로 바꾸고 API 연결 -->
@@ -30,11 +30,11 @@
                         <ul class="article-util-list">
                             <li>
                               <!-- 수정, 삭제 API 연결 필요 -->
-                                <a class="link-modify-article" href="/questions/423/form">수정</a>
+                                <a class="link-modify-article" href="/v1/questions/423/form">수정</a>
                             </li>
                             <li>
                               <!-- 수정, 삭제 API 연결 필요 -->
-                                <form class="form-delete" action="/questions/423" method="POST">
+                                <form class="form-delete" action="/v1/questions/423" method="POST">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <button class="link-delete-article" type="submit">삭제</button>
                                 </form>
@@ -55,7 +55,7 @@
                                 <article class="article" id="${answer.answerId}">
                                     <div class="article-header">
                                         <div class="article-header-thumb">
-                                            <img src="../img/picture.jpeg" class="article-author-thumb" alt="">
+                                            <img src="../../../img/picture.jpeg" class="article-author-thumb" alt="">
                                         </div>
                                         <div class="article-header-text">
                                             <span class="article-author-name">${answer.author}</span>
@@ -71,11 +71,11 @@
                                         <ul class="article-util-list">
                                             <li>
                                               <!-- 수정, 삭제 API 연결 필요 -->
-                                                <a class="link-modify-article" href="/questions/1/answers/1/form">수정</a>
+                                                <a class="link-modify-article" href="/v1/questions/1/answers/1/form">수정</a>
                                             </li>
                                             <li>
                                               <!-- 수정, 삭제 API 연결 필요 -->
-                                                <form class="delete-answer-form" action="/questions/1/answers/1" method="POST">
+                                                <form class="delete-answer-form" action="/v1/questions/1/answers/1" method="POST">
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     <button type="submit" class="delete-answer-button">삭제</button>
                                                 </form>
@@ -124,10 +124,10 @@
             <div class="article-util">
                 <ul class="article-util-list">
                     <li>
-                        <a class="link-modify-article" href="/api/qna/updateAnswer/{3}">수정</a>
+                        <a class="link-modify-article" href="/v1/api/qna/updateAnswer/{3}">수정</a>
                     </li>
                     <li>
-                        <form class="form-delete" action="/api/qna/deleteAnswer" method="POST">
+                        <form class="form-delete" action="/v1/api/qna/deleteAnswer" method="POST">
                             <input type="hidden" name="answerId" value="{4}"/>
                             <button type="submit" class="link-delete-article">삭제</button>
                         </form>
@@ -136,8 +136,8 @@
             </div>
         </article>
     </script>
-    <script src="../js/jquery-2.2.0.min.js"></script>
+    <script src="../../../js/jquery-2.2.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/scripts.js"></script>
+    <script src="../../../js/v1/scriptsV1.js"></script>
   </body>
 </html>

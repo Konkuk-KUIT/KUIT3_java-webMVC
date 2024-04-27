@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark" aria-label="Fourth navbar example">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/"> KUIT </a>
+        <a class="navbar-brand" href="/v1"> KUIT </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -28,21 +28,21 @@
         </a>
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="/" class="nav-link px-2 link-secondary">Q&A</a></li>
+            <li><a href="/v1" class="nav-link px-2 link-secondary">Q&A</a></li>
             <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
-            <li><a href="/user/userList" class="nav-link px-2 link-dark">User List</a></li>
+            <li><a href="/v1/user/userList" class="nav-link px-2 link-dark">User List</a></li>
             <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
         </ul>
 
         <div class="col-md-3 text-end">
             <c:choose>
                 <c:when test="${not empty sessionScope.user}">
-                    <a href="/user/logout" type="button" class="btn btn-outline-primary me-2">Log-Out</a>
-                    <a href="/user/updateForm?userId=${sessionScope.user.userId}" type="button" class="btn btn-primary">Info Update</a>
+                    <a href="/v1/user/logout" type="button" class="btn btn-outline-primary me-2">Log-Out</a>
+                    <a href="/v1/user/updateForm?userId=${sessionScope.user.userId}" type="button" class="btn btn-primary">Info Update</a>
                 </c:when>
                 <c:otherwise>
-                    <a href="/user/loginForm" type="button" class="btn btn-outline-primary me-2">Log-In</a>
-                    <a href="/user/form" type="button" class="btn btn-primary">Sign-up</a>
+                    <a href="/v1/user/loginForm" type="button" class="btn btn-outline-primary me-2">Log-In</a>
+                    <a href="/v1/user/form" type="button" class="btn btn-primary">Sign-up</a>
                     </c:otherwise>
             </c:choose>
         </div>
